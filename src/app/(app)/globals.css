@@ -100,27 +100,6 @@
   --color-accent-dark: rgba(200, 105, 28, 1);
 }
 
-@layer components {
-  .typography {
-    p {
-      font-size: var(--text-base);
-      color: var(--color-gray-700);
-    }
-    h1 {
-      font-size: var(--text-3xl--line-height);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-gray-950);
-      font-family: var(--h1-font-family);
-    }
-    h2 {
-      font-size: var(--text-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-gray-950);
-      font-family: var(--h2-font-family);
-    }
-  }
-}
-
 @layer base {
   body {
     font-feature-settings:
