@@ -1,0 +1,95 @@
+@import 'tailwindcss';
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@font-face {
+  font-family: 'Ink Blossoms';
+  src: url('/Ink Blossoms Font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --body-small-font-family: 'DM Sans', Helvetica;
+  --body-small-font-size: 16px;
+  --body-small-font-style: normal;
+  --body-small-font-weight: 400;
+  --body-small-letter-spacing: 0.5px;
+  --body-small-line-height: 24px;
+  --h1-font-family: 'Poiret One', Helvetica;
+  --h1-font-size: 42px;
+  --h1-font-style: normal;
+  --h1-font-weight: 400;
+  --h1-letter-spacing: 0px;
+  --h1-line-height: normal;
+  --h1-new-font-family: 'Ink Blossoms', Helvetica;
+  --h1-new-font-size: 40px;
+  --h1-new-font-style: normal;
+  --h1-new-font-weight: 400;
+  --h1-new-letter-spacing: 0px;
+  --h1-new-line-height: normal;
+  --h2-font-family: 'DM Sans', Helvetica;
+  --h2-font-size: 22px;
+  --h2-font-style: normal;
+  --h2-font-weight: 700;
+  --h2-letter-spacing: 0px;
+  --h2-line-height: 32px;
+  --overschrift-font-family: 'Inter', Helvetica;
+  --overschrift-font-size: 24px;
+  --overschrift-font-style: normal;
+  --overschrift-font-weight: 100;
+  --overschrift-letter-spacing: 0px;
+  --overschrift-line-height: normal;
+  --shadow-1:
+    -4px -4px 10px 0px rgba(0, 0, 0, 0.15), 4px 4px 10px 0px rgba(0, 0, 0, 0.15),
+    0px 19px 10px 0px rgba(0, 0, 0, 0.04);
+  --shadow-navbar: 0px 4px 10px 0px rgba(0, 0, 0, 0.15), 0px 19px 10px 0px rgba(0, 0, 0, 0.02);
+  --size-space-200: 8px;
+  --text-font-family: 'DM Sans', Helvetica;
+  --text-font-size: 20px;
+  --text-font-style: normal;
+  --text-font-weight: 300;
+  --text-letter-spacing: 0px;
+  --text-line-height: 30px;
+  --variable-collection-dark-beige: rgba(193, 181, 172, 1);
+  --variable-collection-dark-blue: rgba(66, 95, 122, 1);
+  --variable-collection-dark-brown: rgba(127, 85, 57, 1);
+  --variable-collection-dark-grey: rgba(51, 51, 51, 1);
+  --variable-collection-dark-orange: rgba(163, 79, 12, 1);
+  --variable-collection-dark-purple: rgba(59, 20, 39, 1);
+  --variable-collection-light-beige: rgba(234, 231, 226, 1);
+  --variable-collection-light-blue: rgba(197, 207, 214, 1);
+  --variable-collection-light-brown: rgba(221, 184, 146, 1);
+  --variable-collection-light-grey: rgba(153, 153, 161, 1);
+  --variable-collection-light-orange: rgba(255, 204, 132, 1);
+  --variable-collection-light-purple: rgba(222, 171, 191, 1);
+  --variable-collection-mid-blue: rgba(95, 151, 196, 1);
+  --variable-collection-middle-beige: rgba(220, 211, 204, 1);
+  --variable-collection-middle-brown: rgba(176, 137, 104, 1);
+  --variable-collection-middle-dark-purple: rgba(109, 44, 72, 1);
+  --variable-collection-middle-grey: rgba(102, 102, 110, 1);
+  --variable-collection-middle-orange: rgba(255, 168, 107, 1);
+  --variable-collection-middle-purple: rgba(185, 81, 122, 1);
+  --variable-collection-transparent-black: rgba(0, 0, 0, 0.6);
+  --variable-collection-transparent-dark-purple: rgba(59, 20, 39, 0.6);
+  --variable-collection-white: rgba(255, 255, 255, 1);
+}
+
+@layer base {
+  body {
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+  }
+}
