@@ -1,5 +1,4 @@
 import tailwindcssAnimate from 'tailwindcss-animate'
-import './globals.css'
 
 import type { Config } from 'tailwindcss'
 
