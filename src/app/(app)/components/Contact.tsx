@@ -27,24 +27,22 @@ export function Contact({
     >
       {/* Left (or Right if reversed): Text Content */}
       <Card
-        className={`flex w-full ${backgroundColor} p-6 md:w-1/2 md:p-12 lg:p-16 border-none shadow-none`}
+        className={`flex w-full ${backgroundColor} justify-center items-center p-6 md:w-1/2 md:p-12 lg:p-16 border-none shadow-none`}
       >
-        <CardContent className="flex flex-col items-center space-y-4 border-none md:items-start md:justify-center md:space-y-6">
+        <CardContent className="flex flex-col justify-center items-center space-y-4 border-none md:items-start md:justify-center md:space-y-6">
           <Image
             width={230}
             height={60}
             src="/illustrations/talking-heads.svg"
             alt="Talking Heads Illustration"
-            className="lg:w-[230]"
+            className="w-32 md:w-[230]" // Adjust width for smaller screens
           />
-          <p className="text-center text-sm text-white sm:text-base md:text-left md:text-lg lg:text-xl">
+          <p className="text-center text-content text-white  md:text-left">
             Lernt uns in einem persönlichen Gespräch
             <br /> kennen und besprecht mit uns eure Wünsche <br /> zur Geburtsbegleitung.
           </p>
           <div className="pt-2 sm:pt-4">
-            <Button variant={buttonVariant} className="text-xs sm:text-sm md:text-base lg:text-lg">
-              Termin vereinbaren
-            </Button>
+            <Button variant={buttonVariant}>Termin vereinbaren</Button>
           </div>
         </CardContent>
       </Card>

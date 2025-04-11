@@ -91,10 +91,12 @@
   --variable-collection-transparent-black: rgba(0, 0, 0, 0.6);
   --variable-collection-transparent-dark-purple: rgba(59, 20, 39, 0.6);
   --variable-collection-white: rgba(255, 255, 255, 1);
+
   --color-primary: rgba(185, 81, 122, 1);
   --color-primary-light: rgba(222, 171, 191, 1);
   --color-primary-dark: rgba(109, 44, 72, 1);
-  --color-primary-darker: rgba(59, 20, 39, 1);
+  --color-primary-darker: rgba(109, 44, 72, 1);
+  --color-primary-darkest: rgba(59, 20, 39, 1);
   --color-accent: rgba(255, 204, 132, 1);
   --color-accent-light: rgba(255, 168, 107, 1);
   --color-accent-dark: rgba(200, 105, 28, 1);

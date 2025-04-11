@@ -22,7 +22,7 @@ const serviceData = [
     title: 'Geburt',
     description:
       'In einem Zeitraum von 5 Wochen kann euer Kind im Geburtshaus geboren werden, das heißt von der 37+0 – 42+0 Ssw. In dieser Zeit sind wir für euch rund um die Uhr erreichbar und helfen euch bei Unsicherheiten, der Einwehphase und der Geburt.',
-    image: '/illus/frau-mit-ball.svg',
+    image: '/illus/geburt-auf-ball.svg',
     imageAlt: 'Geburt Illustration',
   },
   {
@@ -30,7 +30,7 @@ const serviceData = [
     title: 'Wochenbett',
     description:
       'Das Wochenbett zu Hause ermöglicht es, die Selbstbestimmung während der Geburt auch in den Tagen danach fortzusetzen. Ihr gestaltet eure Zeit in eurem individuellen Rhythmus und in aller Ruhe. Ungestört kannst du dich in euer Kind verlieben und den Zauber des Neubeginns gemeinsam mit deinem Partner und den Geschwisterkindern genießen.',
-    image: '/illus/paar-mit-kind.svg',
+    image: '/illus/paar-mit-baby.svg',
     imageAlt: 'Wochenbett Illustration',
   },
   {
@@ -46,7 +46,7 @@ const serviceData = [
 const Angebote: NextPage = () => {
   return (
     <div>
-      <section className="flex w-full flex-col text-white items-center gap-20 bg-primary-dark px-28 py-20">
+      <section className="flex w-full flex-col text-white items-center gap-20 bg-primary-darker px-28 py-20">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-center font-ink-blossoms text-header font-bold text-variable-collection-white">
             Unsere Angebote

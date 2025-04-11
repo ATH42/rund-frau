@@ -35,9 +35,7 @@ export default function AboutFooterSection({ showAboutSection = false }) {
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
-            <h2 className="font-h1-new text-3xl font-semibold md:text-4xl">
-              Wir sind für euch da.
-            </h2>
+            <h2 className="text-header font-ink-blossoms">Wir sind für euch da.</h2>
             <p className="font-text text-content md:text-lg">
               Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine
               Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend
