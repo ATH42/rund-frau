@@ -6,15 +6,15 @@ import React from 'react'
 import AboutFooterSection from '../components/Footer'
 import { Contact } from '../components/Contact'
 import SocialProof from '../components/Social-Proof'
+import Link from 'next/link'
 
-// Service section data
 const serviceData = [
   {
     id: 1,
     title: 'Schwangerschaft',
     description:
       'Die Begleitung deiner Schwangerschaft durch uns Hebammen ist ein wichtiger Baustein auf dem Weg zu deiner selbstbestimmten Geburt. Es ist uns wichtig, deine Körperwahrnehmung zu stärken und dich darin zu unterstützen, die Expertin für deinen schwangeren Körper und dein Baby zu sein.',
-    image: '/illustrations/pregnancy.svg',
+    image: '/illus/paar.svg',
     imageAlt: 'Schwangerschaft Illustration',
   },
   {
@@ -22,7 +22,7 @@ const serviceData = [
     title: 'Geburt',
     description:
       'In einem Zeitraum von 5 Wochen kann euer Kind im Geburtshaus geboren werden, das heißt von der 37+0 – 42+0 Ssw. In dieser Zeit sind wir für euch rund um die Uhr erreichbar und helfen euch bei Unsicherheiten, der Einwehphase und der Geburt.',
-    image: '/illustrations/pregnancy.svg',
+    image: '/illustrations/frau-mit-ball.svg',
     imageAlt: 'Geburt Illustration',
   },
   {
@@ -30,7 +30,7 @@ const serviceData = [
     title: 'Wochenbett',
     description:
       'Das Wochenbett zu Hause ermöglicht es, die Selbstbestimmung während der Geburt auch in den Tagen danach fortzusetzen. Ihr gestaltet eure Zeit in eurem individuellen Rhythmus und in aller Ruhe. Ungestört kannst du dich in euer Kind verlieben und den Zauber des Neubeginns gemeinsam mit deinem Partner und den Geschwisterkindern genießen.',
-    image: '/illustrations/pregnancy.svg',
+    image: '/illustrations/paar-mit-kind.svg',
     imageAlt: 'Wochenbett Illustration',
   },
   {
@@ -38,12 +38,10 @@ const serviceData = [
     title: 'Weitere Angebote',
     description:
       'In einem Zeitraum von 5 Wochen kann euer Kind im Geburtshaus geboren werden, das heißt von der 37+0 – 42+0 Ssw. In dieser Zeit sind wir für euch rund um die Uhr erreichbar und helfen euch bei Unsicherheiten, der Einwehphase und der Geburt.',
-    image: '/illustrations/pregnancy.svg',
+    image: '/illustrations/frauen-sprechen.svg',
     imageAlt: 'Weitere Angebote Illustration',
   },
 ]
-
-// Footer links data
 
 const Angebote: NextPage = () => {
   return (
@@ -85,7 +83,9 @@ const Angebote: NextPage = () => {
                 {service.description}
               </p>
 
-              <Button variant="white">mehr Infos</Button>
+              <Link href={`/services/${service.title.toLowerCase()}`}>
+                <Button variant="white">mehr Infos</Button>
+              </Link>
             </CardContent>
           </Card>
         ))}
