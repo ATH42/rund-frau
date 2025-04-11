@@ -28,7 +28,7 @@ const Navbar = ({ className }: { className?: string }) => {
         return 'bg-primary-dark text-white'
       case '/courses':
         return 'bg-white text-primary-darker'
-      case '/about':
+      case '/team':
         return 'bg-primary-dark text-white'
       case '/rooms':
         return 'bg-primary-darker text-white'
@@ -60,7 +60,7 @@ const Navbar = ({ className }: { className?: string }) => {
           <Link href="/courses">
             <p className="text-secondary-dark hover:text-secondary">Kurse buchen</p>
           </Link>
-          <Link href="/about">
+          <Link href="/team">
             <p className="text-secondary-dark hover:text-secondary">Team</p>
           </Link>
           <Link href="/rooms">
