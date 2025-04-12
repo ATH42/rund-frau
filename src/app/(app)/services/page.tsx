@@ -48,9 +48,7 @@ const Angebote: NextPage = () => {
     <div className="bg-primary-dark">
       <section className="flex w-full flex-col text-white items-center gap-20 bg-primary-darker px-28 py-20">
         <div className="flex w-full flex-col items-center gap-10">
-          <h1 className="text-center font-ink-blossoms text-header font-bold text-variable-collection-white">
-            Unsere Angebote
-          </h1>
+          <h1 className="text-center font-ink-blossoms text-header">Unsere Angebote</h1>
           <p className="text-center text-lg text-variable-collection-white">
             Alle Angebote können einzeln oder im Paket in Anspruch genommen werden.
           </p>
@@ -75,9 +73,7 @@ const Angebote: NextPage = () => {
             </div>
 
             <CardContent className="flex w-1/2 flex-col items-start gap-5">
-              <h2 className="font-ink-blossoms text-header font-semibold text-variable-collection-white">
-                {service.title}
-              </h2>
+              <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
 
               <p className="text-base text-content text-variable-collection-white">
                 {service.description}

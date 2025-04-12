@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 function Header() {
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-center gap-6 p-24">
+      <div className="w-full flex flex-col justify-center items-center gap-6 p-20">
         <>
           <div className=" text-center text-white font-ink-blossoms text-header">Unser Team</div>
           <div className="w-1/2  text-center text-white text-content leading-loose">

@@ -56,7 +56,7 @@ const CourseItem = ({ title, description }: { title: string; description: string
 )
 
 const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className="py-12 self-center bg-white w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6">
+  <div className=" self-center bg-white w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6">
     <div className="text-header font-ink-blossoms">{title}</div>
     <div className="text-subheader">{subtitle}</div>
     <Image
