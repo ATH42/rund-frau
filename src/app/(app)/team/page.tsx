@@ -97,6 +97,7 @@ function TeamMemberSection({ header }: { header?: string }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {teamMembers.map((member, index) => (
           <div key={index} className="flex flex-col flex-start">
+            {/* TODO: remove second name from card */}
             <TeamMember
               name={member.name}
               title={member.title}
@@ -132,9 +133,9 @@ function TeamMemberDialog({
       <DialogTrigger asChild className="w-[150px]">
         <Button variant="whiteLight">mehr erfahren</Button>
       </DialogTrigger>
-      <DialogContent className=" bg-primary-dark text-white border-none max-w-fit">
+      <DialogContent className=" bg-primary-dark text-white border-none max-w-fit p-8">
         <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
-        <div className="flex flex-row gap-8 items-center justify-center">
+        <div className="flex flex-row gap-6 items-center justify-center">
           <div className="w-1/2">
             <TeamMember name={name} title={title} phone={phone} mail={mail} />
           </div>
