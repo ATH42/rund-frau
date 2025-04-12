@@ -13,10 +13,6 @@ const fadeIn = {
   visible: { opacity: 1, transition: { duration: 0.5 } },
 }
 
-const bounceOnHover = {
-  whileHover: { scale: 1.05, transition: { duration: 0.3 } },
-}
-
 const newsItems = [
   {
     title: 'Infoabend Geburt - 24.11.24',
@@ -49,15 +45,15 @@ export function Schedule() {
 
       <div className="flex flex-col items-center gap-6">
         {newsItems.map((item, index) => (
-          <motion.div key={index} {...bounceOnHover}>
+          <motion.div key={index}>
             <Accordion type="single" collapsible className="w-[800px]">
               <AccordionItem value={`item-${index}`} className="border-none">
-                <AccordionTrigger className="flex items-center rounded-[20px] bg-primary-light px-8 py-6 shadow-shadow-1">
+                <AccordionTrigger className="flex items-center rounded-2xl decoration-0 hover:cursor-pointer bg-primary-light px-8 py-6 ">
                   <h3 className="flex-1 text-subheader">{item.title}</h3>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <Card className="border-none shadow-none ">
-                    <CardContent className=" rounded-2xl flex items-center justify-center w-full flex-col bg-primary-light ">
+                  <Card className="border-none shadow-none">
+                    <CardContent className="rounded-2xl pt-4 w-full bg-primary-light">
                       {item.content}
                     </CardContent>
                   </Card>

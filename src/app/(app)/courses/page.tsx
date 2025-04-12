@@ -56,7 +56,7 @@ const CourseItem = ({ title, description }: { title: string; description: string
 )
 
 const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className="py-12 self-center w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6">
+  <div className="py-12 self-center bg-white w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6">
     <div className="text-header font-ink-blossoms">{title}</div>
     <div className="text-subheader">{subtitle}</div>
     <Image
@@ -71,7 +71,7 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
 
 const Courses: NextPage = () => {
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full bg-white flex flex-col  py-20">
       <Header
         title="Unsere Kurse"
         subtitle="Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck."

@@ -45,7 +45,7 @@ const serviceData = [
 
 const Angebote: NextPage = () => {
   return (
-    <div>
+    <div className="bg-primary-dark">
       <section className="flex w-full flex-col text-white items-center gap-20 bg-primary-darker px-28 py-20">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-center font-ink-blossoms text-header font-bold text-variable-collection-white">
