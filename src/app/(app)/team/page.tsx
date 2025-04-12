@@ -5,7 +5,6 @@ import Footer from '../components/Footer'
 import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { div } from 'motion/react-client'
 
 function Header() {
   return (
@@ -71,8 +70,8 @@ function TeamMember({
           <h3 className="text-content font-semibold pb-2">{name}</h3>
           <div className="flex flex-col">
             <span>{title}</span>
-            <span>{phone}</span>
-            <span>{mail}</span>
+            <a href={`tel:${phone}`}>{phone}</a>
+            <a href={`mailto:${mail}`}>{mail}</a>
           </div>
           <div className="py-4">
             <Image
@@ -133,17 +132,21 @@ function TeamMemberDialog({
       <DialogTrigger asChild className="w-[150px]">
         <Button variant="whiteLight">mehr erfahren</Button>
       </DialogTrigger>
-      <DialogContent className="w-full grid grid-cols-1 items-center md:grid-cols-2 bg-primary-dark text-white border-none ">
-        <div>
-          <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
-          <TeamMember name={name} title={title} phone={phone} mail={mail} />
+      <DialogContent className=" bg-primary-dark text-white border-none max-w-fit">
+        <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
+        <div className="flex flex-row gap-8 items-center justify-center">
+          <div className="w-1/2">
+            <TeamMember name={name} title={title} phone={phone} mail={mail} />
+          </div>
+          <p className="w-1/2">
+            Deserunt tempor mollit ea laboris labore adipisicing. Esse deserunt incididunt sunt
+            consequat proident eu incididunt sint eu velit sit. Ut aute labore enim tempor qui do
+            elit ipsum eu voluptate laborum. Velit officia ipsum occaecat occaecat laborum magna.
+            Qui ut tempor consequat consequat. Deserunt tempor mollit ea laboris labore adipisicing.
+            Esse deserunt incididunt sunt consequat proident eu incididunt sint eu velit sit. Ut
+            aute
+          </p>
         </div>
-        <p>
-          Deserunt tempor mollit ea laboris labore adipisicing. Esse deserunt incididunt sunt
-          consequat proident eu incididunt sint eu velit sit. Ut aute labore enim tempor qui do elit
-          ipsum eu voluptate laborum. Velit officia ipsum occaecat occaecat laborum magna. Qui ut
-          tempor consequat consequat.
-        </p>
       </DialogContent>
     </Dialog>
   )
