@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/button'
 function Header() {
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-center gap-6 p-20">
+      {/* TODO: create a page componnent */}
+      <div className="w-full flex flex-col justify-center items-center gap-6">
         <>
           <div className=" text-center text-white font-ink-blossoms text-header">Unser Team</div>
           <div className="w-1/2  text-center text-white text-content leading-loose">
@@ -155,7 +156,7 @@ function TeamMemberDialog({
 
 const Team: NextPage = () => {
   return (
-    <main className="w-full bg-primary-dark flex-col overflow-hidden">
+    <main className="w-full bg-primary-dark flex-col overflow-hidden p-20">
       <Header />
       <TeamMemberSection header="Vorsorge-, Geburts- und Wochenbetthebammen" />
       <TeamMemberSection header="Vorsorge- und Wochenbetthebammen" />
