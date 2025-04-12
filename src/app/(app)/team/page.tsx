@@ -2,6 +2,10 @@ import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Footer from '../components/Footer'
+import { Card, CardContent } from '@/components/ui/card'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { div } from 'motion/react-client'
 
 function Header() {
   return (
@@ -22,47 +26,137 @@ function Header() {
   )
 }
 
-function TeamMemberSection() {
+const teamMembers = [
+  {
+    name: 'Alice Johnson',
+    title: 'Software Engineer',
+    phone: '+49 123 456 789',
+    mail: 'alice.johnson@example.com',
+  },
+  {
+    name: 'Bob Smith',
+    title: 'Product Manager',
+    phone: '+49 987 654 321',
+    mail: 'bob.smith@example.com',
+  },
+  {
+    name: 'Charlie Brown',
+    title: 'UX Designer',
+    phone: '+49 555 444 333',
+    mail: 'charlie.brown@example.com',
+  },
+  {
+    name: 'Diana Prince',
+    title: 'Marketing Specialist',
+    phone: '+49 111 222 333',
+    mail: 'diana.prince@example.com',
+  },
+]
+
+function TeamMember({
+  name,
+  title,
+  phone,
+  mail,
+}: {
+  name: string
+  title: string
+  phone: string
+  mail: string
+}) {
   return (
-    <section className="self-stretch py-5 flex flex-col justify-start items-center gap-16">
+    <>
+      <Card>
+        <CardContent className="flex flex-col items-start  text-white">
+          <h3 className="text-content font-semibold pb-2">{name}</h3>
+          <div className="flex flex-col">
+            <span>{title}</span>
+            <span>{phone}</span>
+            <span>{mail}</span>
+          </div>
+          <div className="py-4">
+            <Image
+              width={1000}
+              height={20}
+              className="rounded-xl w-48 h-48 object-cover "
+              src="/Bilder/headshot.png"
+              alt={name}
+            />
+          </div>
+        </CardContent>
+      </Card>
+    </>
+  )
+}
+
+function TeamMemberSection({ header }: { header?: string }) {
+  return (
+    <section className="py-5 flex flex-col justify-start items-center gap-16">
       <h1 className="self-stretch text-center justify-start text-white text-header font-ink-blossoms">
-        Vorsorge-, Geburts- und Wochenbetthebammen
+        {header}
       </h1>
-      <div className="self-stretch inline-flex justify-start items-start gap-16">
-        <div className="flex-1 inline-flex flex-col justify-start items-start gap-6">
-          <div className="self-stretch flex flex-col justify-start items-start gap-4">
-            <div className="self-stretch justify-start text-white text-header font-ink-blossoms leading-loose">
-              Andrea
-            </div>
-            <div className="self-stretch justify-start text-white text-content leading-loose">
-              Hebamme
-              <br />
-              Mobil: 0155 66394059
-              <br />
-              Mail: salome@geburtshaus-leipzig.de
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {teamMembers.map((member, index) => (
+          <div key={index} className="flex flex-col flex-start">
+            <TeamMember
+              name={member.name}
+              title={member.title}
+              phone={member.phone}
+              mail={member.mail}
+            />
+            <TeamMemberDialog
+              name={member.name}
+              title={member.title}
+              phone={member.phone}
+              mail={member.mail}
+            />
           </div>
-          <div className="self-stretch h-96 bg-primary-darker rounded-[20px]" />
-          <div data-style="Default" className="inline-flex justify-start items-start">
-            <div
-              data-style="Filled"
-              className="px-5 py-3 bg-white rounded-[50px] flex justify-center items-center gap-2.5 overflow-hidden"
-            >
-              <div className="justify-start text-dark-purple text-content font-ink-blossoms leading-normal tracking-wide">
-                mehr erfahren
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   )
 }
+
+function TeamMemberDialog({
+  name,
+  title,
+  phone,
+  mail,
+}: {
+  name: string
+  title: string
+  phone: string
+  mail: string
+}) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild className="w-[150px]">
+        <Button variant="whiteLight">mehr erfahren</Button>
+      </DialogTrigger>
+      <DialogContent className="w-full grid grid-cols-1 items-center md:grid-cols-2 bg-primary-dark text-white border-none ">
+        <div>
+          <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
+          <TeamMember name={name} title={title} phone={phone} mail={mail} />
+        </div>
+        <p>
+          Deserunt tempor mollit ea laboris labore adipisicing. Esse deserunt incididunt sunt
+          consequat proident eu incididunt sint eu velit sit. Ut aute labore enim tempor qui do elit
+          ipsum eu voluptate laborum. Velit officia ipsum occaecat occaecat laborum magna. Qui ut
+          tempor consequat consequat.
+        </p>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
 const Team: NextPage = () => {
   return (
     <main className="w-full bg-primary-dark flex-col overflow-hidden">
       <Header />
-      <TeamMemberSection />
+      <TeamMemberSection header="Vorsorge-, Geburts- und Wochenbetthebammen" />
+      <TeamMemberSection header="Vorsorge- und Wochenbetthebammen" />
+      <TeamMemberSection header="Kurshebammen" />
+      <TeamMemberSection header="Kooperation" />
       <Footer />
     </main>
   )
