@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import Footer from '../components/Footer'
 
 const coursesData = [
   {
@@ -56,9 +57,9 @@ const CourseItem = ({ title, description }: { title: string; description: string
 )
 
 const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
-  <div className=" self-center bg-white w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6">
-    <div className="text-header font-ink-blossoms">{title}</div>
-    <div className="text-subheader">{subtitle}</div>
+  <section className=" self-center bg-white w-full md:w-1/2 text-center text-primary-darker flex flex-col gap-6 py-20">
+    <h1 className="text-header font-ink-blossoms">{title}</h1>
+    <p className="text-subheader">{subtitle}</p>
     <Image
       src="/illustrations/ball-flower.svg"
       alt="Header Image"
@@ -66,12 +67,12 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
       height={200}
       className="self-center"
     />
-  </div>
+  </section>
 )
 
 const Courses: NextPage = () => {
   return (
-    <div className="w-full bg-white flex flex-col  py-20">
+    <main className="w-full bg-white flex flex-col">
       <Header
         title="Unsere Kurse"
         subtitle="Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck."
@@ -85,7 +86,8 @@ const Courses: NextPage = () => {
           </div>
         ))}
       </section>
-    </div>
+      <Footer />
+    </main>
   )
 }
 

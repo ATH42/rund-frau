@@ -1,4 +1,3 @@
-import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { Contact } from './components/Contact'
 import AboutFooterSection from './components/Footer'
@@ -19,7 +18,7 @@ export default function Home() {
 
       <Offers />
 
-      <Contact imageUrl="/woman-preg.jpeg" />
+      <Contact imageUrl="/woman-preg.jpeg" buttonVariant="default" />
 
       <Schedule />
 

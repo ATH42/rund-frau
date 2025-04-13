@@ -1,42 +1,34 @@
 import type { NextPage } from 'next'
+import { Contact } from '../components/Contact'
+import Footer from '../components/Footer'
+import { Separator } from '@/components/ui/separator'
+
+function Header() {
+  return (
+    <>
+      {/* TODO: create a page componnent */}
+      <section className="w-full flex flex-col justify-center items-center gap-6 py-20">
+        <>
+          <h1 className=" text-center text-white font-ink-blossoms text-header">FAQ</h1>
+        </>
+        <Separator className="h-0.5 bg-primary w-2/3" />
+      </section>
+    </>
+  )
+}
 
 const FAQ: NextPage = () => {
-    return (
-        <section className="min-h-screen bg-primary-light p-8 lg:p-16">
-            <h1 className="mb-8 text-4xl font-bold text-secondary-dark">
-                Häufige Fragen
-            </h1>
-            <p className="mb-4 text-lg text-secondary">
-                Antworten auf die häufigsten Fragen rund um unser Geburtshaus.
-            </p>
-            <div className="space-y-6">
-                <div>
-                    <h2 className="text-2xl font-bold text-secondary-dark">
-                        Frage 1
-                    </h2>
-                    <p className="mt-2 text-secondary">
-                        Antwort auf die Frage 1.
-                    </p>
-                </div>
-                <div>
-                    <h2 className="text-2xl font-bold text-secondary-dark">
-                        Frage 2
-                    </h2>
-                    <p className="mt-2 text-secondary">
-                        Antwort auf die Frage 2.
-                    </p>
-                </div>
-                <div>
-                    <h2 className="text-2xl font-bold text-secondary-dark">
-                        Frage 3
-                    </h2>
-                    <p className="mt-2 text-secondary">
-                        Antwort auf die Frage 3.
-                    </p>
-                </div>
-            </div>
-        </section>
-    )
+  return (
+    <main className="min-h-screen bg-primary-darker">
+      <Header />
+      <Contact
+        imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
+        backgroundColor="bg-primary-darker"
+        buttonVariant="whiteLight"
+      />
+      <Footer />
+    </main>
+  )
 }
 
 export default FAQ

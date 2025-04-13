@@ -1,20 +1,19 @@
-import { Button } from '@/components/ui/button'
 import * as motion from 'motion/react-client'
 import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from 'next/image'
+import { ContactForm } from './ContactForm'
 
 interface ContactProps {
   imageUrl: string
   backgroundColor?: string
-  buttonVariant?: 'white' | 'default' | 'whiteLight' | null | undefined
+  buttonVariant: 'white' | 'default' | 'whiteLight'
   reverse?: boolean
 }
 
 export function Contact({
   imageUrl,
   backgroundColor = 'bg-primary',
-  buttonVariant = 'white',
   reverse = false,
 }: ContactProps) {
   return (
@@ -35,14 +34,14 @@ export function Contact({
             height={60}
             src="/illustrations/talking-heads.svg"
             alt="Talking Heads Illustration"
-            className="w-32 md:w-[230]" // Adjust width for smaller screens
+            className="w-32 md:w-[230]"
           />
           <p className="text-center text-content text-white  md:text-left">
             Lernt uns in einem persönlichen Gespräch
             <br /> kennen und besprecht mit uns eure Wünsche <br /> zur Geburtsbegleitung.
           </p>
           <div className="pt-2 sm:pt-4">
-            <Button variant={buttonVariant}>Termin vereinbaren</Button>
+            <ContactForm buttonVariant="white" />
           </div>
         </CardContent>
       </Card>

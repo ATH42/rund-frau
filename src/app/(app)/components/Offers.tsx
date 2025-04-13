@@ -60,7 +60,8 @@ function CarouselSize() {
             >
               <div className="p-1">
                 <Card className="rounded-lg bg-white">
-                  <CardContent className="flex flex-col items-center justify-center pt-4 text-center">
+                  {/* TODO: add links to subpages */}
+                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                     <Image
                       src={icon}
                       width={200}

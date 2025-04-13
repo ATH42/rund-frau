@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import * as motion from 'motion/react-client'
 import Image from 'next/image'
+import { ContactForm } from './ContactForm'
 
 const Hero: React.FC = () => {
   return (
@@ -17,12 +17,12 @@ const Hero: React.FC = () => {
         <CardContent className="flex flex-col items-start space-y-4 md:items-start md:justify-center md:space-y-6">
           <Image width={80} height={60} src="/logo.png" alt="Talking Heads Illustration" priority />
           <h1 className="text-left text-header font-ink-blossoms text-primary-dark">
-            Herzlich Willkommen im Geburtshaus Rundfrau Leipzig.
+            Herzlich Willkommen
+            <br /> im Geburtshaus
+            <br /> Rundfrau Leipzig.
           </h1>
           <div className="pt-2 sm:pt-4">
-            <Button variant="dark" className="text-xs sm:text-sm md:text-base lg:text-lg">
-              Termin vereinbaren
-            </Button>
+            <ContactForm buttonVariant="dark" />
           </div>
         </CardContent>
       </Card>
