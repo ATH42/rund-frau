@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button'
+'use client'
+
 import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -8,7 +9,6 @@ import { ContactForm } from '../components/ContactForm'
 function Header() {
   return (
     <>
-      {/* TODO: create a page componnent */}
       <section className="w-full flex flex-col justify-center items-center gap-6 py-20">
         <>
           <h1 className=" text-center text-white font-ink-blossoms text-header">Unsere Räume</h1>
