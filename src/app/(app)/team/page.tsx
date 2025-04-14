@@ -74,12 +74,11 @@ function TeamMember({
           <a href={`tel:${phone}`}>{phone}</a>
           <a href={`mailto:${mail}`}>{mail}</a>
         </div>
-        {/* TODO: fix gaps */}
         <div className="py-4 w-full">
           <Image
             width={1000}
             height={1000}
-            className="rounded-xl w-full h-1/2 object-cover"
+            className="rounded-xl w-full h-60 md:h-100 object-cover"
             src="/Bilder/headshot.png"
             alt={name}
           />
@@ -89,17 +88,37 @@ function TeamMember({
             <DialogTrigger asChild className="w-[150px]">
               <Button variant="whiteLight">mehr erfahren</Button>
             </DialogTrigger>
-            <DialogContent className="flex justify-around bg-primary-dark text-white border-none md:p-20 md:max-w-fit">
+            <DialogContent className="bg-primary-dark text-white border-none md:p-14 md:max-w-fit">
               <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
-              <div>
-                <p>
-                  Deserunt tempor mollit ea laboris labore adipisicing. Esse deserunt incididunt
-                  sunt consequat proident eu incididunt sint eu velit sit. Ut aute labore enim
-                  tempor qui do elit ipsum eu voluptate laborum. Velit officia ipsum occaecat
-                  occaecat laborum magna. Qui ut tempor consequat consequat. Deserunt tempor mollit
-                  ea laboris labore adipisicing. Esse deserunt incididunt sunt consequat proident eu
-                  incididunt sint eu velit sit. Ut aute
-                </p>
+              <div className="lg:grid lg:grid-cols-2 lg:gap-10 flex flex-col">
+                <div>
+                  <div className="flex flex-col">
+                    <span>{title}</span>
+                    <a href={`tel:${phone}`}>{phone}</a>
+                    <a href={`mailto:${mail}`} className="wrap-break-word">
+                      {mail}
+                    </a>
+                  </div>
+                  <div className="py-4">
+                    <Image
+                      width={1000}
+                      height={1000}
+                      className="rounded-xl w-full h-60 object-cover"
+                      src="/Bilder/headshot.png"
+                      alt={name}
+                    />
+                  </div>
+                </div>
+                <div className="">
+                  <p>
+                    Deserunt tempor mollit ea laboris labore adipisicing. Esse deserunt incididunt
+                    sunt consequat proident eu incididunt sint eu velit sit. Ut aute labore enim
+                    tempor qui do elit ipsum eu voluptate laborum. Velit officia ipsum occaecat
+                    occaecat laborum magna. Qui ut tempor consequat consequat. Deserunt tempor
+                    mollit ea laboris labore adipisicing. Esse deserunt incididunt sunt consequat
+                    proident eu incididunt sint eu velit sit. Ut aute
+                  </p>
+                </div>
               </div>
             </DialogContent>
           </Dialog>
@@ -118,7 +137,6 @@ function TeamMemberSection({ header }: { header?: string }) {
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {teamMembers.map((member, index) => (
           <div key={index} className="flex flex-col flex-start p-6">
-            {/* TODO: remove second name from card */}
             <TeamMember
               name={member.name}
               title={member.title}
@@ -135,12 +153,14 @@ function TeamMemberSection({ header }: { header?: string }) {
 const Team: NextPage = () => {
   return (
     <main className="w-full bg-primary-dark flex-col overflow-hidden">
-      <Header />
-      <TeamMemberSection header="Vorsorge-, Geburts- und Wochenbett-Hebammen" />
-      <TeamMemberSection header="Vorsorge- und Wochenbett-Hebammen" />
-      <TeamMemberSection header="Kurshebammen" />
-      <TeamMemberSection header="Kooperation" />
-      <Footer />
+      <div className="md:px-20 ">
+        <Header />
+        <TeamMemberSection header="Vorsorge-, Geburts- und Wochenbett-Hebammen" />
+        <TeamMemberSection header="Vorsorge- und Wochenbett-Hebammen" />
+        <TeamMemberSection header="Kurshebammen" />
+        <TeamMemberSection header="Kooperation" />
+        <Footer />
+      </div>
     </main>
   )
 }

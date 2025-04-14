@@ -41,7 +41,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('/api/send-email', {
+      const response = await fetch('/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

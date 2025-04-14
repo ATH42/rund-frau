@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { Contact } from '../components/Contact'
 import Footer from '../components/Footer'
 import { Separator } from '@/components/ui/separator'
+import BirthCalculator from '../components/BirthCalc'
 
 function Header() {
   return (
@@ -20,14 +21,17 @@ function Header() {
 const FAQ: NextPage = () => {
   return (
     <main className="min-h-screen bg-primary-darker">
-      <Header />
-      <Contact
-        imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
-        backgroundColor="bg-primary-dark"
-        buttonVariant="whiteLight"
-        reverse
-      />
-      <Footer />
+      <div className="flex flex-col justify-start items-center gap-6 px-24">
+        <Header />
+        <Contact
+          imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
+          backgroundColor="bg-primary-dark"
+          buttonVariant="whiteLight"
+          reverse
+        />
+        <BirthCalculator />
+        <Footer />
+      </div>
     </main>
   )
 }
