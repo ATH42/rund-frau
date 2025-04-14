@@ -23,8 +23,9 @@ const FAQ: NextPage = () => {
       <Header />
       <Contact
         imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
-        backgroundColor="bg-primary-darker"
+        backgroundColor="bg-primary-dark"
         buttonVariant="whiteLight"
+        reverse
       />
       <Footer />
     </main>

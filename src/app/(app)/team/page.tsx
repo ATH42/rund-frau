@@ -89,7 +89,7 @@ function TeamMember({
             <DialogTrigger asChild className="w-[150px]">
               <Button variant="whiteLight">mehr erfahren</Button>
             </DialogTrigger>
-            <DialogContent className="flex justify-around bg-primary-dark text-white border-none md:max-w-fit">
+            <DialogContent className="flex justify-around bg-primary-dark text-white border-none md:p-20 md:max-w-fit">
               <DialogTitle className="font-ink-blossoms text-subheader">{name}</DialogTitle>
               <div>
                 <p>

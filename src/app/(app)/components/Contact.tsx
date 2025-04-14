@@ -42,7 +42,7 @@ export function Contact({
       </Card>
 
       {/* Right (or Left if reversed): Image with Overlay */}
-      <Card className="relative flex w-full border-none md:w-1/2">
+      <Card className="relative flex w-full border-none shadow-none md:w-1/2">
         <AspectRatio ratio={720 / 653} className="relative h-full w-full">
           <div className={`absolute inset-0 z-10 opacity-30 ${backgroundColor}`}></div>
           <Image
