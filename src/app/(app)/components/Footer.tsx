@@ -31,7 +31,7 @@ export default function AboutFooterSection({ showAboutSection = false }) {
               height={1000}
               priority
             />
-            <ArrowRight className="absolute right-4 top-4 text-white" />
+            <ArrowRight className="absolute right-4 top-4 text-white size-10" />
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
@@ -47,7 +47,8 @@ export default function AboutFooterSection({ showAboutSection = false }) {
       )}
 
       {/* Footer */}
-      <footer className="relative z-10 w-full px-6 pb-16 pt-24 lg:px-32">
+      {/* TODO: revisit text to not go over part of the footer       */}
+      <footer className="relative z-10 w-full px-6 pb-16 pt-24 lg:px-32 ">
         <div className="flex flex-col gap-12 lg:flex-row">
           <div className="flex-1 space-y-6 text-center lg:text-left">
             <h2 className=" text-header font-ink-blossoms text-white md:text-4xl">
@@ -63,15 +64,21 @@ export default function AboutFooterSection({ showAboutSection = false }) {
           </div>
 
           <div className="flex flex-1 flex-col gap-4 text-center text-white lg:text-left">
-            <div className="flex items-center justify-center gap-3 lg:justify-start">
+            <a
+              className="flex items-center justify-center gap-3 cursor-pointer lg:justify-start"
+              href="mailto:mail@mail.de"
+            >
               <Mail className="h-5 w-5" />
               <span>E-Mail</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 lg:justify-start">
+            </a>
+            <a
+              className="flex items-center justify-center gap-3 lg:justify-start cursor-pointer"
+              href="tel:+49123456789"
+            >
               <Phone className="h-5 w-5" />
               <span>Telefonnummer</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 lg:justify-start">
+            </a>
+            <div className="flex items-center justify-center gap-3 lg:justify-start cursor-pointer">
               <Phone className="h-5 w-5" />
               <span>Faxnummer</span>
             </div>

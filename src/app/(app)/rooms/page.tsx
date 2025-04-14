@@ -18,7 +18,7 @@ function Header() {
             Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.
           </p>
         </>
-        <Separator className="h-0.5 bg-primary w-2/3" />
+        <Separator className=" bg-primary px-20" />
       </section>
     </>
   )
@@ -26,11 +26,12 @@ function Header() {
 
 function ImageGrid() {
   const colSpans = [2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2]
-
+  // TODO: spans
   return (
-    <div className="grid grid-cols-3 gap-4 px-20 py-24">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:px-20 py-10 p-6">
       {Array.from({ length: 11 }).map((_, index) => (
         <div key={index} className={`relative col-span-${colSpans[index]}`}>
+          {/* TODO: open image full size */}
           <Image
             className="h-60 object-cover rounded-lg"
             src="/Bilder/GHR/Sofa.png"
@@ -50,7 +51,7 @@ const Rooms: NextPage = () => {
     <main className="w-full bg-primary-darker flex-col overflow-hidden">
       <Header />
       <ImageGrid />
-      <section className="flex flex-col justify-center items-center gap-4 px-30 w-full pb-30">
+      <section className="flex flex-col justify-center items-center gap-4 px-30 w-full py-20">
         <p className="text-subheader text-center text-white w-120 self-center">
           Lernt uns in einem persönlichen Gespräch kennen und besprecht mit uns eure Wünsche zur
           Geburtsbegleitung.

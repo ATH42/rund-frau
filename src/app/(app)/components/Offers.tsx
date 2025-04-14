@@ -8,7 +8,6 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
-import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 
 const items = [
@@ -29,7 +28,6 @@ export default function Offers() {
     <section className="w-full bg-primary-dark p-6 md:p-12">
       <div className="mb-6 flex flex-col items-center justify-between gap-2 md:flex-row">
         <h2 className="font-ink-blossoms text-header text-white">Unsere Angebote</h2>
-        <ArrowRight className="h-8 w-8 text-white md:w-16" />
       </div>
       <CarouselSize />
       <p className="mt-4 text-center text-sm text-white">
@@ -52,6 +50,7 @@ function CarouselSize() {
           }),
         ]}
       >
+        {/* TODO: all gaps same size on all breakpoints */}
         <CarouselContent>
           {items.map(({ icon, title }, index) => (
             <CarouselItem
@@ -62,6 +61,7 @@ function CarouselSize() {
                 <Card className="rounded-lg bg-white">
                   {/* TODO: add links to subpages */}
                   <CardContent className="flex flex-col items-center justify-center p-6 text-center">
+                    {/* TODO: card size with long desc */}
                     <Image
                       src={icon}
                       width={200}

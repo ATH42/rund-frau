@@ -41,7 +41,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('/send-email', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +51,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
 
       if (response.ok) {
         alert('Email sent successfully!')
+        e.preventDefault()
       } else {
         alert('Failed to send email.')
       }
@@ -62,7 +63,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
 
   return (
     <Dialog>
-      <DialogTrigger asChild className="w-[150px]">
+      <DialogTrigger asChild>
         <Button variant={buttonVariant}>Termin vereinbaren</Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-primary-darker max-w-fit p-20">

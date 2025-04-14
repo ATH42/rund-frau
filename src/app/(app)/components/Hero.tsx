@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
       className={`flex w-full flex-col bg-white md:flex-row-reverse`}
     >
       {/* Left (or Right if reversed): Text Content */}
-      <Card className={`flex w-full flex-1 bg-white p-6 md:w-1/2 md:p-12 lg:p-16`}>
+      <Card className={`flex w-full flex-1 bg-white p-6 md:w-1/2 md:p-12 lg:p-16 shadow-none`}>
         <CardContent className="flex flex-col items-start space-y-4 md:items-start md:justify-center md:space-y-6">
           <Image width={80} height={60} src="/logo.png" alt="Talking Heads Illustration" priority />
           <h1 className="text-left text-header font-ink-blossoms text-primary-dark">
@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
       </Card>
 
       {/* Right (or Left if reversed): Image with Overlay */}
-      <Card className="relative flex w-full flex-1 md:w-1/2">
+      <Card className="relative flex w-full flex-1 md:w-1/2 shadow-none">
         <AspectRatio ratio={720 / 653} className="relative h-full w-full">
           <div className={`absolute inset-0 z-10 bg-primary-dark opacity-30`}></div>
           <Image

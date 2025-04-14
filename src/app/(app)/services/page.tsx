@@ -45,8 +45,8 @@ const serviceData = [
 
 const Angebote: NextPage = () => {
   return (
-    <div className="bg-primary-dark">
-      <section className="flex w-full flex-col text-white items-center gap-20 bg-primary-darker px-28 py-20">
+    <div className="bg-primary-dark w-full">
+      <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-dark px-6 md:px-28 py-20 px-0">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-center font-ink-blossoms text-header">Unsere Angebote</h1>
           <p className="text-center text-lg text-variable-collection-white">
@@ -58,7 +58,7 @@ const Angebote: NextPage = () => {
         {serviceData.map((service, index) => (
           <Card
             key={service.id}
-            className={`flex w-full flex-col items-center justify-end gap-20 border-none shadow-none md:flex-row ${
+            className={`flex w-full flex-col items-center justify-start md:justify-end md:gap-20 border-none shadow-none md:flex-row ${
               index % 2 !== 0 ? 'md:flex-row-reverse' : ''
             }`}
           >
@@ -72,7 +72,7 @@ const Angebote: NextPage = () => {
               />
             </div>
 
-            <CardContent className="flex w-1/2 flex-col items-start gap-5">
+            <CardContent className="flex  md:w-1/2 flex-col items-start gap-5">
               <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
 
               <p className="text-base text-content text-variable-collection-white">
@@ -86,12 +86,13 @@ const Angebote: NextPage = () => {
           </Card>
         ))}
       </section>
-
-      <SocialProof
-        cardBackgroundColor="bg-white"
-        textColor="text-primary-dark"
-        backgroundColor="bg-primary-dark"
-      />
+      <div className="hidden">
+        <SocialProof
+          cardBackgroundColor="bg-white"
+          textColor="text-primary-dark"
+          backgroundColor="bg-primary-dark"
+        />
+      </div>
 
       <Contact
         imageUrl="/Bilder/paar-schwanger.png"

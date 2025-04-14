@@ -1,4 +1,3 @@
-import * as motion from 'motion/react-client'
 import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from 'next/image'
@@ -17,16 +16,12 @@ export function Contact({
   reverse = false,
 }: ContactProps) {
   return (
-    <motion.section
-      initial={{ opacity: 0, x: -250 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.5 }}
-      transition={{ duration: 1 }}
+    <section
       className={`flex w-full flex-col bg-white ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
     >
       {/* Left (or Right if reversed): Text Content */}
       <Card
-        className={`flex w-full ${backgroundColor} justify-center items-center p-6 md:w-1/2 md:p-12 lg:p-16 border-none shadow-none`}
+        className={`flex w-full ${backgroundColor} justify-center items-center p-6 py-12 md:w-1/2 md:p-12 lg:p-16 border-none shadow-none`}
       >
         <CardContent className="flex flex-col justify-center items-center space-y-4 border-none md:items-start md:justify-center md:space-y-6">
           <Image
@@ -60,6 +55,6 @@ export function Contact({
           />
         </AspectRatio>
       </Card>
-    </motion.section>
+    </section>
   )
 }

@@ -31,7 +31,7 @@ export default function Home() {
           height={202}
         />
       </div>
-
+      {/* TODO: not responsive on small screens */}
       <SocialProof
         cardBackgroundColor="bg-primary"
         textColor="text-primary-darker"
