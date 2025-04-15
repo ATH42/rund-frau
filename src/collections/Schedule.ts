@@ -25,7 +25,7 @@ export const Schedule: CollectionConfig = {
     },
     {
       name: 'content',
-      type: 'text', // Use richText for more flexibility
+      type: 'textarea', // Use richText for more flexibility
       required: true,
       label: 'Veranstaltungsbeschreibung', // Event Description
     },
