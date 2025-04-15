@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
 
+
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
   teamImageData?: number | Media
@@ -16,6 +17,7 @@ export default function AboutFooterSection({
   introTitle = 'Wir sind für euch da.',
   introDescription = 'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.',
 }: AboutFooterSectionProps) {
+
   const footerLinks = [
     { label: 'Impressum', href: '#' },
     { label: 'Datenschutzerklärung', href: '#' },
@@ -27,6 +29,7 @@ export default function AboutFooterSection({
     typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
       ? teamImageData.url
       : '/default-image.jpg'
+
 
   return (
     <section className="relative flex w-full flex-col">
@@ -43,8 +46,10 @@ export default function AboutFooterSection({
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
             <div className="relative">
               <Image
+
                 src={imageUrl || '/default-image.jpg'}
                 alt={'Team Image'}
+
                 className="h-100 w-full object-cover"
                 width={1000}
                 height={1000}
