@@ -32,7 +32,7 @@ const MobileNavbar = ({ className }: { className?: string }) => {
   }, [isOpen])
 
   return (
-    <nav className={`${className} sticky relative bg-white shadow-md`} ref={menuRef}>
+    <nav className={`${className} sticky bg-white shadow-md`} ref={menuRef}>
       <div className="flex items-center justify-center p-3">
         <Link href="/">
           <Image src="/logo.png" width={40} height={50} alt="Logo Rundfrau" />

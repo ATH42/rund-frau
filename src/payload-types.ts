@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     schedule: Schedule;
+    intro: Intro;
+    'team-image': TeamImage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +81,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     schedule: ScheduleSelect<false> | ScheduleSelect<true>;
+    intro: IntroSelect<false> | IntroSelect<true>;
+    'team-image': TeamImageSelect<false> | TeamImageSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -159,7 +163,44 @@ export interface Schedule {
   id: number;
   title: string;
   date: string;
-  content: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  location?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "intro".
+ */
+export interface Intro {
+  id: number;
+  title: string;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-image".
+ */
+export interface TeamImage {
+  id: number;
+  image: number | Media;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -181,6 +222,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'schedule';
         value: number | Schedule;
+      } | null)
+    | ({
+        relationTo: 'intro';
+        value: number | Intro;
+      } | null)
+    | ({
+        relationTo: 'team-image';
+        value: number | TeamImage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -265,6 +314,27 @@ export interface ScheduleSelect<T extends boolean = true> {
   title?: T;
   date?: T;
   content?: T;
+  location?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "intro_select".
+ */
+export interface IntroSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-image_select".
+ */
+export interface TeamImageSelect<T extends boolean = true> {
+  image?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

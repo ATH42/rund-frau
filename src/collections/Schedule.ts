@@ -1,25 +1,39 @@
 import { CollectionConfig } from 'payload'
 
 export const Schedule: CollectionConfig = {
-    slug: 'schedule',
-    access: {
-        read: () => true,
+  slug: 'schedule',
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      label: 'Veranstaltungstitel', // Event Title
     },
-    fields: [
-        {
-            name: 'title',
-            type: 'text',
-            required: true,
+    {
+      name: 'date',
+      type: 'date',
+      required: true,
+      label: 'Veranstaltungsdatum', // Event Date
+      admin: {
+        date: {
+          pickerAppearance: 'dayOnly', // Customize date picker appearance
         },
-        {
-            name: 'date',
-            type: 'date',
-            required: true,
-        },
-        {
-            name: 'content',
-            type: 'text',
-            required: true,
-        },
-    ],
+      },
+    },
+    {
+      name: 'content',
+      type: 'richText', // Use richText for more flexibility
+      required: true,
+      label: 'Veranstaltungsbeschreibung', // Event Description
+    },
+    {
+      name: 'location',
+      type: 'text',
+      required: false,
+      label: 'Veranstaltungsort', // Event Location
+    },
+  ],
 }

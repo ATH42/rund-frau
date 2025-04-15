@@ -2,14 +2,40 @@ import { ArrowRight, Mail, Phone, Instagram, Facebook } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 
-const footerLinks = [
-  { label: 'Impressum', href: '#' },
-  { label: 'Datenschutzerklärung', href: '#' },
-  { label: 'Kontakt', href: '#' },
-  { label: 'Downloads & Links', href: '#' },
-]
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
-export default function AboutFooterSection({ showAboutSection = false }) {
+export default async function AboutFooterSection({ showAboutSection = false }) {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
+  // Fetch team image data
+  const teamImageData = await payload.find({
+    collection: 'team-image',
+  })
+
+  const teamImage = teamImageData?.docs[0]?.image
+  const imageUrl =
+    typeof teamImage === 'object' && teamImage.url ? teamImage.url : '/default-placeholder.png'
+
+  // Fetch intro data
+  const introData = await payload.find({
+    collection: 'intro',
+  })
+
+  const introTitle = introData?.docs[0]?.title || 'Wir sind für euch da.'
+  const introDescription =
+    introData?.docs[0]?.description ||
+    'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.'
+
+  const footerLinks = [
+    { label: 'Impressum', href: '#' },
+    { label: 'Datenschutzerklärung', href: '#' },
+    { label: 'Kontakt', href: '#' },
+    { label: 'Downloads & Links', href: '#' },
+  ]
+
   return (
     <section className="relative flex w-full flex-col">
       {showAboutSection && (
@@ -23,31 +49,28 @@ export default function AboutFooterSection({ showAboutSection = false }) {
       {showAboutSection && (
         <div className="relative z-10 flex w-full flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:items-start lg:px-32">
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
-            <Image
-              src="/team.png"
-              alt="Team"
-              className="h-full w-full object-cover"
-              width={1000}
-              height={1000}
-              priority
-            />
+            <div className="relative">
+              <Image
+                src={imageUrl}
+                alt={teamImageData?.docs[0]?.description || 'Team'}
+                className="h-100 w-full object-cover"
+                width={1000}
+                height={1000}
+                priority
+              />
+              <div className="absolute inset-0 bg-primary/30"></div> {/* Overlay */}
+            </div>
             <ArrowRight className="absolute right-4 top-4 text-white size-10" />
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
-            <h2 className="text-header font-ink-blossoms">Wir sind für euch da.</h2>
-            <p className="font-text text-content md:text-lg">
-              Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine
-              Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend
-              tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im
-              Gepäck.
-            </p>
+            <h2 className="text-header font-ink-blossoms">{introTitle}</h2>
+            <p className="font-text text-content md:text-lg">{introDescription}</p>
           </div>
         </div>
       )}
 
       {/* Footer */}
-      {/* TODO: revisit text to not go over part of the footer       */}
       <footer className="relative z-10 w-full px-6 pb-16 pt-24 lg:px-32 ">
         <div className="flex flex-col gap-12 lg:flex-row">
           <div className="flex-1 space-y-6 text-center lg:text-left">
