@@ -1,10 +1,29 @@
 import { NextPage } from 'next'
+import { Header } from '../components/Header'
+import GridComponent from '../components/ContentGrid'
+import { Paragraph } from '../components/Paragraph'
+import { Contact } from '../../components/Contact'
+import Footer from '../../components/Footer'
 
 const ServiceDetailPage: NextPage = () => {
   return (
     <main>
-      <div className="flex flex-col items-center justify-center gap-10 bg-primary-dark p-6 md:p-12">
-        hallo
+      <div>
+        <Header image={''} subtitle={''} />
+        <GridComponent>
+          <Paragraph />
+
+          <Paragraph />
+          <Paragraph />
+          <Paragraph />
+        </GridComponent>
+        <Contact
+          imageUrl="/Bilder/hand-auf-bauch.png"
+          buttonVariant={'whiteLight'}
+          backgroundColor="bg-primary-darker"
+          reverse
+        />
+        <Footer />
       </div>
     </main>
   )

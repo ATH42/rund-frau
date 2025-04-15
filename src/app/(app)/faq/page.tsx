@@ -21,17 +21,15 @@ function Header() {
 const FAQ: NextPage = () => {
   return (
     <main className="min-h-screen bg-primary-darker">
-      <div className="flex flex-col justify-start items-center gap-6 px-24">
-        <Header />
-        <Contact
-          imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
-          backgroundColor="bg-primary-dark"
-          buttonVariant="whiteLight"
-          reverse
-        />
-        <BirthCalculator />
-        <Footer />
-      </div>
+      <Header />
+      <Contact
+        imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
+        backgroundColor="bg-primary-dark"
+        buttonVariant="whiteLight"
+        reverse
+      />
+      <BirthCalculator />
+      <Footer />
     </main>
   )
 }
