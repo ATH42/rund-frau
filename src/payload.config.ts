@@ -40,6 +40,7 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     vercelBlobStorage({
+      clientUploads: true,
       enabled: true,
       collections: {
         media: true,
