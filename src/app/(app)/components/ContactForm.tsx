@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 interface ContactFormProps {
   buttonVariant?: 'white' | 'default' | 'whiteLight' | 'dark'
@@ -22,6 +23,14 @@ interface FormData {
   message: string
 }
 
+const Loader = () => {
+  return (
+    <div className="flex justify-center items-center">
+      <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-primary"></div>
+    </div>
+  )
+}
+
 export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -29,8 +38,11 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
     email: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { id, value } = e.target
     setFormData((prevData) => ({
       ...prevData,
@@ -40,6 +52,8 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    setSuccessMessage('')
     try {
       const response = await fetch('/send-email', {
         method: 'POST',
@@ -50,73 +64,94 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
       })
 
       if (response.ok) {
-        alert('Email sent successfully!')
-        e.preventDefault()
+        setSuccessMessage('Wir haben deine E-Mail erhalten und melden uns bald bei dir!')
+        setFormData({ name: '', phone: '', email: '', message: '' }) // Reset form
       } else {
         alert('Failed to send email.')
       }
     } catch (error) {
       console.error('Error sending email:', error)
       alert('An error occurred while sending the email.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <Dialog>
+    <Dialog
+      open={isDialogOpen}
+      onOpenChange={(open) => {
+        setIsDialogOpen(open)
+        if (!open) {
+          setSuccessMessage('')
+        }
+      }}
+    >
       <DialogTrigger asChild>
-        <Button variant={buttonVariant}>Termin vereinbaren</Button>
+        <Button variant={buttonVariant} onClick={() => setIsDialogOpen(true)}>
+          Termin vereinbaren
+        </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-primary-darker max-w-fit p-20">
         <DialogHeader>
-          <DialogTitle className="text-primary-darker text-header font-ink-blossoms">
-            Kontaktformular
-          </DialogTitle>
+          {!successMessage ? (
+            <DialogTitle className="text-primary-darker text-header font-ink-blossoms">
+              Kontaktformular
+            </DialogTitle>
+          ) : null}
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              type="text"
-              id="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Vor- und Nachname"
-            />
-          </div>
-          <div>
-            <Label htmlFor="phone">Telefon</Label>
-            <Input
-              id="phone"
-              type="text"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Deine Telefon-Nummer"
-            />
-          </div>
-          <div>
-            <Label htmlFor="email">E-Mail</Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Deine E-Mail"
-            />
-          </div>
-          <div>
-            <Label htmlFor="message">Nachricht</Label>
-            <Input
-              type="text"
-              id="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Schreib uns deine Nachricht."
-            />
-          </div>
-          <Button type="submit" className="mt-4" variant="dark">
-            Termin vereinbaren
-          </Button>
-        </form>
+        {successMessage ? (
+          <div className="text-primary-darker font-ink-blossoms text-center">{successMessage}</div>
+        ) : (
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Vor- und Nachname"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone">Telefon</Label>
+              <Input
+                id="phone"
+                type="text"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Deine Telefon-Nummer"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">E-Mail</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Deine E-Mail"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <Label htmlFor="message">Nachricht</Label>
+              <Textarea
+                id="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Schreib uns deine Nachricht."
+                disabled={isSubmitting}
+              />
+            </div>
+            <Button type="submit" className="mt-4" variant="dark" disabled={isSubmitting}>
+              {isSubmitting ? <Loader /> : 'Termin vereinbaren'}
+            </Button>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   )

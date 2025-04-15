@@ -1,5 +1,3 @@
-'use client'
-
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 
@@ -8,6 +6,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import Footer from '../components/Footer'
 import { ContactForm } from '../components/ContactForm'
+import Link from 'next/link'
 
 function Header() {
   return (
@@ -33,28 +32,38 @@ async function ImageGrid() {
   })
 
   const roomsImageData = await payload.find({
-    collection: 'team-image',
+    collection: 'room-image',
   })
 
   const images = roomsImageData.docs.map((doc) => {
-    const teamImageData = doc.image // Assuming doc.image is the data you receive
+    const roomsImageData = doc.image
 
     const imageUrl =
-      typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
-        ? teamImageData.url
+      typeof roomsImageData === 'object' && roomsImageData !== null && 'url' in roomsImageData
+        ? roomsImageData.url
         : '/default-image.jpg'
+
+    const imageDescription = doc.description || 'Räume' // Assuming there's a description field
 
     return {
       src: imageUrl,
       alt: 'Räume',
+      description: imageDescription,
     }
   })
 
   return (
     <div className="md:px-20 py-10 p-6">
-      {images.map((image, index) => (
-        <div key={index} className="grid grid-cols-3 gap-4 mb-4">
-          <div className={`relative ${index % 2 === 0 ? 'col-span-2' : 'col-span-1'}`}>
+      <div className="grid grid-cols-3 gap-4">
+        {images.map((image, index) => (
+          <Link
+            key={index}
+            href={image.src || '/default-image.jpg'}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={image.description}
+            className={`relative ${index % 2 === 0 ? 'col-span-2' : 'col-span-1'}`}
+          >
             <Image
               className="h-60 object-cover rounded-lg"
               src={image.src || '/default-image.jpg'}
@@ -63,19 +72,9 @@ async function ImageGrid() {
               height={500}
             />
             <div className="absolute inset-0 bg-primary/40 rounded-lg"></div>
-          </div>
-          <div className={`relative ${index % 2 === 0 ? 'col-span-1' : 'col-span-2'}`}>
-            <Image
-              className="h-60 object-cover rounded-lg"
-              src={image.src || '/default-image.jpg'}
-              alt={image.alt}
-              width={1000}
-              height={500}
-            />
-            <div className="absolute inset-0 bg-primary/40 rounded-lg"></div>
-          </div>
-        </div>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }

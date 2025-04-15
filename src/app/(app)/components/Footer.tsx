@@ -2,7 +2,7 @@ import { ArrowRight, Mail, Phone, Instagram, Facebook } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
-
+import Link from 'next/link'
 
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
@@ -11,13 +11,25 @@ type AboutFooterSectionProps = {
   introDescription?: string
 }
 
+function SocialMediaLinks() {
+  return (
+    <div className="flex gap-4">
+      <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" passHref>
+        <Instagram className="h-6 w-6 text-white" />
+      </Link>
+      <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" passHref>
+        <Facebook className="h-6 w-6 text-white" />
+      </Link>
+    </div>
+  )
+}
+
 export default function AboutFooterSection({
   showAboutSection = false,
   teamImageData,
   introTitle = 'Wir sind für euch da.',
   introDescription = 'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.',
 }: AboutFooterSectionProps) {
-
   const footerLinks = [
     { label: 'Impressum', href: '#' },
     { label: 'Datenschutzerklärung', href: '#' },
@@ -29,7 +41,6 @@ export default function AboutFooterSection({
     typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
       ? teamImageData.url
       : '/default-image.jpg'
-
 
   return (
     <section className="relative flex w-full flex-col">
@@ -46,10 +57,8 @@ export default function AboutFooterSection({
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
             <div className="relative">
               <Image
-
                 src={imageUrl || '/default-image.jpg'}
                 alt={'Team Image'}
-
                 className="h-100 w-full object-cover"
                 width={1000}
                 height={1000}
@@ -118,10 +127,7 @@ export default function AboutFooterSection({
             ))}
           </div>
 
-          <div className="flex gap-4">
-            <Instagram className="h-6 w-6 text-white" />
-            <Facebook className="h-6 w-6 text-white" />
-          </div>
+          <SocialMediaLinks />
         </div>
       </footer>
     </section>
