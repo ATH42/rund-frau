@@ -1,5 +1,8 @@
 'use client'
 
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+
 import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -24,25 +27,37 @@ function Header() {
   )
 }
 
-function ImageGrid() {
-  const images = Array.from({ length: 11 }).map((_, index) => ({
-    src: `/Bilder/GHR/Sofa.png`,
-    alt: `Image ${index + 1}`,
-  }))
+async function ImageGrid() {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
+  const roomsImageData = await payload.find({
+    collection: 'team-image',
+  })
+
+  const images = roomsImageData.docs.map((doc) => {
+    const teamImageData = doc.image // Assuming doc.image is the data you receive
+
+    const imageUrl =
+      typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
+        ? teamImageData.url
+        : '/default-image.jpg'
+
+    return {
+      src: imageUrl,
+      alt: 'Räume',
+    }
+  })
 
   return (
     <div className="md:px-20 py-10 p-6">
       {images.map((image, index) => (
-        <div
-          key={index}
-          className={`grid grid-cols-3 gap-4 mb-4 ${
-            index % 2 === 0 ? 'grid-cols-3' : 'grid-cols-3'
-          }`}
-        >
+        <div key={index} className="grid grid-cols-3 gap-4 mb-4">
           <div className={`relative ${index % 2 === 0 ? 'col-span-2' : 'col-span-1'}`}>
             <Image
               className="h-60 object-cover rounded-lg"
-              src={image.src}
+              src={image.src || '/default-image.jpg'}
               alt={image.alt}
               width={1000}
               height={500}
@@ -52,7 +67,7 @@ function ImageGrid() {
           <div className={`relative ${index % 2 === 0 ? 'col-span-1' : 'col-span-2'}`}>
             <Image
               className="h-60 object-cover rounded-lg"
-              src={image.src}
+              src={image.src || '/default-image.jpg'}
               alt={image.alt}
               width={1000}
               height={500}
