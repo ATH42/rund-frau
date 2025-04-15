@@ -5,9 +5,9 @@ import { Media } from '@/payload-types'
 
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
-  teamImageData: number | Media
-  introTitle: string
-  introDescription: string
+  teamImageData?: number | Media
+  introTitle?: string
+  introDescription?: string
 }
 
 export default function AboutFooterSection({
