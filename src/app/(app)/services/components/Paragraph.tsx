@@ -1,17 +1,8 @@
-export function Paragraph() {
+export function Paragraph({ title, content }: { title: string; content: string }) {
   return (
-    <div className="p-5 rounded">
-      <h3 className="font-bold wrap-break-word">Schwangerschaftsaufstellung</h3>
-      <p>
-        Reprehenderit nisi sit nostrud duis eu. Tempor minim occaecat exercitation nisi id nisi ea
-        ut cillum dolor. Aliqua aliquip cillum enim. Laboris culpa dolore cupidatat voluptate. Nisi
-        deserunt voluptate voluptate id ex quis dolor aute reprehenderit minim. Sint pariatur
-        aliquip proident aute Lorem veniam voluptate sit labore laborum.Reprehenderit nisi sit
-        nostrud duis eu. Tempor minim occaecat exercitation nisi id nisi ea ut cillum dolor. Aliqua
-        aliquip cillum enim. Laboris culpa dolore cupidatat voluptate. Nisi deserunt voluptate
-        voluptate id ex quis dolor aute reprehenderit minim. Sint pariatur aliquip proident aute
-        Lorem veniam voluptate sit labore laborum.
-      </p>
+    <div className="p-5 justify-center items-center rounded-lg shadow-none text-primary-darker">
+      <h3 className="font-bold wrap-break-word pb-6">{title}</h3>
+      <p>{content}</p>
     </div>
   )
 }

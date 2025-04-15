@@ -1,7 +1,8 @@
-import { Button } from '@/components/ui/button'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Footer from '../components/Footer'
+import { CourseDialogTrigger } from './components/DialogTrigger'
+import { CalendarDemo } from './components/Calendar'
 
 const coursesData = [
   {
@@ -37,9 +38,7 @@ const CourseItem = ({ title, description }: { title: string; description: string
       <h2 className="text-subheader font-bold text-white">{title}</h2>
       <p className="text-content text-white">{description}</p>
       <div className="flex items-start">
-        <Button variant="whiteLight">
-          <p>mehr erfahren</p>
-        </Button>
+        <CourseDialogTrigger title={title} description={description} />
       </div>
     </div>
 
@@ -85,6 +84,9 @@ const Courses: NextPage = () => {
             <CourseItem title={course.title} description={course.description} />
           </div>
         ))}
+      </section>
+      <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24 w-full">
+        <CalendarDemo />
       </section>
       <Footer />
     </main>

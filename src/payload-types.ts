@@ -199,6 +199,7 @@ export interface TeamImage {
 export interface Service {
   id: number;
   title: string;
+  image: number | Media;
   description: string;
   paragraphs?:
     | {
@@ -354,6 +355,7 @@ export interface TeamImageSelect<T extends boolean = true> {
  */
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
+  image?: T;
   description?: T;
   paragraphs?:
     | T

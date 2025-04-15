@@ -8,42 +8,37 @@ import { Contact } from '../components/Contact'
 import SocialProof from '../components/Social-Proof'
 import Link from 'next/link'
 
-const serviceData = [
-  {
-    id: 1,
-    title: 'Schwangerschaft',
-    description:
-      'Die Begleitung deiner Schwangerschaft durch uns Hebammen ist ein wichtiger Baustein auf dem Weg zu deiner selbstbestimmten Geburt. Es ist uns wichtig, deine Körperwahrnehmung zu stärken und dich darin zu unterstützen, die Expertin für deinen schwangeren Körper und dein Baby zu sein.',
-    image: '/illus/paar.svg',
-    imageAlt: 'Schwangerschaft Illustration',
-  },
-  {
-    id: 2,
-    title: 'Geburt',
-    description:
-      'In einem Zeitraum von 5 Wochen kann euer Kind im Geburtshaus geboren werden, das heißt von der 37+0 – 42+0 Ssw. In dieser Zeit sind wir für euch rund um die Uhr erreichbar und helfen euch bei Unsicherheiten, der Einwehphase und der Geburt.',
-    image: '/illus/geburt-auf-ball.svg',
-    imageAlt: 'Geburt Illustration',
-  },
-  {
-    id: 3,
-    title: 'Wochenbett',
-    description:
-      'Das Wochenbett zu Hause ermöglicht es, die Selbstbestimmung während der Geburt auch in den Tagen danach fortzusetzen. Ihr gestaltet eure Zeit in eurem individuellen Rhythmus und in aller Ruhe. Ungestört kannst du dich in euer Kind verlieben und den Zauber des Neubeginns gemeinsam mit deinem Partner und den Geschwisterkindern genießen.',
-    image: '/illus/paar-mit-baby.svg',
-    imageAlt: 'Wochenbett Illustration',
-  },
-  {
-    id: 4,
-    title: 'Weitere Angebote',
-    description:
-      'In einem Zeitraum von 5 Wochen kann euer Kind im Geburtshaus geboren werden, das heißt von der 37+0 – 42+0 Ssw. In dieser Zeit sind wir für euch rund um die Uhr erreichbar und helfen euch bei Unsicherheiten, der Einwehphase und der Geburt.',
-    image: '/illus/frauen-sprechen.svg',
-    imageAlt: 'Weitere Angebote Illustration',
-  },
-]
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
-const Angebote: NextPage = () => {
+const Angebote: NextPage = async () => {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
+  const data = await payload.find({
+    collection: 'services',
+  })
+
+  const serviceImages = [
+    {
+      image: '/illus/paar.svg',
+      imageAlt: 'Schwangerschaft Illustration',
+    },
+    {
+      image: '/illus/geburt-auf-ball.svg',
+      imageAlt: 'Geburt Illustration',
+    },
+    {
+      image: '/illus/paar-mit-baby.svg',
+      imageAlt: 'Wochenbett Illustration',
+    },
+    {
+      image: '/illus/frauen-sprechen.svg',
+      imageAlt: 'Weitere Angebote Illustration',
+    },
+  ]
+
   return (
     <div className="bg-primary-dark w-full">
       <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-dark px-6 md:px-28 py-20 px-0">
@@ -55,7 +50,7 @@ const Angebote: NextPage = () => {
         </div>
 
         {/* Service sections */}
-        {serviceData.map((service, index) => (
+        {data.docs.map((service, index) => (
           <Card
             key={service.id}
             className={`flex w-full flex-col items-center justify-start md:justify-end md:gap-20 border-none shadow-none md:flex-row ${
@@ -64,8 +59,8 @@ const Angebote: NextPage = () => {
           >
             <div>
               <Image
-                src={service.image}
-                alt={service.imageAlt}
+                src={serviceImages[index]?.image || '/default-image.jpg'}
+                alt={serviceImages[index]?.imageAlt || 'Service Illustration'}
                 className="object-contain"
                 width={350}
                 height={250}
@@ -76,10 +71,14 @@ const Angebote: NextPage = () => {
               <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
 
               <p className="text-base text-content text-variable-collection-white">
-                {service.description}
+                {service.description.toString()}
               </p>
 
-              <Link href={`/services/${service.title.toLowerCase()}`}>
+              <Link
+                href={{
+                  pathname: `/services/${service.title.toLowerCase()}`,
+                }}
+              >
                 <Button variant="white">mehr Infos</Button>
               </Link>
             </CardContent>

@@ -10,6 +10,13 @@ export const Services: CollectionConfig = {
       label: 'Titel des Angebots',
     },
     {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      label: 'Bild zum Angebot',
+    },
+    {
       name: 'description',
       type: 'textarea',
       required: true,

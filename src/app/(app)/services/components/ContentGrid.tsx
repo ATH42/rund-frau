@@ -5,7 +5,7 @@ interface GridComponentProps {
 }
 
 const GridComponent: React.FC<GridComponentProps> = ({ children }) => {
-  return <div className="grid grid-cols-2 gap-5">{children}</div>
+  return <div className="grid md:grid-cols-2 grid-cols-1 gap-10 md:w-2/3 w-full">{children}</div>
 }
 
 export default GridComponent

@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar className="sm:hidden md:block" />
+        <Navbar className="hidden md:block" />
         <MobileNavbar className="md:hidden" />
         {children}
       </body>
