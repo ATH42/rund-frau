@@ -75,6 +75,7 @@ export interface Config {
     services: Service;
     courses: Course;
     'room-image': RoomImage;
+    'team-members': TeamMember;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -89,6 +90,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     'room-image': RoomImageSelect<false> | RoomImageSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -243,6 +245,21 @@ export interface RoomImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: number;
+  name: string;
+  title: string;
+  phone: string;
+  mail: string;
+  image: number | Media;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -279,6 +296,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'room-image';
         value: number | RoomImage;
+      } | null)
+    | ({
+        relationTo: 'team-members';
+        value: number | TeamMember;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -424,6 +445,20 @@ export interface CoursesSelect<T extends boolean = true> {
  * via the `definition` "room-image_select".
  */
 export interface RoomImageSelect<T extends boolean = true> {
+  image?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  title?: T;
+  phone?: T;
+  mail?: T;
   image?: T;
   description?: T;
   updatedAt?: T;

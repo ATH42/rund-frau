@@ -4,6 +4,7 @@ export const RoomImageCollection: CollectionConfig = {
   slug: 'room-image',
   labels: {
     singular: 'Raum Foto',
+    plural: 'Raum Fotos',
   },
   admin: {
     useAsTitle: 'description',
