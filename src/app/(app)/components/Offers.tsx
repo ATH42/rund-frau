@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const items = [
   { icon: '/illus/paar.svg', title: 'Schwangerschaft' },
@@ -59,14 +60,16 @@ function CarouselSize() {
               <div className="p-1">
                 <Card className="rounded-lg bg-white ">
                   <CardContent className="w-70 h-70 flex flex-col items-center justify-center p-6 text-center">
-                    <Image
-                      src={icon}
-                      width={250}
-                      height={100}
-                      alt={'illustration'}
-                      className="h-50 w-50 "
-                    />
-                    <p className="text-content font-semibold text-primary-dark">{title}</p>
+                    <Link href={`/services/${title}`} className="flex flex-col items-center">
+                      <Image
+                        src={icon}
+                        width={250}
+                        height={100}
+                        alt={'illustration'}
+                        className="h-50 w-50 "
+                      />
+                      <p className="text-content font-semibold text-primary-dark">{title}</p>
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
