@@ -33,15 +33,10 @@ export default function SocialProof({
     >
       <div className="grid w-full md:gap-6 gap-2 grid-cols-1 md:grid-cols-3">
         {socialProofData.map((item, index) => (
-          <Card
-            key={index}
-            className={`flex items-center md:justify-start rounded-2xl border-none bg-white shadow-none`}
-          >
-            <div
-              className={`${cardBackgroundColor} w-full h-full rounded-2xl flex items-center justify-start`}
-            >
-              <CardContent className="flex flex-col justify-center items-center w-full items-center p-4 md:p-8">
-                <h2 className={`font-ink-blossoms  text-header ${textColor}`}>{item.title}</h2>
+          <Card key={index} className={`rounded-2xl border-none  shadow-none`}>
+            <div className={`${cardBackgroundColor} w-full h-full rounded-2xl`}>
+              <CardContent className="flex flex-col justify-center items-center md:items-start w-full items-center p-4 md:p-8">
+                <h2 className={`font-ink-blossoms text-header ${textColor}`}>{item.title}</h2>
                 <p className="text-content text-primary-dark">{item.description}</p>
               </CardContent>
             </div>
