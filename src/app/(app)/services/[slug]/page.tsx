@@ -8,16 +8,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { Service } from '@/payload-types'
 
-interface ServiceDetailPageProps {
-  params: {
-    slug: string
-  }
-}
-
-export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
-  const { slug } = params
-
-  const pageTitle = slug.charAt(0).toUpperCase() + slug.slice(1)
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
   const payload = await getPayload({
     config: configPromise,
@@ -27,7 +19,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
     collection: 'services',
     where: {
       title: {
-        equals: pageTitle,
+        equals: slug,
       },
     },
   })
