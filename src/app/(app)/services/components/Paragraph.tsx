@@ -1,7 +1,7 @@
 export function Paragraph() {
   return (
-    <div className="p-5 border rounded">
-      <h3 className="font-bold">Schwangerschaftsaufstellung</h3>
+    <div className="p-5 rounded">
+      <h3 className="font-bold wrap-break-word">Schwangerschaftsaufstellung</h3>
       <p>
         Reprehenderit nisi sit nostrud duis eu. Tempor minim occaecat exercitation nisi id nisi ea
         ut cillum dolor. Aliqua aliquip cillum enim. Laboris culpa dolore cupidatat voluptate. Nisi

@@ -12,7 +12,6 @@ const ServiceDetailPage: NextPage = () => {
         <Header image={''} subtitle={''} />
         <GridComponent>
           <Paragraph />
-
           <Paragraph />
           <Paragraph />
           <Paragraph />
