@@ -13,6 +13,7 @@ import { Schedule } from './collections/Schedule'
 import { IntroCollection } from './collections/Intro'
 import { TeamImageCollection } from './collections/TeamImage'
 import Services from './collections/Services'
+import { CourseCollection as Kurse } from './collections/Course'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,7 +27,11 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Schedule, IntroCollection, TeamImageCollection, Services],
+  localization: {
+    locales: ['de'],
+    defaultLocale: 'de',
+  },
+  collections: [Users, Media, Schedule, IntroCollection, TeamImageCollection, Services, Kurse],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

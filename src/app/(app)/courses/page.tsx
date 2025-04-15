@@ -4,41 +4,34 @@ import Footer from '../components/Footer'
 import { CourseDialogTrigger } from './components/DialogTrigger'
 import { CalendarDemo } from './components/Calendar'
 
-const coursesData = [
-  {
-    title: 'Geburtsvorbereitung',
-    description:
-      'Geburtsvorbereitungskurse bieten wir als wöchentliche Kurse, als Wochenend-Kompaktkurse sowie speziell für Mehrgebärende an. Auch spezielle Kurse zur bewussten Geburt könnt ihr bei uns besuchen.',
-  },
-  {
-    title: 'Rückbildung',
-    description:
-      'Der Rückbildungskurs befasst sich mit der Stärkung der durch Schwangerschaft und Geburt beanspruchten Strukturen, kräftigt Dich generell und gibt Tipps für Deinen körperlichen Alltag.',
-  },
-  {
-    title: 'Babymassage',
-    description:
-      'Wenn ihr etwas sucht, das euch und eurem Baby Entspannung bietet, könnt ihr an einem Babymassagekurs teilnehmen.',
-  },
-  {
-    title: 'Geschwisterkurs',
-    description:
-      'Mehrmals im Jahr findet bei uns im Geburtshaus ein Geschwisterkurs statt. Darin lernen die werdenden großen Geschwister spielerisch alles, was zum Thema Geburt und Wochenbett sowie für die erste Zeit mit dem Baby wichtig ist.',
-  },
-  {
-    title: 'Seminare & Info-Abende',
-    description:
-      'Mehrmals im Jahr findet bei uns im Geburtshaus ein Geschwisterkurs statt. Darin lernen die werdenden großen Geschwister spielerisch alles, was zum Thema Geburt und Wochenbett sowie für die erste Zeit mit dem Baby wichtig ist.',
-  },
-]
-
-const CourseItem = ({ title, description }: { title: string; description: string }) => (
+const CourseItem = ({
+  title,
+  description,
+  date,
+  maxAttendees,
+  location,
+  price,
+}: {
+  title: string
+  description: string
+  date: string
+  maxAttendees: number
+  location: string
+  price: number
+}) => (
   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
     <div className="flex flex-col w-full lg:w-1/2 gap-4">
       <h2 className="text-subheader font-bold text-white">{title}</h2>
       <p className="text-content text-white">{description}</p>
       <div className="flex items-start">
-        <CourseDialogTrigger title={title} description={description} />
+        <CourseDialogTrigger
+          title={title}
+          description={description}
+          date={date}
+          maxAttendees={maxAttendees}
+          location={location}
+          price={price}
+        />
       </div>
     </div>
 
@@ -69,7 +62,18 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
   </section>
 )
 
-const Courses: NextPage = () => {
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+
+const Courses: NextPage = async () => {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
+  const coursesData = await payload.find({
+    collection: 'courses',
+  })
+
   return (
     <main className="w-full bg-white flex flex-col">
       <Header
@@ -79,9 +83,16 @@ const Courses: NextPage = () => {
 
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24">
         <h1 className="text-header font-ink-blossoms text-white">Alle Kurse im Überblick</h1>
-        {coursesData.map((course, index) => (
+        {coursesData.docs.map((course, index) => (
           <div key={index} className="flex flex-col lg:flex-row flex-wrap gap-16 py-5">
-            <CourseItem title={course.title} description={course.description} />
+            <CourseItem
+              title={course.title || ''}
+              description={course.description || ''}
+              date={course.date || ''}
+              maxAttendees={course.maxAttendees || 0}
+              location={course.location || ''}
+              price={course.price || 0}
+            />
           </div>
         ))}
       </section>
