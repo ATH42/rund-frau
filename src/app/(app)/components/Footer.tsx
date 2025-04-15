@@ -31,8 +31,8 @@ export default function AboutFooterSection({
   introDescription = 'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.',
 }: AboutFooterSectionProps) {
   const footerLinks = [
-    { label: 'Impressum', href: '#' },
-    { label: 'Datenschutzerklärung', href: '#' },
+    { label: 'Impressum', href: '/imprint' },
+    { label: 'Datenschutzerklärung', href: '/privacy' },
     { label: 'Kontakt', href: '#' },
     { label: 'Downloads & Links', href: '#' },
   ]
