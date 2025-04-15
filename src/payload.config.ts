@@ -17,6 +17,7 @@ import Services from './collections/Services'
 import { CourseCollection as Kurse } from './collections/Course'
 import { RoomImageCollection } from './collections/RoomImage'
 import TeamMembers from './collections/TeamMember'
+import ContactReasons from './collections/ContactForm'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,6 +43,7 @@ export default buildConfig({
     Kurse,
     RoomImageCollection,
     TeamMembers,
+    ContactReasons,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

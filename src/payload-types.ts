@@ -76,6 +76,7 @@ export interface Config {
     courses: Course;
     'room-image': RoomImage;
     'team-members': TeamMember;
+    'contact-reasons': ContactReason;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -91,6 +92,7 @@ export interface Config {
     courses: CoursesSelect<false> | CoursesSelect<true>;
     'room-image': RoomImageSelect<false> | RoomImageSelect<true>;
     'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
+    'contact-reasons': ContactReasonsSelect<false> | ContactReasonsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -260,6 +262,16 @@ export interface TeamMember {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-reasons".
+ */
+export interface ContactReason {
+  id: number;
+  reason: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -300,6 +312,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'team-members';
         value: number | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'contact-reasons';
+        value: number | ContactReason;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -461,6 +477,15 @@ export interface TeamMembersSelect<T extends boolean = true> {
   mail?: T;
   image?: T;
   description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-reasons_select".
+ */
+export interface ContactReasonsSelect<T extends boolean = true> {
+  reason?: T;
   updatedAt?: T;
   createdAt?: T;
 }
