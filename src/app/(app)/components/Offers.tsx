@@ -50,24 +50,21 @@ function CarouselSize() {
           }),
         ]}
       >
-        {/* TODO: all gaps same size on all breakpoints */}
-        <CarouselContent>
+        <CarouselContent className="gap-5">
           {items.map(({ icon, title }, index) => (
             <CarouselItem
               key={index}
-              className="flex justify-center pl-2 sm:basis-1 md:basis-1/2 md:pl-4 lg:basis-1/3"
+              className="flex justify-center basis-1/3" // Adjust basis for multiple items
             >
               <div className="p-1">
-                <Card className="rounded-lg bg-white">
-                  {/* TODO: add links to subpages */}
-                  <CardContent className="flex flex-col items-center justify-center p-6 text-center">
-                    {/* TODO: card size with long desc */}
+                <Card className="rounded-lg bg-white ">
+                  <CardContent className="w-70 h-70 flex flex-col items-center justify-center p-6 text-center">
                     <Image
                       src={icon}
-                      width={200}
+                      width={250}
                       height={100}
                       alt={'illustration'}
-                      className="h-2/3"
+                      className="h-50 w-50 "
                     />
                     <p className="text-content font-semibold text-primary-dark">{title}</p>
                   </CardContent>
