@@ -1,29 +1,26 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import * as motion from 'motion/react-client'
-import Link from 'next/link'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { AccordionList } from './AccordionList' // Import the new component
 
 const fadeIn = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.5 } },
 }
 
-const newsItems = [
-  {
-    title: 'Infoabend Geburt - 24.11.24',
-    content:
-      'Eiusmod sunt velit nulla elit officia non dolore ad do nisi duis voluptate irure officia. Deserunt adipisicing esse incididunt sit tempor enim anim eiusmod elit deserunt labore non esse proident. Nulla Lorem in occaecat occaecat. Adipisicing est adipisicing aute voluptate veniam Lorem eu in elit est dolor elit. Eiusmod ex culpa mollit qui ex mollit. Qui ipsum cupidatat anim eu nostrud velit elit excepteur aliquip amet. Enim dolor eu consectetur magna pariatur elit velit voluptate. Consectetur velit do incididunt nisi laborum nostrud do reprehenderit est Lorem nostrud elit.',
-  },
-  // More items...
-]
+export async function Schedule() {
+  const payload = await getPayload({
+    config: configPromise,
+  })
 
-export function Schedule() {
+  const data = await payload.find({
+    collection: 'schedule',
+  })
+
+  const sortedData = data.docs.sort((a, b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime()
+  })
+
   return (
     <motion.section
       initial="hidden"
@@ -34,31 +31,7 @@ export function Schedule() {
     >
       <h2 className="text-center font-ink-blossoms text-header text-white">Aktuelles</h2>
 
-      <div className="flex flex-col items-center gap-6 w-full px-4 md:px-0">
-        {newsItems.map((item, index) => (
-          <motion.div key={index} className="w-full md:w-[800px]">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value={`item-${index}`} className="border-none">
-                <AccordionTrigger className="flex items-center rounded-2xl decoration-0 hover:cursor-pointer px-4 py-4 md:px-8 md:py-6">
-                  <h3 className="flex-1 text-subheader">{item.title}</h3>
-                </AccordionTrigger>
-                <AccordionContent className="px-4 py-2 text-primary-darker">
-                  {item.content}
-
-                  {/* TODO: correct link */}
-                  <Link className="flex items-center gap-2" href="/anmeldung">
-                    <ArrowRight className="text-primary-darker mr-2 size-6" />
-                    <span className="text-content text-primary-darker hover:underline py-4">
-                      zur Anmeldung
-                    </span>
-                  </Link>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </motion.div>
-        ))}
-        <Button variant="whiteLight">mehr ansehen</Button>
-      </div>
+      <AccordionList items={sortedData} />
     </motion.section>
   )
 }
