@@ -7,9 +7,25 @@ import Offers from './components/Offers'
 import SocialProof from './components/Social-Proof'
 import { Schedule } from './components/Schedule'
 
-export default function Home() {
-  // TODO: cards bigger on desktop
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
 
+export default async function Home() {
+  const payload = await getPayload({
+    config: configPromise,
+  })
+
+  const teamImageData = await payload.find({
+    collection: 'team-image',
+  })
+
+  const introData = await payload.find({
+    collection: 'intro',
+  })
+
+  const teamImage = teamImageData.docs[0]?.image
+  const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
+  const introDescription = introData.docs[0]?.description || 'Default description'
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
       <Hero />
@@ -38,7 +54,12 @@ export default function Home() {
         backgroundColor="bg-primary-darker"
       />
 
-      <AboutFooterSection showAboutSection />
+      <AboutFooterSection
+        teamImageData={teamImage}
+        introTitle={introTitle}
+        introDescription={introDescription}
+        showAboutSection={true}
+      />
     </main>
   )
 }

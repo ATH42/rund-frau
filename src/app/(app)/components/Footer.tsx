@@ -1,33 +1,22 @@
 import { ArrowRight, Mail, Phone, Instagram, Facebook } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
+import { Media } from '@/payload-types'
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 
-export default async function AboutFooterSection({ showAboutSection = false }) {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+type AboutFooterSectionProps = {
+  showAboutSection?: boolean
+  teamImageData?: number | Media
+  introTitle?: string
+  introDescription?: string
+}
 
-  // Fetch team image data
-  const teamImageData = await payload.find({
-    collection: 'team-image',
-  })
-
-  const teamImage = teamImageData?.docs[0]?.image
-  const imageUrl =
-    typeof teamImage === 'object' && teamImage.url ? teamImage.url : '/default-placeholder.png'
-
-  // Fetch intro data
-  const introData = await payload.find({
-    collection: 'intro',
-  })
-
-  const introTitle = introData?.docs[0]?.title || 'Wir sind für euch da.'
-  const introDescription =
-    introData?.docs[0]?.description ||
-    'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.'
+export default function AboutFooterSection({
+  showAboutSection = false,
+  teamImageData,
+  introTitle = 'Wir sind für euch da.',
+  introDescription = 'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.',
+}: AboutFooterSectionProps) {
 
   const footerLinks = [
     { label: 'Impressum', href: '#' },
@@ -35,6 +24,12 @@ export default async function AboutFooterSection({ showAboutSection = false }) {
     { label: 'Kontakt', href: '#' },
     { label: 'Downloads & Links', href: '#' },
   ]
+
+  const imageUrl =
+    typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
+      ? teamImageData.url
+      : '/default-image.jpg'
+
 
   return (
     <section className="relative flex w-full flex-col">
@@ -51,8 +46,10 @@ export default async function AboutFooterSection({ showAboutSection = false }) {
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
             <div className="relative">
               <Image
-                src={imageUrl}
-                alt={teamImageData?.docs[0]?.description || 'Team'}
+
+                src={imageUrl || '/default-image.jpg'}
+                alt={'Team Image'}
+
                 className="h-100 w-full object-cover"
                 width={1000}
                 height={1000}
