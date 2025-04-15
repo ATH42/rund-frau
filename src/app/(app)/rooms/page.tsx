@@ -18,28 +18,47 @@ function Header() {
             Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.
           </p>
         </>
-        <Separator className=" bg-primary px-20" />
+        <Separator className="bg-primary px-20" />
       </section>
     </>
   )
 }
 
 function ImageGrid() {
-  const colSpans = [2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2]
-  // TODO: spans
+  const images = Array.from({ length: 11 }).map((_, index) => ({
+    src: `/Bilder/GHR/Sofa.png`,
+    alt: `Image ${index + 1}`,
+  }))
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:px-20 py-10 p-6">
-      {Array.from({ length: 11 }).map((_, index) => (
-        <div key={index} className={`relative col-span-${colSpans[index]}`}>
-          {/* TODO: open image full size */}
-          <Image
-            className="h-60 object-cover rounded-lg"
-            src="/Bilder/GHR/Sofa.png"
-            alt=""
-            width={1000}
-            height={500}
-          />
-          <div className="absolute inset-0 bg-primary/40 rounded-lg"></div>
+    <div className="md:px-20 py-10 p-6">
+      {images.map((image, index) => (
+        <div
+          key={index}
+          className={`grid grid-cols-3 gap-4 mb-4 ${
+            index % 2 === 0 ? 'grid-cols-3' : 'grid-cols-3'
+          }`}
+        >
+          <div className={`relative ${index % 2 === 0 ? 'col-span-2' : 'col-span-1'}`}>
+            <Image
+              className="h-60 object-cover rounded-lg"
+              src={image.src}
+              alt={image.alt}
+              width={1000}
+              height={500}
+            />
+            <div className="absolute inset-0 bg-primary/40 rounded-lg"></div>
+          </div>
+          <div className={`relative ${index % 2 === 0 ? 'col-span-1' : 'col-span-2'}`}>
+            <Image
+              className="h-60 object-cover rounded-lg"
+              src={image.src}
+              alt={image.alt}
+              width={1000}
+              height={500}
+            />
+            <div className="absolute inset-0 bg-primary/40 rounded-lg"></div>
+          </div>
         </div>
       ))}
     </div>

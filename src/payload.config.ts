@@ -6,6 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -14,11 +15,10 @@ import { IntroCollection } from './collections/Intro'
 import { TeamImageCollection } from './collections/TeamImage'
 import Services from './collections/Services'
 import { CourseCollection as Kurse } from './collections/Course'
+import { RoomImageCollection } from './collections/RoomImage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 export default buildConfig({
   admin: {
@@ -31,7 +31,16 @@ export default buildConfig({
     locales: ['de'],
     defaultLocale: 'de',
   },
-  collections: [Users, Media, Schedule, IntroCollection, TeamImageCollection, Services, Kurse],
+  collections: [
+    Users,
+    Media,
+    Schedule,
+    IntroCollection,
+    TeamImageCollection,
+    Services,
+    Kurse,
+    RoomImageCollection,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

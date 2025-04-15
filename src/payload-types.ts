@@ -74,6 +74,7 @@ export interface Config {
     'team-image': TeamImage;
     services: Service;
     courses: Course;
+    'room-image': RoomImage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,6 +88,7 @@ export interface Config {
     'team-image': TeamImageSelect<false> | TeamImageSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
+    'room-image': RoomImageSelect<false> | RoomImageSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -230,6 +232,17 @@ export interface Course {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "room-image".
+ */
+export interface RoomImage {
+  id: number;
+  image: number | Media;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -262,6 +275,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'courses';
         value: number | Course;
+      } | null)
+    | ({
+        relationTo: 'room-image';
+        value: number | RoomImage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -399,6 +416,16 @@ export interface CoursesSelect<T extends boolean = true> {
   maxAttendees?: T;
   location?: T;
   price?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "room-image_select".
+ */
+export interface RoomImageSelect<T extends boolean = true> {
+  image?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
