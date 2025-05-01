@@ -23,7 +23,6 @@ export default async function Home() {
     collection: 'intro',
   })
 
-  const teamImage = teamImageData.docs[0]?.image
   const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
   const introDescription = introData.docs[0]?.description || 'Default description'
   return (
@@ -55,7 +54,7 @@ export default async function Home() {
       />
 
       <AboutFooterSection
-        teamImageData={teamImage}
+        teamImageData={teamImageData}
         introTitle={introTitle}
         introDescription={introDescription}
         showAboutSection={true}

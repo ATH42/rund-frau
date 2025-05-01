@@ -3,8 +3,11 @@ import type { CollectionConfig } from 'payload'
 export const TeamImageCollection: CollectionConfig = {
   slug: 'team-image',
   labels: {
-    singular: 'Team Image',
-    plural: 'Team Images',
+    singular: 'Team Bild',
+    plural: 'Team Bilder',
+  },
+  access: {
+    read: () => true,
   },
   admin: {
     useAsTitle: 'description',
@@ -13,7 +16,7 @@ export const TeamImageCollection: CollectionConfig = {
     {
       name: 'image',
       type: 'upload',
-      relationTo: 'media', // This links to your Media collection
+      relationTo: 'media',
       required: true,
       label: 'Team Bild',
     },

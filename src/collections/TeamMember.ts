@@ -6,6 +6,9 @@ const TeamMembers: CollectionConfig = {
     singular: 'Team Member',
     plural: 'Team Members',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'name',

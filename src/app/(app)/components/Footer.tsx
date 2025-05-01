@@ -1,12 +1,13 @@
 import { ArrowRight, Mail, Phone, Instagram, Facebook } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
-import { Media } from '@/payload-types'
+import { TeamImage } from '@/payload-types'
 import Link from 'next/link'
+import { PaginatedDocs } from 'payload'
 
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
-  teamImageData?: number | Media
+  teamImageData?: PaginatedDocs<TeamImage>
   introTitle?: string
   introDescription?: string
 }
@@ -27,8 +28,6 @@ function SocialMediaLinks() {
 export default function AboutFooterSection({
   showAboutSection = false,
   teamImageData,
-  introTitle = 'Wir sind für euch da.',
-  introDescription = 'Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck.',
 }: AboutFooterSectionProps) {
   const footerLinks = [
     { label: 'Impressum', href: '/imprint' },
@@ -37,9 +36,10 @@ export default function AboutFooterSection({
     { label: 'Downloads & Links', href: '#' },
   ]
 
+  const teamImage = teamImageData?.docs[0]?.image
   const imageUrl =
-    typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
-      ? teamImageData.url
+    typeof teamImage === 'object' && teamImage !== null && 'url' in teamImage
+      ? teamImage.url
       : '/default-image.jpg'
 
   return (
@@ -70,8 +70,10 @@ export default function AboutFooterSection({
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
-            <h2 className="text-header font-ink-blossoms">{introTitle}</h2>
-            <p className="font-text text-content md:text-lg">{introDescription}</p>
+            <h2 className="text-header font-ink-blossoms">{teamImageData?.docs[0]?.description}</h2>
+            <p className="font-text text-content md:text-lg">
+              {teamImageData?.docs[0]?.description}
+            </p>
           </div>
         </div>
       )}

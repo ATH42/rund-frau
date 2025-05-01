@@ -2,6 +2,13 @@ import { CollectionConfig } from 'payload'
 
 export const CourseCollection: CollectionConfig = {
   slug: 'courses',
+  access: {
+    read: () => true,
+  },
+  labels: {
+    singular: 'Kurs',
+    plural: 'Kurse',
+  },
   fields: [
     {
       name: 'title',

@@ -51,7 +51,7 @@ async function ImageGrid() {
       description: imageDescription,
     }
   })
-
+  // TODO:  const imageCount = images.length
   return (
     <div className="md:px-20 py-10 p-6">
       <div className="grid grid-cols-3 gap-4">

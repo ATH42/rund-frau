@@ -5,6 +5,10 @@ export const Media: CollectionConfig = {
   access: {
     read: () => true,
   },
+  labels: {
+    singular: 'Medien',
+    plural: 'Bilder',
+  },
   fields: [
     {
       name: 'alt',

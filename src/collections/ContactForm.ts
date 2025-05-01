@@ -6,6 +6,9 @@ const ContactReasons: CollectionConfig = {
     singular: 'Anliegen',
     plural: 'Anliegen',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'reason',

@@ -5,6 +5,10 @@ export const Schedule: CollectionConfig = {
   access: {
     read: () => true,
   },
+  labels: {
+    singular: 'Veranstaltung',
+    plural: 'Veranstaltungen',
+  },
   fields: [
     {
       name: 'title',

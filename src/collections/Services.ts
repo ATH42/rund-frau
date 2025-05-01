@@ -2,6 +2,13 @@ import { CollectionConfig } from 'payload'
 
 export const Services: CollectionConfig = {
   slug: 'services',
+  labels: {
+    singular: 'Angebot',
+    plural: 'Angebote',
+  },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'title',

@@ -35,10 +35,6 @@ export const CourseDialogTrigger = ({
             <DialogTitle className="text-white text-header font-ink-blossoms">{title}</DialogTitle>
           </DialogHeader>
           <p className="p-4">{description}</p>
-          <p className="p-4">Datum: {date}</p>
-          <p className="p-4">Maximale Teilnehmerzahl: {maxAttendees}</p>
-          <p className="p-4">Ort: {location}</p>
-          <p className="p-4">Preis: €{price.toFixed(2)}</p>
         </div>
         <Button variant="whiteLight">Kurs Buchen</Button>
       </DialogContent>
