@@ -25,6 +25,7 @@ export const TeamImageCollection: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Titel',
+      defaultValue: 'Team',
     },
     {
       name: 'description',
