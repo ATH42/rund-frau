@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, Phone, Instagram, Facebook } from 'lucide-react'
+import { ArrowRight, Mail, Phone, Instagram, Facebook, Printer } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import { TeamImage } from '@/payload-types'
@@ -110,7 +110,7 @@ export default function AboutFooterSection({
               <span>Telefonnummer</span>
             </a>
             <div className="flex items-center justify-center gap-3 lg:justify-start cursor-pointer">
-              <Phone className="h-5 w-5" />
+              <Printer className="h-5 w-5" />
               <span>Faxnummer</span>
             </div>
           </div>

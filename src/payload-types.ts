@@ -196,6 +196,7 @@ export interface Intro {
 export interface TeamImage {
   id: number;
   image: number | Media;
+  title: string;
   description: string;
   updatedAt: string;
   createdAt: string;
@@ -420,6 +421,7 @@ export interface IntroSelect<T extends boolean = true> {
  */
 export interface TeamImageSelect<T extends boolean = true> {
   image?: T;
+  title?: T;
   description?: T;
   updatedAt?: T;
   createdAt?: T;

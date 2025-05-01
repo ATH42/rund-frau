@@ -21,8 +21,14 @@ export const TeamImageCollection: CollectionConfig = {
       label: 'Team Bild',
     },
     {
-      name: 'description',
+      name: 'title',
       type: 'text',
+      required: true,
+      label: 'Titel',
+    },
+    {
+      name: 'description',
+      type: 'textarea',
       required: true,
       label: 'Beschreibung',
       admin: {
