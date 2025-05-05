@@ -27,7 +27,6 @@ export default async function Home() {
   const introDescription = introData.docs[0]?.description || 'Default description'
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
-      <></>
       <Hero />
 
       <Intro />
