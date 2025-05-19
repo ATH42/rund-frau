@@ -24,7 +24,9 @@ export default async function Home() {
   })
 
   const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
+
   const introDescription = introData.docs[0]?.description || 'Default description'
+
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
       <Hero />
@@ -46,6 +48,7 @@ export default async function Home() {
           height={202}
         />
       </div>
+
       {/* TODO: not responsive on small screens */}
       <SocialProof
         cardBackgroundColor="bg-primary"
