@@ -259,6 +259,16 @@ export type ContactReasons = {
   reason?: string
 }
 
+export type Intro = {
+  _id: string
+  _type: 'intro'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+}
+
 export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -278,4 +288,5 @@ export type AllSanitySchemaTypes =
   | SanityImageMetadata
   | Course
   | ContactReasons
+  | Intro
 export declare const internalGroqTypeReferenceTo: unique symbol

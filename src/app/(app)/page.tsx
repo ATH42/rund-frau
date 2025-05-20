@@ -9,6 +9,8 @@ import { Schedule } from './components/Schedule'
 
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
+import { sanityFetch } from '@/sanity/live'
+import { INTRO_QUERY } from '@/sanity/queries'
 
 export default async function Home() {
   const payload = await getPayload({
@@ -19,9 +21,11 @@ export default async function Home() {
     collection: 'team-image',
   })
 
-  const introData = await payload.find({
-    collection: 'intro',
-  })
+  // const introData = await payload.find({
+  //   collection: 'intro',
+  // })
+
+  const { data: introData } = await sanityFetch({ query: INTRO_QUERY })
 
   const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
 
