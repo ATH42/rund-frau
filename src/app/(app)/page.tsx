@@ -21,15 +21,11 @@ export default async function Home() {
     collection: 'team-image',
   })
 
-  // const introData = await payload.find({
-  //   collection: 'intro',
-  // })
-
   const { data: introData } = await sanityFetch({ query: INTRO_QUERY })
 
-  const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
+  const introTitle = introData?.title || 'Wir sind für euch da.'
 
-  const introDescription = introData.docs[0]?.description || 'Default description'
+  const introDescription = introData?.description || 'Default description'
 
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">

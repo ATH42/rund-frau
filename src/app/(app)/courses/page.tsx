@@ -62,17 +62,20 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
   </section>
 )
 
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import { sanityFetch } from '@/sanity/live'
+import { COURSE_QUERY } from '@/sanity/queries'
+import { Course } from '@/sanity/types'
 
 const Courses: NextPage = async () => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  // const payload = await getPayload({
+  //   config: configPromise,
+  // })
 
-  const coursesData = await payload.find({
-    collection: 'courses',
-  })
+  // const coursesData = await payload.find({
+  //   collection: 'courses',
+  // })
+
+  const { data: coursesData } = await sanityFetch({ query: COURSE_QUERY })
 
   return (
     <main className="w-full bg-white flex flex-col">
@@ -83,7 +86,7 @@ const Courses: NextPage = async () => {
 
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24">
         <h1 className="text-header font-ink-blossoms text-white">Alle Kurse im Überblick</h1>
-        {coursesData.docs.map((course, index) => (
+        {coursesData.map((course: Course, index: number) => (
           <div key={index} className="flex flex-col lg:flex-row flex-wrap gap-16 py-5">
             <CourseItem
               title={course.title || ''}
