@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/app/(app)/components/Navbar'
 import MobileNavbar from './components/MobileNavbar'
+import { SanityLive } from '@/sanity/live'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -31,6 +32,7 @@ export default function RootLayout({
         <Navbar className="hidden md:block" />
         <MobileNavbar className="md:hidden" />
         {children}
+        <SanityLive />
       </body>
     </html>
   )
