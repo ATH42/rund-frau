@@ -5,9 +5,10 @@ import Footer from '../components/Footer'
 import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { type TeamMember } from '@/payload-types'
+import { sanityFetch } from '@/sanity/live'
+import { TeamMembersQuery } from '@/sanity/queries'
+import { TeamMember } from '@/sanity/types'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 
 function Header() {
   return (
@@ -24,9 +25,9 @@ function Header() {
   )
 }
 
-function TeamMember({ member }: { member: TeamMember }) {
+function TeamMemberCard({ member }: { member: TeamMember }) {
   const { name, title, phone, mail, image, description } = member
-  const imageUrl = typeof image === 'object' && image.url ? image.url : '/default-image.jpg' // Use default image if URL is null
+  // const imageUrl = typeof image === 'object' && image.url ? image.url : '/default-image.jpg' // Use default image if URL is null
 
   return (
     <Card className="flex flex-col bg-primary-dark text-white shadow-none">
@@ -42,8 +43,8 @@ function TeamMember({ member }: { member: TeamMember }) {
             width={1000}
             height={1000}
             className="rounded-xl w-full h-60 md:h-100 object-cover"
-            src={imageUrl}
-            alt={name}
+            src={image ? urlFor(image).url() : 'default-image.jpg'}
+            alt={name || ''}
           />
         </div>
         <Dialog>
@@ -66,13 +67,14 @@ function TeamMember({ member }: { member: TeamMember }) {
                     width={1000}
                     height={1000}
                     className="rounded-xl w-full h-60 object-cover"
-                    src={imageUrl}
-                    alt={name}
+                    src={image ? urlFor(image).url() : 'default-image.jpg'}
+                    alt={name || ''}
                   />
                 </div>
               </div>
               <div className="">
                 <p>{description}</p>
+                {/* TODO: if it's too much text it's not readable, add shadcn component to scroll f.ex. */}
               </div>
             </div>
           </DialogContent>
@@ -91,7 +93,7 @@ function TeamMemberSection({ title, members }: { title: string; members: TeamMem
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {members.map((member, index) => (
           <div key={index} className="flex flex-col flex-start p-6">
-            <TeamMember member={member} />
+            <TeamMemberCard member={member} />
           </div>
         ))}
       </div>
@@ -100,18 +102,25 @@ function TeamMemberSection({ title, members }: { title: string; members: TeamMem
 }
 
 const Team: NextPage = async () => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  // const payload = await getPayload({
+  //   config: configPromise,
+  // })
 
-  const { docs: teamMembers } = await payload.find({
-    collection: 'team-members',
-    limit: 100,
-    depth: 1,
-  })
+  // const { docs: teamMembers } = await payload.find({
+  //   collection: 'team-members',
+  //   limit: 100,
+  //   depth: 1,
+  // })
+
+  const { data: teamMembers } = (await sanityFetch({ query: TeamMembersQuery })) as {
+    data: TeamMember[]
+  }
 
   const groupedMembers = teamMembers.reduce(
-    (acc, member) => {
+    (acc: Record<string, TeamMember[]>, member: TeamMember) => {
+      if (!member.title) {
+        return acc
+      } // for now, bc of the sanity bug that it makes everything optional in types.
       if (!acc[member.title]) {
         acc[member.title] = []
       }

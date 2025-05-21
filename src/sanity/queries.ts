@@ -20,7 +20,7 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
   alt
 }`)
 
-export const TeamMembersQuery = defineQuery(`*[_type == "team-members"]{  
+export const TeamMembersQuery = defineQuery(`*[_type == "team-member"]{  
   _id,
   name,
   title,

@@ -74,9 +74,9 @@ export type Slug = {
   source?: string
 }
 
-export type TeamMembers = {
+export type TeamMember = {
   _id: string
-  _type: 'team-members'
+  _type: 'team-member'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -289,7 +289,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Slug
-  | TeamMembers
+  | TeamMember
   | TeamImage
   | Services
   | Schedule
@@ -328,3 +328,16 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 //   } | null
 //   alt: string | null
 // }>
+// // Variable: TeamMembersQuery
+// // Query: *[_type == "team-members"]{    _id,  name,  title,  phone,  mail,  image{    asset->{url}  },  description}
+// export type TeamMembersQueryResult = Array<never>
+
+// // Query TypeMap
+// import '@sanity/client'
+// declare module '@sanity/client' {
+//   interface SanityQueries {
+//     '*[_type == "intro"][0]{\n  _id,\n  title,\n  description\n}': INTRO_QUERYResult
+//     '*[_type == "course"]{  \n  _id,\n  title,\n  description,\n  date,\n  maxAttendees,\n  location,\n  price,\n  image{\n    asset->{url}\n  },\n  alt\n}': COURSE_QUERYResult
+//     '*[_type == "team-members"]{  \n  _id,\n  name,\n  title,\n  phone,\n  mail,\n  image{\n    asset->{url}\n  },\n  description\n}': TeamMembersQueryResult
+//   }
+// }
