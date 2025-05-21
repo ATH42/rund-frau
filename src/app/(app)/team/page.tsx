@@ -6,9 +6,9 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { sanityFetch } from '@/sanity/live'
-import { TeamMembersQuery } from '@/sanity/queries'
 import { TeamMember } from '@/sanity/types'
 import { urlFor } from '@/sanity/imageUrlBuilder'
+import { TEAM_MEMBERS_QUERY } from '@/sanity/queries'
 
 function Header() {
   return (
@@ -112,7 +112,7 @@ const Team: NextPage = async () => {
   //   depth: 1,
   // })
 
-  const { data: teamMembers } = (await sanityFetch({ query: TeamMembersQuery })) as {
+  const { data: teamMembers } = (await sanityFetch({ query: TEAM_MEMBERS_QUERY })) as {
     data: TeamMember[]
   }
 
@@ -137,6 +137,7 @@ const Team: NextPage = async () => {
         {Object.entries(groupedMembers).map(([title, members], index) => (
           <TeamMemberSection key={index} title={title} members={members} />
         ))}
+        {/* Maybe add something to be able to sort them?*/}
         <Footer />
       </div>
     </main>

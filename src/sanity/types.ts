@@ -97,6 +97,7 @@ export type TeamMember = {
     _type: 'image'
   }
   description?: string
+  sortOrder?: number
 }
 
 export type TeamImage = {
@@ -122,9 +123,9 @@ export type TeamImage = {
   description?: string
 }
 
-export type Services = {
+export type Service = {
   _id: string
-  _type: 'services'
+  _type: 'service'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -142,7 +143,13 @@ export type Services = {
     _type: 'image'
   }
   description?: string
-  paragraphTitle?: string
+  paragraphs?: Array<{
+    paragraphTitle?: string
+    paragraph?: string
+    _type: 'paragraphItem'
+    _key: string
+  }>
+  sortOrder?: number
 }
 
 export type Schedule = {
@@ -291,7 +298,7 @@ export type AllSanitySchemaTypes =
   | Slug
   | TeamMember
   | TeamImage
-  | Services
+  | Service
   | Schedule
   | RoomImage
   | Course
@@ -328,9 +335,37 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 //   } | null
 //   alt: string | null
 // }>
-// // Variable: TeamMembersQuery
-// // Query: *[_type == "team-members"]{    _id,  name,  title,  phone,  mail,  image{    asset->{url}  },  description}
-// export type TeamMembersQueryResult = Array<never>
+// // Variable: TEAM_MEMBERS_QUERY
+// // Query: *[_type == "team-member"] | order(sortOrder asc){    _id,  name,  title,  phone,  mail,  image{    asset->{url}  },  description}
+// export type TEAM_MEMBERS_QUERYResult = Array<{
+//   _id: string
+//   name: string | null
+//   title: string | null
+//   phone: string | null
+//   mail: string | null
+//   image: {
+//     asset: {
+//       url: string | null
+//     } | null
+//   } | null
+//   description: string | null
+// }>
+// // Variable: SERVICE_QUERY
+// // Query: *[_type == "service"] | order(sortOrder asc){    _id,  title,  description,  image{    asset->{url}  },  paragraphTitle,}
+// export type SERVICE_QUERYResult = Array<{
+//   _id: string
+//   title: string | null
+//   description: string | null
+//   image: {
+//     asset: {
+//       url: string | null
+//     } | null
+//   } | null
+//   paragraphTitle: null
+// }>
+// // Variable: SINGLE_SERVICE_QUERY
+// // Query: *[_type == "service" && slug.current == $slug][0]{  }
+// export type SINGLE_SERVICE_QUERYResult = {} | null
 
 // // Query TypeMap
 // import '@sanity/client'
@@ -338,6 +373,8 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 //   interface SanityQueries {
 //     '*[_type == "intro"][0]{\n  _id,\n  title,\n  description\n}': INTRO_QUERYResult
 //     '*[_type == "course"]{  \n  _id,\n  title,\n  description,\n  date,\n  maxAttendees,\n  location,\n  price,\n  image{\n    asset->{url}\n  },\n  alt\n}': COURSE_QUERYResult
-//     '*[_type == "team-members"]{  \n  _id,\n  name,\n  title,\n  phone,\n  mail,\n  image{\n    asset->{url}\n  },\n  description\n}': TeamMembersQueryResult
+//     '*[_type == "team-member"] | order(sortOrder asc){  \n  _id,\n  name,\n  title,\n  phone,\n  mail,\n  image{\n    asset->{url}\n  },\n  description\n}': TEAM_MEMBERS_QUERYResult
+//     '*[_type == "service"] | order(sortOrder asc){  \n  _id,\n  title,\n  description,\n  image{\n    asset->{url}\n  },\n  paragraphTitle,\n}': SERVICE_QUERYResult
+//     '*[_type == "service" && slug.current == $slug][0]{\n  \n}': SINGLE_SERVICE_QUERYResult
 //   }
 // }

@@ -8,17 +8,20 @@ import { Contact } from '../components/Contact'
 import SocialProof from '../components/Social-Proof'
 import Link from 'next/link'
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import { sanityFetch } from '@/sanity/live'
+import { SERVICE_QUERY } from '@/sanity/queries'
+import { Service } from '@/sanity/types'
 
 const Angebote: NextPage = async () => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  // const payload = await getPayload({
+  //   config: configPromise,
+  // })
 
-  const data = await payload.find({
-    collection: 'services',
-  })
+  // const data = await payload.find({
+  //   collection: 'services',
+  // })
+
+  const { data } = (await sanityFetch({ query: SERVICE_QUERY })) as { data: Service[] }
 
   const serviceImages = [
     {
@@ -41,7 +44,7 @@ const Angebote: NextPage = async () => {
 
   return (
     <div className="bg-primary-dark w-full">
-      <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-dark px-6 md:px-28 py-20 px-0">
+      <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-dark px-6 md:px-28 py-20">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-center font-ink-blossoms text-header">Unsere Angebote</h1>
           <p className="text-center text-lg text-variable-collection-white">
@@ -50,9 +53,9 @@ const Angebote: NextPage = async () => {
         </div>
 
         {/* Service sections */}
-        {data.docs.map((service, index) => (
+        {data.map((service: Service, index: number) => (
           <Card
-            key={service.id}
+            key={service._id}
             className={`flex w-full flex-col items-center justify-start md:justify-end md:gap-20 border-none shadow-none md:flex-row ${
               index % 2 !== 0 ? 'md:flex-row-reverse' : ''
             }`}
@@ -71,7 +74,7 @@ const Angebote: NextPage = async () => {
               <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
 
               <p className="text-base text-content text-variable-collection-white">
-                {service.description.toString()}
+                {service.description?.toString()}
               </p>
 
               <Link

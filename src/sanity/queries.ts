@@ -20,7 +20,7 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
   alt
 }`)
 
-export const TeamMembersQuery = defineQuery(`*[_type == "team-member"]{  
+export const TEAM_MEMBERS_QUERY = defineQuery(`*[_type == "team-member"] | order(sortOrder asc){  
   _id,
   name,
   title,
@@ -30,4 +30,20 @@ export const TeamMembersQuery = defineQuery(`*[_type == "team-member"]{
     asset->{url}
   },
   description
+}`)
+
+export const SERVICE_QUERY = defineQuery(`*[_type == "service"] | order(sortOrder asc){  
+  _id,
+  title,
+  description,
+}`)
+
+export const SINGLE_SERVICE_QUERY = defineQuery(`*[_type == "service" && title == $title][0]{
+    _id,
+  title,
+  description,
+  image{
+    asset->{url}
+  },
+  paragraphs[],
 }`)

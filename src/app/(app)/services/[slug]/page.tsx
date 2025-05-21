@@ -4,46 +4,50 @@ import { Contact } from '../../components/Contact'
 import Footer from '../../components/Footer'
 import { Paragraph } from '../components/Paragraph'
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
-import { Service } from '@/payload-types'
+import { sanityFetch } from '@/sanity/live'
+import { SINGLE_SERVICE_QUERY } from '@/sanity/queries'
+import { Service } from '@/sanity/types'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  // const payload = await getPayload({
+  //   config: configPromise,
+  // })
 
-  const data = await payload.find({
-    collection: 'services',
-    where: {
-      title: {
-        equals: slug,
-      },
-    },
-  })
+  // const data = await payload.find({
+  //   collection: 'services',
+  //   where: {
+  //     title: {
+  //       equals: slug,
+  //     },
+  //   },
+  // })
 
-  if (!data.docs.length) {
+  const { data } = (await sanityFetch({
+    query: SINGLE_SERVICE_QUERY,
+    params: { title: slug },
+  })) as { data: Service }
+
+  if (!data) {
     return <p>Service not found</p>
   }
 
-  const service: Service = data.docs[0]
-  const teamImageData = service.image
-
-  const imageUrl =
-    typeof teamImageData === 'object' && teamImageData !== null && 'url' in teamImageData
-      ? teamImageData.url
-      : '/default-image.jpg'
+  const service: Service = data
 
   return (
     <main>
-      <Header title={service.title} image={imageUrl || ''} subtitle={service.description} />
+      <Header
+        title={service.title || ''}
+        image={service.image ? urlFor(service.image).url() : '/default-image.jpg'}
+        subtitle={service.description || ''}
+      />
       <div className="flex justify-center items-center gap-8 p-6 pb-20">
         <GridComponent>
           {service.paragraphs?.map((para, index) => (
             <div key={index}>
-              <Paragraph title={para.paragraphTitle} content={para.paragraph} />
+              <Paragraph title={para.paragraphTitle || ''} content={para.paragraph || ''} />
             </div>
           ))}
         </GridComponent>
