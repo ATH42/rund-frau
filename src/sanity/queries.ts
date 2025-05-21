@@ -13,5 +13,21 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
   date,
   maxAttendees,
   location,
-  price
+  price,
+  image{
+    asset->{url}
+  },
+  alt
+}`)
+
+export const TeamMembersQuery = defineQuery(`*[_type == "team-members"]{  
+  _id,
+  name,
+  title,
+  phone,
+  mail,
+  image{
+    asset->{url}
+  },
+  description
 }`)

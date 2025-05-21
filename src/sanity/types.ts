@@ -179,6 +179,33 @@ export type RoomImage = {
   caption?: string
 }
 
+export type Course = {
+  _id: string
+  _type: 'course'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  date?: string
+  maxAttendees?: number
+  location?: string
+  price?: number
+  image?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  alt?: string
+}
+
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop'
   top?: number
@@ -236,20 +263,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean
 }
 
-export type Course = {
-  _id: string
-  _type: 'course'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  description?: string
-  date?: string
-  maxAttendees?: number
-  location?: string
-  price?: number
-}
-
 export type ContactReasons = {
   _id: string
   _type: 'contact-reasons'
@@ -281,12 +294,37 @@ export type AllSanitySchemaTypes =
   | Services
   | Schedule
   | RoomImage
+  | Course
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | Course
   | ContactReasons
   | Intro
 export declare const internalGroqTypeReferenceTo: unique symbol
+// Source: ../rund-frau-next/src/sanity/queries.ts
+// Variable: INTRO_QUERY
+// Query: *[_type == "intro"][0]{  _id,  title,  description}
+// export type INTRO_QUERYResult = {
+//   _id: string
+//   title: string | null
+//   description: string | null
+// } | null
+// // Variable: COURSE_QUERY
+// // Query: *[_type == "course"]{    _id,  title,  description,  date,  maxAttendees,  location,  price,  image{    asset->{url}  },  alt}
+// export type COURSE_QUERYResult = Array<{
+//   _id: string
+//   title: string | null
+//   description: string | null
+//   date: string | null
+//   maxAttendees: number | null
+//   location: string | null
+//   price: number | null
+//   image: {
+//     asset: {
+//       url: string | null
+//     } | null
+//   } | null
+//   alt: string | null
+// }>
