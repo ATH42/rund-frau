@@ -12,19 +12,6 @@ import { urlFor } from '@/sanity/imageUrlBuilder'
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  // const payload = await getPayload({
-  //   config: configPromise,
-  // })
-
-  // const data = await payload.find({
-  //   collection: 'services',
-  //   where: {
-  //     title: {
-  //       equals: slug,
-  //     },
-  //   },
-  // })
-
   const { data } = (await sanityFetch({
     query: SINGLE_SERVICE_QUERY,
     params: { title: slug },

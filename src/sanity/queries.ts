@@ -47,3 +47,12 @@ export const SINGLE_SERVICE_QUERY = defineQuery(`*[_type == "service" && title =
   },
   paragraphs[],
 }`)
+
+export const ROOMS_QUERY = defineQuery(`*[_type == "room-image"]{  
+  _id,
+  image{
+    asset->{url}
+  },
+  alt,
+  caption,
+}`)
