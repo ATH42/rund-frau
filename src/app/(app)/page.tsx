@@ -7,19 +7,11 @@ import Offers from './components/Offers'
 import SocialProof from './components/Social-Proof'
 import { Schedule } from './components/Schedule'
 
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { sanityFetch } from '@/sanity/live'
-import { INTRO_QUERY } from '@/sanity/queries'
+import { INTRO_QUERY, TEAM_IMAGE_QUERY } from '@/sanity/queries'
 
 export default async function Home() {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-
-  const teamImageData = await payload.find({
-    collection: 'team-image',
-  })
+  const { data: teamImageData } = await sanityFetch({ query: TEAM_IMAGE_QUERY })
 
   const { data: introData } = await sanityFetch({ query: INTRO_QUERY })
 

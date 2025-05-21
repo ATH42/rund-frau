@@ -56,3 +56,12 @@ export const ROOMS_QUERY = defineQuery(`*[_type == "room-image"]{
   alt,
   caption,
 }`)
+
+export const TEAM_IMAGE_QUERY = defineQuery(`*[_type == "team-image"][0]{  
+  _id,
+  image{
+    asset->{url}
+  },
+  title,
+  description
+}`)

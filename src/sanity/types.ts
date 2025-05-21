@@ -118,7 +118,6 @@ export type TeamImage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  alt?: string
   title?: string
   description?: string
 }
@@ -309,93 +308,3 @@ export type AllSanitySchemaTypes =
   | ContactReasons
   | Intro
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ../rund-frau-next/src/sanity/queries.ts
-// Variable: INTRO_QUERY
-// Query: *[_type == "intro"][0]{  _id,  title,  description}
-// export type INTRO_QUERYResult = {
-//   _id: string
-//   title: string | null
-//   description: string | null
-// } | null
-// // Variable: COURSE_QUERY
-// // Query: *[_type == "course"]{    _id,  title,  description,  date,  maxAttendees,  location,  price,  image{    asset->{url}  },  alt}
-// export type COURSE_QUERYResult = Array<{
-//   _id: string
-//   title: string | null
-//   description: string | null
-//   date: string | null
-//   maxAttendees: number | null
-//   location: string | null
-//   price: number | null
-//   image: {
-//     asset: {
-//       url: string | null
-//     } | null
-//   } | null
-//   alt: string | null
-// }>
-// // Variable: TEAM_MEMBERS_QUERY
-// // Query: *[_type == "team-member"] | order(sortOrder asc){    _id,  name,  title,  phone,  mail,  image{    asset->{url}  },  description}
-// export type TEAM_MEMBERS_QUERYResult = Array<{
-//   _id: string
-//   name: string | null
-//   title: string | null
-//   phone: string | null
-//   mail: string | null
-//   image: {
-//     asset: {
-//       url: string | null
-//     } | null
-//   } | null
-//   description: string | null
-// }>
-// // Variable: SERVICE_QUERY
-// // Query: *[_type == "service"] | order(sortOrder asc){    _id,  title,  description,}
-// export type SERVICE_QUERYResult = Array<{
-//   _id: string
-//   title: string | null
-//   description: string | null
-// }>
-// // Variable: SINGLE_SERVICE_QUERY
-// // Query: *[_type == "service" && title == $title][0]{    _id,  title,  description,  image{    asset->{url}  },  paragraphs[],}
-// export type SINGLE_SERVICE_QUERYResult = {
-//   _id: string
-//   title: string | null
-//   description: string | null
-//   image: {
-//     asset: {
-//       url: string | null
-//     } | null
-//   } | null
-//   paragraphs: Array<{
-//     paragraphTitle?: string
-//     paragraph?: string
-//     _type: 'paragraphItem'
-//     _key: string
-//   }> | null
-// } | null
-// // Variable: ROOMS_QUERY
-// // Query: *[_type == "room-image"]{    _id,  image{    asset->{url}  },  alt,  caption,}
-// export type ROOMS_QUERYResult = Array<{
-//   _id: string
-//   image: {
-//     asset: {
-//       url: string | null
-//     } | null
-//   } | null
-//   alt: null
-//   caption: null
-// }>
-
-// // Query TypeMap
-// import '@sanity/client'
-// declare module '@sanity/client' {
-//   interface SanityQueries {
-//     '*[_type == "intro"][0]{\n  _id,\n  title,\n  description\n}': INTRO_QUERYResult
-//     '*[_type == "course"]{  \n  _id,\n  title,\n  description,\n  date,\n  maxAttendees,\n  location,\n  price,\n  image{\n    asset->{url}\n  },\n  alt\n}': COURSE_QUERYResult
-//     '*[_type == "team-member"] | order(sortOrder asc){  \n  _id,\n  name,\n  title,\n  phone,\n  mail,\n  image{\n    asset->{url}\n  },\n  description\n}': TEAM_MEMBERS_QUERYResult
-//     '*[_type == "service"] | order(sortOrder asc){  \n  _id,\n  title,\n  description,\n}': SERVICE_QUERYResult
-//     '*[_type == "service" && title == $title][0]{\n    _id,\n  title,\n  description,\n  image{\n    asset->{url}\n  },\n  paragraphs[],\n}': SINGLE_SERVICE_QUERYResult
-//     '*[_type == "room-image"]{  \n  _id,\n  image{\n    asset->{url}\n  },\n  alt,\n  caption,\n}': ROOMS_QUERYResult
-//   }
-// }
