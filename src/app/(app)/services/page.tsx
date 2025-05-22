@@ -13,14 +13,6 @@ import { SERVICE_QUERY } from '@/sanity/queries'
 import { Service } from '@/sanity/types'
 
 const Angebote: NextPage = async () => {
-  // const payload = await getPayload({
-  //   config: configPromise,
-  // })
-
-  // const data = await payload.find({
-  //   collection: 'services',
-  // })
-
   const { data } = (await sanityFetch({ query: SERVICE_QUERY })) as { data: Service[] }
 
   const serviceImages = [

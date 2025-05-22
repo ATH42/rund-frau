@@ -27,7 +27,6 @@ function Header() {
 
 function TeamMemberCard({ member }: { member: TeamMember }) {
   const { name, title, phone, mail, image, description } = member
-  // const imageUrl = typeof image === 'object' && image.url ? image.url : '/default-image.jpg' // Use default image if URL is null
 
   return (
     <Card className="flex flex-col bg-primary-dark text-white shadow-none">
@@ -102,16 +101,6 @@ function TeamMemberSection({ title, members }: { title: string; members: TeamMem
 }
 
 const Team: NextPage = async () => {
-  // const payload = await getPayload({
-  //   config: configPromise,
-  // })
-
-  // const { docs: teamMembers } = await payload.find({
-  //   collection: 'team-members',
-  //   limit: 100,
-  //   depth: 1,
-  // })
-
   const { data: teamMembers } = (await sanityFetch({ query: TEAM_MEMBERS_QUERY })) as {
     data: TeamMember[]
   }
@@ -137,7 +126,6 @@ const Team: NextPage = async () => {
         {Object.entries(groupedMembers).map(([title, members], index) => (
           <TeamMemberSection key={index} title={title} members={members} />
         ))}
-        {/* Maybe add something to be able to sort them?*/}
         <Footer />
       </div>
     </main>

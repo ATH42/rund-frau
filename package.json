@@ -1,26 +1,17 @@
 {
   "name": "rundfrau-main",
   "version": "1.0.0",
-  "description": "A blank template to get started with Payload 3.0",
+  "description": "A next.js website with sanity.io as headless cms",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
-    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
-    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "3.31.0",
-    "@payloadcms/next": "3.31.0",
-    "@payloadcms/payload-cloud": "3.31.0",
-    "@payloadcms/plugin-cloud-storage": "3.31.0",
-    "@payloadcms/richtext-lexical": "3.31.0",
-    "@payloadcms/storage-vercel-blob": "3.31.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-aspect-ratio": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.7",
@@ -43,7 +34,6 @@
     "next": "15.2.3",
     "next-sanity": "^9.11.1",
     "nodemailer": "^6.10.1",
-    "payload": "3.31.0",
     "postcss": "^8.5.3",
     "react": "19.0.0",
     "react-day-picker": "8.10.1",
@@ -67,9 +57,6 @@
   "engines": {
     "node": "^18.20.2 || >=20.9.0",
     "pnpm": "^9"
-  },
-  "overrides": {
-    "payload": "3.31.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

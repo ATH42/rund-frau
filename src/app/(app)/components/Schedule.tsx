@@ -1,7 +1,8 @@
 import * as motion from 'motion/react-client'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { AccordionList } from './AccordionList' // Import the new component
+import { sanityFetch } from '@/sanity/live'
+import { SCHEDULE_QUERY } from '@/sanity/queries'
+import type { Schedule } from '@/sanity/types'
 
 const fadeIn = {
   hidden: { opacity: 0 },
@@ -9,16 +10,10 @@ const fadeIn = {
 }
 
 export async function Schedule() {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  const { data } = await sanityFetch({ query: SCHEDULE_QUERY })
 
-  const data = await payload.find({
-    collection: 'schedule',
-  })
-
-  const sortedData = data.docs.sort((a, b) => {
-    return new Date(a.date).getTime() - new Date(b.date).getTime()
+  const sortedData = data.sort((a: Schedule, b: Schedule) => {
+    return new Date(a?.date || '').getTime() - new Date(b?.date || '').getTime()
   })
 
   return (

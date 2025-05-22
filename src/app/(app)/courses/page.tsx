@@ -20,7 +20,10 @@ const CourseItem = ({
   maxAttendees: number
   location: string
   price: number
-  image: any | null // i know that's bad practice, but it solves the problem and i would need to change everything how coursedata is passed here and in the dialogTrigger
+  image: any | null
+
+  // i know that's bad practice, but the image type is quite complicated and it solves the problem and i would need to change everything how coursedata is passed here and in the dialogTrigger
+
   alt: string
 }) => (
   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
@@ -72,14 +75,6 @@ import { Course } from '@/sanity/types'
 import { urlFor } from '@/sanity/imageUrlBuilder'
 
 const Courses: NextPage = async () => {
-  // const payload = await getPayload({
-  //   config: configPromise,
-  // })
-
-  // const coursesData = await payload.find({
-  //   collection: 'courses',
-  // })
-
   const { data: coursesData } = await sanityFetch({ query: COURSE_QUERY })
 
   return (

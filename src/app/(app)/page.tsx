@@ -19,6 +19,8 @@ export default async function Home() {
 
   const introDescription = introData?.description || 'Default description'
 
+  console.log('teamImageDataMain', teamImageData)
+
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
       <Hero />
@@ -52,7 +54,7 @@ export default async function Home() {
         teamImageData={teamImageData}
         introTitle={introTitle}
         introDescription={introDescription}
-        showAboutSection={true}
+        showAboutSection={false}
       />
     </main>
   )

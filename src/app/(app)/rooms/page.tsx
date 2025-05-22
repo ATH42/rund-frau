@@ -1,6 +1,3 @@
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
-
 import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -31,14 +28,6 @@ function Header() {
 }
 
 async function ImageGrid() {
-  // const payload = await getPayload({
-  //   config: configPromise,
-  // })
-
-  // const roomsImageData = await payload.find({
-  //   collection: 'room-image',
-  // })
-
   const { data: roomsImageData } = await sanityFetch({ query: ROOMS_QUERY })
 
   // TODO:  const imageCount = images.length

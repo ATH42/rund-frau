@@ -26,7 +26,7 @@ function SocialMediaLinks() {
 }
 
 export default function AboutFooterSection({
-  showAboutSection = true,
+  showAboutSection = false,
   teamImageData,
 }: AboutFooterSectionProps) {
   const footerLinks = [
@@ -36,11 +36,7 @@ export default function AboutFooterSection({
     { label: 'Downloads & Links', href: '#' },
   ]
 
-  // const teamImage = teamImageData?.image
-  // // const imageUrl =
-  // //   typeof teamImage === 'object' && teamImage !== null && 'url' in teamImage
-  // //     ? teamImage.url
-  // //     : '/default-image.jpg'
+  console.log('teamImageData', teamImageData)
 
   return (
     <section className="relative flex w-full flex-col">
@@ -72,7 +68,7 @@ export default function AboutFooterSection({
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
-            <h2 className="text-header font-ink-blossoms">{teamImageData?.description}</h2>
+            <h2 className="text-header font-ink-blossoms">{teamImageData?.title}</h2>
             <p className="font-text text-content md:text-lg">{teamImageData?.description}</p>
           </div>
         </div>
