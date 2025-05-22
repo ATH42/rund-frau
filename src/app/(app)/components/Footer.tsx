@@ -8,8 +8,6 @@ import { urlFor } from '@/sanity/imageUrlBuilder'
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
   teamImageData?: TeamImage
-  introTitle?: string
-  introDescription?: string
 }
 
 function SocialMediaLinks() {
@@ -25,6 +23,7 @@ function SocialMediaLinks() {
   )
 }
 
+// TODO: add Footer to Layout and show about section vie pathName
 export default function AboutFooterSection({
   showAboutSection = false,
   teamImageData,
@@ -35,8 +34,6 @@ export default function AboutFooterSection({
     { label: 'Kontakt', href: '#' },
     { label: 'Downloads & Links', href: '#' },
   ]
-
-  console.log('teamImageData', teamImageData)
 
   return (
     <section className="relative flex w-full flex-col">

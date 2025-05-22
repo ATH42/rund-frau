@@ -8,18 +8,10 @@ import SocialProof from './components/Social-Proof'
 import { Schedule } from './components/Schedule'
 
 import { sanityFetch } from '@/sanity/live'
-import { INTRO_QUERY, TEAM_IMAGE_QUERY } from '@/sanity/queries'
+import { TEAM_IMAGE_QUERY } from '@/sanity/queries'
 
 export default async function Home() {
   const { data: teamImageData } = await sanityFetch({ query: TEAM_IMAGE_QUERY })
-
-  const { data: introData } = await sanityFetch({ query: INTRO_QUERY })
-
-  const introTitle = introData?.title || 'Wir sind für euch da.'
-
-  const introDescription = introData?.description || 'Default description'
-
-  console.log('teamImageDataMain', teamImageData)
 
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
@@ -54,7 +46,7 @@ export default async function Home() {
         teamImageData={teamImageData}
         introTitle={introTitle}
         introDescription={introDescription}
-        showAboutSection={false}
+        showAboutSection
       />
     </main>
   )
