@@ -5,7 +5,12 @@ import { INTRO_QUERY } from '@/sanity/queries'
 import { sanityFetch } from '@/sanity/live'
 
 export async function Intro() {
-  const { data } = await sanityFetch({ query: INTRO_QUERY })
+  const { data } = await sanityFetch({
+    query: INTRO_QUERY,
+    params: {
+      revalidate: 60,
+    },
+  })
 
   return (
     <section className=" flex w-full bg-primary-dark flex-col text-white items-start self-stretch">
