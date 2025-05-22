@@ -65,3 +65,16 @@ export const TEAM_IMAGE_QUERY = defineQuery(`*[_type == "team-image"][0]{
   title,
   description
 }`)
+
+export const SCHEDULE_QUERY = defineQuery(`*[_type == "schedule"]{  
+  _id,
+  title,
+  date,
+  content,
+  location,
+}`)
+
+export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-form"][0]{  
+  _id,
+reason  
+}`)

@@ -43,7 +43,7 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
             width={1000}
             height={1000}
             className="rounded-xl w-full h-60 md:h-100 object-cover"
-            src={image ? urlFor(image).url() : 'default-image.jpg'}
+            src={image ? urlFor(image).url() || 'default-image.jpg' : 'default-image.jpg'}
             alt={name || ''}
           />
         </div>

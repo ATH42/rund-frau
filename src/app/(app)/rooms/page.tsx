@@ -41,22 +41,6 @@ async function ImageGrid() {
 
   const { data: roomsImageData } = await sanityFetch({ query: ROOMS_QUERY })
 
-  // const images = roomsImageData.map((doc: RoomImage) => {
-  //   const roomsImageData = doc.image
-
-  //   const imageUrl =
-  //     typeof roomsImageData === 'object' && roomsImageData !== null && 'url' in roomsImageData
-  //       ? roomsImageData.url
-  //       : '/default-image.jpg'
-
-  //   const imageDescription = doc.description || 'Räume' // Assuming there's a description field
-
-  //   return {
-  //     src: imageUrl,
-  //     description: imageDescription,
-  //   }
-  // })
-
   // TODO:  const imageCount = images.length
   return (
     <div className="md:px-20 py-10 p-6">
@@ -64,7 +48,7 @@ async function ImageGrid() {
         {roomsImageData.map((roomImage: RoomImage, index: number) => (
           <Link
             key={index}
-            href={urlFor(roomImage.image).url() || '/default-image.jpg'}
+            href={roomImage.image ? urlFor(roomImage.image).url() : '/default-image.jpg'}
             target="_blank"
             rel="noopener noreferrer"
             title={roomImage.description}
@@ -72,7 +56,7 @@ async function ImageGrid() {
           >
             <Image
               className="h-60 object-cover rounded-lg"
-              src={urlFor(roomImage.image).url() || '/default-image.jpg'}
+              src={roomImage.image ? urlFor(roomImage.image).url() : '/default-image.jpg'}
               alt={roomImage.description || 'Raum'}
               width={1000}
               height={500}

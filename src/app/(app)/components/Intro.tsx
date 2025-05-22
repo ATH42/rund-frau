@@ -1,7 +1,5 @@
 import { Instagram, Facebook } from 'lucide-react'
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import Link from 'next/link'
 import { INTRO_QUERY } from '@/sanity/queries'
 import { sanityFetch } from '@/sanity/live'
