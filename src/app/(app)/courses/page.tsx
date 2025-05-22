@@ -11,6 +11,8 @@ const CourseItem = ({
   maxAttendees,
   location,
   price,
+  image,
+  alt,
 }: {
   title: string
   description: string
@@ -18,6 +20,11 @@ const CourseItem = ({
   maxAttendees: number
   location: string
   price: number
+  image: any | null
+
+  // i know that's bad practice, but the image type is quite complicated and it solves the problem and i would need to change everything how coursedata is passed here and in the dialogTrigger
+
+  alt: string
 }) => (
   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
     <div className="flex flex-col w-full lg:w-1/2 gap-4">
@@ -39,8 +46,8 @@ const CourseItem = ({
       <Image
         width={486}
         height={270}
-        src="/Bilder/GHR/course-placeholder.jpg"
-        alt="placeholder"
+        src={image ? urlFor(image).url() : ''}
+        alt={alt}
         className="rounded-lg h-[270px] object-cover w-full"
       />
       <div className="absolute inset-0 bg-primary/30 rounded-lg"></div>
@@ -62,17 +69,13 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
   </section>
 )
 
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import { sanityFetch } from '@/sanity/live'
+import { COURSE_QUERY } from '@/sanity/queries'
+import { Course } from '@/sanity/types'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 
 const Courses: NextPage = async () => {
-  const payload = await getPayload({
-    config: configPromise,
-  })
-
-  const coursesData = await payload.find({
-    collection: 'courses',
-  })
+  const { data: coursesData } = await sanityFetch({ query: COURSE_QUERY })
 
   return (
     <main className="w-full bg-white flex flex-col">
@@ -83,7 +86,7 @@ const Courses: NextPage = async () => {
 
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24">
         <h1 className="text-header font-ink-blossoms text-white">Alle Kurse im Überblick</h1>
-        {coursesData.docs.map((course, index) => (
+        {coursesData.map((course: Course, index: number) => (
           <div key={index} className="flex flex-col lg:flex-row flex-wrap gap-16 py-5">
             <CourseItem
               title={course.title || ''}
@@ -92,6 +95,8 @@ const Courses: NextPage = async () => {
               maxAttendees={course.maxAttendees || 0}
               location={course.location || ''}
               price={course.price || 0}
+              image={course.image || ''}
+              alt={course.alt || ''}
             />
           </div>
         ))}

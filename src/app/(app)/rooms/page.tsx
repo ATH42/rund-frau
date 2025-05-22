@@ -1,12 +1,13 @@
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
-
 import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import Footer from '../components/Footer'
 import { ContactForm } from '../components/ContactForm'
 import Link from 'next/link'
+import { sanityFetch } from '@/sanity/live'
+import { ROOMS_QUERY } from '@/sanity/queries'
+import { RoomImage } from '@/sanity/types'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 
 function Header() {
   return (
@@ -27,47 +28,25 @@ function Header() {
 }
 
 async function ImageGrid() {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  const { data: roomsImageData } = await sanityFetch({ query: ROOMS_QUERY })
 
-  const roomsImageData = await payload.find({
-    collection: 'room-image',
-  })
-
-  const images = roomsImageData.docs.map((doc) => {
-    const roomsImageData = doc.image
-
-    const imageUrl =
-      typeof roomsImageData === 'object' && roomsImageData !== null && 'url' in roomsImageData
-        ? roomsImageData.url
-        : '/default-image.jpg'
-
-    const imageDescription = doc.description || 'Räume' // Assuming there's a description field
-
-    return {
-      src: imageUrl,
-      alt: 'Räume',
-      description: imageDescription,
-    }
-  })
   // TODO:  const imageCount = images.length
   return (
     <div className="md:px-20 py-10 p-6">
       <div className="grid grid-cols-3 gap-4">
-        {images.map((image, index) => (
+        {roomsImageData.map((roomImage: RoomImage, index: number) => (
           <Link
             key={index}
-            href={image.src || '/default-image.jpg'}
+            href={roomImage.image ? urlFor(roomImage.image).url() : '/default-image.jpg'}
             target="_blank"
             rel="noopener noreferrer"
-            title={image.description}
+            title={roomImage.description}
             className={`relative ${index % 2 === 0 ? 'col-span-2' : 'col-span-1'}`}
           >
             <Image
               className="h-60 object-cover rounded-lg"
-              src={image.src || '/default-image.jpg'}
-              alt={image.alt}
+              src={roomImage.image ? urlFor(roomImage.image).url() : '/default-image.jpg'}
+              alt={roomImage.description || 'Raum'}
               width={1000}
               height={500}
             />

@@ -35,6 +35,23 @@ export const CourseDialogTrigger = ({
             <DialogTitle className="text-white text-header font-ink-blossoms">{title}</DialogTitle>
           </DialogHeader>
           <p className="p-4">{description}</p>
+          {date ? (
+            <p className="p-4">
+              {new Date(date).toLocaleDateString('de-DE', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}{' '}
+              um{' '}
+              {new Date(date).toLocaleTimeString('de-DE', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          ) : null}
+          {maxAttendees ? <p className="p-4">Max. Teilnehmer*innen: {maxAttendees}</p> : null}
+          {location ? <p className="p-4">Ort: {location}</p> : null}
+          {price ? <p className="p-4">Preis: {price}€</p> : null}
         </div>
         <Button variant="whiteLight">Kurs Buchen</Button>
       </DialogContent>

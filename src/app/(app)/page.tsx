@@ -7,25 +7,19 @@ import Offers from './components/Offers'
 import SocialProof from './components/Social-Proof'
 import { Schedule } from './components/Schedule'
 
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import { sanityFetch } from '@/sanity/live'
+import { INTRO_QUERY, TEAM_IMAGE_QUERY } from '@/sanity/queries'
 
 export default async function Home() {
-  const payload = await getPayload({
-    config: configPromise,
-  })
+  const { data: teamImageData } = await sanityFetch({ query: TEAM_IMAGE_QUERY })
 
-  const teamImageData = await payload.find({
-    collection: 'team-image',
-  })
+  const { data: introData } = await sanityFetch({ query: INTRO_QUERY })
 
-  const introData = await payload.find({
-    collection: 'intro',
-  })
+  const introTitle = introData?.title || 'Wir sind für euch da.'
 
-  const introTitle = introData.docs[0]?.title || 'Wir sind für euch da.'
+  const introDescription = introData?.description || 'Default description'
 
-  const introDescription = introData.docs[0]?.description || 'Default description'
+  console.log('teamImageDataMain', teamImageData)
 
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
@@ -60,7 +54,7 @@ export default async function Home() {
         teamImageData={teamImageData}
         introTitle={introTitle}
         introDescription={introDescription}
-        showAboutSection={true}
+        showAboutSection={false}
       />
     </main>
   )

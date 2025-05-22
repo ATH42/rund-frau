@@ -74,9 +74,9 @@ export type Slug = {
   source?: string
 }
 
-export type TeamMembers = {
+export type TeamMember = {
   _id: string
-  _type: 'team-members'
+  _type: 'team-member'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -97,6 +97,7 @@ export type TeamMembers = {
     _type: 'image'
   }
   description?: string
+  sortOrder?: number
 }
 
 export type TeamImage = {
@@ -117,14 +118,13 @@ export type TeamImage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  alt?: string
   title?: string
   description?: string
 }
 
-export type Services = {
+export type Service = {
   _id: string
-  _type: 'services'
+  _type: 'service'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -142,7 +142,13 @@ export type Services = {
     _type: 'image'
   }
   description?: string
-  paragraphTitle?: string
+  paragraphs?: Array<{
+    paragraphTitle?: string
+    paragraph?: string
+    _type: 'paragraphItem'
+    _key: string
+  }>
+  sortOrder?: number
 }
 
 export type Schedule = {
@@ -175,8 +181,34 @@ export type RoomImage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  description?: string
+}
+
+export type Course = {
+  _id: string
+  _type: 'course'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  date?: string
+  maxAttendees?: number
+  location?: string
+  price?: number
+  image?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   alt?: string
-  caption?: string
 }
 
 export type SanityImageCrop = {
@@ -236,20 +268,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean
 }
 
-export type Course = {
-  _id: string
-  _type: 'course'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  description?: string
-  date?: string
-  maxAttendees?: number
-  location?: string
-  price?: number
-}
-
 export type ContactReasons = {
   _id: string
   _type: 'contact-reasons'
@@ -259,6 +277,16 @@ export type ContactReasons = {
   reason?: string
 }
 
+export type Intro = {
+  _id: string
+  _type: 'intro'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+}
+
 export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -266,16 +294,17 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Slug
-  | TeamMembers
+  | TeamMember
   | TeamImage
-  | Services
+  | Service
   | Schedule
   | RoomImage
+  | Course
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | Course
   | ContactReasons
+  | Intro
 export declare const internalGroqTypeReferenceTo: unique symbol

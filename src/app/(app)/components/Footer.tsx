@@ -1,13 +1,13 @@
 import { ArrowRight, Mail, Phone, Instagram, Facebook, Printer } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
-import { TeamImage } from '@/payload-types'
 import Link from 'next/link'
-import { PaginatedDocs } from 'payload'
+import { TeamImage } from '@/sanity/types'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 
 type AboutFooterSectionProps = {
   showAboutSection?: boolean
-  teamImageData?: PaginatedDocs<TeamImage>
+  teamImageData?: TeamImage
   introTitle?: string
   introDescription?: string
 }
@@ -36,11 +36,7 @@ export default function AboutFooterSection({
     { label: 'Downloads & Links', href: '#' },
   ]
 
-  const teamImage = teamImageData?.docs[0]?.image
-  const imageUrl =
-    typeof teamImage === 'object' && teamImage !== null && 'url' in teamImage
-      ? teamImage.url
-      : '/default-image.jpg'
+  console.log('teamImageData', teamImageData)
 
   return (
     <section className="relative flex w-full flex-col">
@@ -57,7 +53,9 @@ export default function AboutFooterSection({
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
             <div className="relative">
               <Image
-                src={imageUrl || '/default-image.jpg'}
+                src={
+                  teamImageData?.image ? urlFor(teamImageData?.image).url() : '/default-image.jpg'
+                }
                 alt={'Team Image'}
                 className="h-100 w-full object-cover"
                 width={1000}
@@ -70,10 +68,8 @@ export default function AboutFooterSection({
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
-            <h2 className="text-header font-ink-blossoms">{teamImageData?.docs[0]?.description}</h2>
-            <p className="font-text text-content md:text-lg">
-              {teamImageData?.docs[0]?.description}
-            </p>
+            <h2 className="text-header font-ink-blossoms">{teamImageData?.title}</h2>
+            <p className="font-text text-content md:text-lg">{teamImageData?.description}</p>
           </div>
         </div>
       )}

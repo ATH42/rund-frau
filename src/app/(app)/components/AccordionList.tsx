@@ -6,7 +6,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { type Schedule } from '@/payload-types'
+import { Schedule } from '@/sanity/types'
+
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
