@@ -15,7 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-// TODO: add DM SANS
 export const metadata: Metadata = {
   title: 'Rundfrau Leipzig',
   description: 'Wir sind fuer euch da',
