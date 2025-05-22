@@ -42,12 +42,7 @@ export default async function Home() {
         backgroundColor="bg-primary-darker"
       />
 
-      <AboutFooterSection
-        teamImageData={teamImageData}
-        introTitle={introTitle}
-        introDescription={introDescription}
-        showAboutSection
-      />
+      <AboutFooterSection teamImageData={teamImageData} showAboutSection />
     </main>
   )
 }
