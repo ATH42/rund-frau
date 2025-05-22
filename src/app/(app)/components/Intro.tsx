@@ -7,9 +7,6 @@ import { sanityFetch } from '@/sanity/live'
 export async function Intro() {
   const { data } = await sanityFetch({
     query: INTRO_QUERY,
-    params: {
-      revalidate: 60,
-    },
   })
 
   return (
