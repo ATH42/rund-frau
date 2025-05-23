@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-smooth`}>
         <Navbar className="hidden md:block" />
         <MobileNavbar className="md:hidden" />
         {children}
