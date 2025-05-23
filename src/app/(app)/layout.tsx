@@ -36,8 +36,8 @@ export default async function RootLayout({
         <Navbar className="hidden md:block" />
         <MobileNavbar className="md:hidden" />
         {children}
-        <SanityLive />
         <Footer teamImageData={teamImageData} />
+        <SanityLive />
       </body>
     </html>
   )
