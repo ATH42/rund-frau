@@ -77,7 +77,6 @@ const Rooms: NextPage = () => {
           Therapie - wir freuen uns, dich bei uns als externe Partner:in begrüßen zu dürfen.
         </p>
       </section>
-      <Footer />
     </main>
   )
 }

@@ -45,7 +45,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         backgroundColor="bg-primary-darker"
         reverse
       />
-      <Footer />
     </main>
   )
 }

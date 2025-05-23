@@ -104,7 +104,6 @@ const Courses: NextPage = async () => {
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24 w-full">
         <CalendarDemo />
       </section>
-      <Footer />
     </main>
   )
 }

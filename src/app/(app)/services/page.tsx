@@ -94,7 +94,6 @@ const Angebote: NextPage = async () => {
         buttonVariant="whiteLight"
         reverse
       />
-      <AboutFooterSection />
     </div>
   )
 }

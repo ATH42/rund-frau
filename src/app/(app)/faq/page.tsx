@@ -117,7 +117,6 @@ const FAQ: NextPage = () => {
       />
       {/* TODO: uncomment this when the component is ready */}
       {/* <BirthCalculator /> */}
-      <Footer />
     </main>
   )
 }

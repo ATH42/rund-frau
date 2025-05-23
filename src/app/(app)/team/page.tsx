@@ -126,7 +126,6 @@ const Team: NextPage = async () => {
         {Object.entries(groupedMembers).map(([title, members], index) => (
           <TeamMemberSection key={index} title={title} members={members} />
         ))}
-        <Footer />
       </div>
     </main>
   )
