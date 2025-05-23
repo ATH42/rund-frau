@@ -1,10 +1,10 @@
 'use client'
-import { ArrowRight, Mail, Phone, Instagram, Facebook, Printer } from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { urlFor } from '@/sanity/imageUrlBuilder'
+import { TeamImage } from '@/sanity/types'
+import { ArrowRight, Facebook, Instagram, Mail, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { TeamImage } from '@/sanity/types'
-import { urlFor } from '@/sanity/imageUrlBuilder'
 import { usePathname } from 'next/navigation'
 
 type AboutFooterSectionProps = {

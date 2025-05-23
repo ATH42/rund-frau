@@ -1,13 +1,12 @@
-import { Header } from '../components/Header'
-import GridComponent from '../components/ContentGrid'
 import { Contact } from '../../components/Contact'
-import Footer from '../../components/Footer'
+import GridComponent from '../components/ContentGrid'
+import { Header } from '../components/Header'
 import { Paragraph } from '../components/Paragraph'
 
+import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
 import { SINGLE_SERVICE_QUERY } from '@/sanity/queries'
 import { Service } from '@/sanity/types'
-import { urlFor } from '@/sanity/imageUrlBuilder'
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

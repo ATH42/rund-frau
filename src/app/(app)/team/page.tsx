@@ -1,14 +1,13 @@
-import { Separator } from '@/components/ui/separator'
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import Footer from '../components/Footer'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { sanityFetch } from '@/sanity/live'
-import { TeamMember } from '@/sanity/types'
+import { Separator } from '@/components/ui/separator'
 import { urlFor } from '@/sanity/imageUrlBuilder'
+import { sanityFetch } from '@/sanity/live'
 import { TEAM_MEMBERS_QUERY } from '@/sanity/queries'
+import { TeamMember } from '@/sanity/types'
+import type { NextPage } from 'next'
+import Image from 'next/image'
 
 function Header() {
   return (

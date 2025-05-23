@@ -1,15 +1,13 @@
+import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import { Contact } from '../components/Contact'
-import Footer from '../components/Footer'
-import { Separator } from '@/components/ui/separator'
-import BirthCalculator from '../components/BirthCalc'
+// import BirthCalculator from '../components/BirthCalc'
 
-import React from 'react'
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from '@/components/ui/accordion'
 
 type Question = {

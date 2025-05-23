@@ -1,13 +1,12 @@
 import { Separator } from '@/components/ui/separator'
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import Footer from '../components/Footer'
-import { ContactForm } from '../components/ContactForm'
-import Link from 'next/link'
+import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
 import { ROOMS_QUERY } from '@/sanity/queries'
 import { RoomImage } from '@/sanity/types'
-import { urlFor } from '@/sanity/imageUrlBuilder'
+import type { NextPage } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ContactForm } from '../components/ContactForm'
 
 function Header() {
   return (

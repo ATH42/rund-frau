@@ -1,8 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import Footer from '../components/Footer'
-import { CourseDialogTrigger } from './components/DialogTrigger'
 import { CalendarDemo } from './components/Calendar'
+import { CourseDialogTrigger } from './components/DialogTrigger'
 
 const CourseItem = ({
   title,
@@ -69,10 +68,10 @@ const Header = ({ title, subtitle }: { title: string; subtitle: string }) => (
   </section>
 )
 
+import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
 import { COURSE_QUERY } from '@/sanity/queries'
 import { Course } from '@/sanity/types'
-import { urlFor } from '@/sanity/imageUrlBuilder'
 
 const Courses: NextPage = async () => {
   const { data: coursesData } = await sanityFetch({ query: COURSE_QUERY })
