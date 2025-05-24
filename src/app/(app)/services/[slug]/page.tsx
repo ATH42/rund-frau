@@ -25,7 +25,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   return (
     <main>
       <Header
-        title={service.title || ''}
+        title={service.title?.replace(/[\s\d\W]+/g, ' ') || ''}
         image={service.image ? urlFor(service.image).url() : '/default-image.jpg'}
         subtitle={service.description || ''}
       />

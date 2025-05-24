@@ -17,7 +17,9 @@ export default async function Home() {
 
       <Contact imageUrl="/woman-preg.jpeg" buttonVariant="default" />
 
-      <Schedule />
+      <div id="schedule" className="w-full">
+        <Schedule />
+      </div>
 
       <div className="relative flex w-full bg-primary-darker items-center justify-center self-stretch pb-0 pt-[125px]">
         <Image

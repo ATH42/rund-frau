@@ -16,7 +16,7 @@ const items = [
   { icon: '/illus/geburt-auf-ball.svg', title: 'Geburt' },
   { icon: '/illus/paar-mit-baby.svg', title: 'Wochenbett' },
   { icon: '/illus/frau-auf-ball.svg', title: 'Kurse' },
-  { icon: '/illus/Fehlgeburt.svg', title: 'Begleitete Fehlgeburt' },
+  // { icon: '/illus/Fehlgeburt.svg', title: 'Begleitete Fehlgeburt' },
   {
     icon: '/illus/frauen-sprechen.svg',
     title: 'Info-Veranstaltungen',
@@ -60,7 +60,16 @@ function CarouselSize() {
               <div className="p-1">
                 <Card className="rounded-lg bg-white ">
                   <CardContent className="w-70 h-70 flex flex-col items-center justify-center p-6 text-center">
-                    <Link href={`/services/${title}`} className="flex flex-col items-center">
+                    <Link
+                      href={
+                        title === 'Kurse'
+                          ? '/courses'
+                          : title === 'Info-Veranstaltungen'
+                            ? '#schedule'
+                            : `/services/${title.replace(/\s+/g, ' ')}`
+                      }
+                      className="flex flex-col items-center"
+                    >
                       <Image
                         src={icon}
                         width={250}
