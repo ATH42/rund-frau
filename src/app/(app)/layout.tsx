@@ -4,6 +4,9 @@ import './globals.css'
 import Navbar from '@/app/(app)/components/Navbar'
 import MobileNavbar from './components/MobileNavbar'
 import { SanityLive } from '@/sanity/live'
+import Footer from './components/Footer'
+import { sanityFetch } from '@/sanity/live'
+import { TEAM_IMAGE_QUERY } from '@/sanity/queries'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,17 +23,20 @@ export const metadata: Metadata = {
   description: 'Wir sind fuer euch da',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { data: teamImageData } = await sanityFetch({ query: TEAM_IMAGE_QUERY })
+
   return (
     <html lang="de">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Navbar className="hidden md:block" />
         <MobileNavbar className="md:hidden" />
         {children}
+        <Footer teamImageData={teamImageData} />
         <SanityLive />
       </body>
     </html>

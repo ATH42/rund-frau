@@ -1,51 +1,62 @@
-import { ArrowRight, Mail, Phone, Instagram, Facebook, Printer } from 'lucide-react'
+'use client'
 import { Card } from '@/components/ui/card'
+import { urlFor } from '@/sanity/imageUrlBuilder'
+import { TeamImage } from '@/sanity/types'
+import { ArrowRight, Facebook, Instagram, Mail, Phone, Printer } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { TeamImage } from '@/sanity/types'
-import { urlFor } from '@/sanity/imageUrlBuilder'
+import { usePathname } from 'next/navigation'
 
 type AboutFooterSectionProps = {
-  showAboutSection?: boolean
   teamImageData?: TeamImage
 }
 
 function SocialMediaLinks() {
   return (
     <div className="flex gap-4">
-      <Link href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" passHref>
+      <Link
+        href="https://www.instagram.com/geburtshaus_rundfrau_leipzig/"
+        target="_blank"
+        rel="noopener noreferrer"
+        passHref
+      >
         <Instagram className="h-6 w-6 text-white" />
       </Link>
-      <Link href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" passHref>
+      <Link
+        href="https://www.facebook.com/Geburtshaus.Rundfrau.Leipzig/"
+        target="_blank"
+        rel="noopener noreferrer"
+        passHref
+      >
         <Facebook className="h-6 w-6 text-white" />
       </Link>
     </div>
   )
 }
 
-// TODO: add Footer to Layout and show about section vie pathName
-export default function AboutFooterSection({
-  showAboutSection = false,
-  teamImageData,
-}: AboutFooterSectionProps) {
+export default function AboutFooterSection({ teamImageData }: AboutFooterSectionProps) {
+  const pathname = usePathname()
+
+  const isHomePage = pathname === '/'
+  // TODO: Download & Links Dialog
   const footerLinks = [
     { label: 'Impressum', href: '/imprint' },
     { label: 'Datenschutzerklärung', href: '/privacy' },
-    { label: 'Kontakt', href: '#' },
-    { label: 'Downloads & Links', href: '#' },
+    { label: 'Kontakt', href: '/team' },
+    { label: 'Downloads & Links', href: '' },
   ]
 
   return (
     <section className="relative flex w-full flex-col">
-      {showAboutSection && (
+      {isHomePage && (
         <div className="absolute left-0 top-0 h-1/2 w-full bg-primary-darker md:h-1/3"></div>
       )}
       <div
-        className={`absolute bottom-0 left-0 w-full ${showAboutSection ? 'h-1/2 md:h-2/3' : 'h-full'} bg-primary`}
+        className={`absolute bottom-0 left-0 w-full ${isHomePage ? 'h-1/2 md:h-2/3' : 'h-full'} bg-primary`}
       ></div>
 
       {/* About Section */}
-      {showAboutSection && (
+      {isHomePage && (
         <div className="relative z-10 flex w-full flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:items-start lg:px-32">
           <Card className="relative h-auto w-full max-w-[546px] overflow-hidden rounded-2xl shadow-lg lg:w-1/2">
             <div className="relative">
@@ -61,7 +72,9 @@ export default function AboutFooterSection({
               />
               <div className="absolute inset-0 bg-primary/30"></div> {/* Overlay */}
             </div>
-            <ArrowRight className="absolute right-4 top-4 text-white size-10" />
+            <Link href="/team">
+              <ArrowRight className="absolute right-4 top-4 text-white size-10" />
+            </Link>
           </Card>
 
           <div className="w-full space-y-6 text-center text-white lg:w-1/2 lg:text-left">
