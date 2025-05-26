@@ -36,6 +36,9 @@ export const SERVICE_QUERY = defineQuery(`*[_type == "service"] | order(sortOrde
   _id,
   title,
   description,
+  image{
+    asset->{url}
+  },
 }`)
 
 export const SINGLE_SERVICE_QUERY = defineQuery(`*[_type == "service" && title == $title][0]{

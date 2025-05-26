@@ -4,33 +4,14 @@ import { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Contact } from '../components/Contact'
-import SocialProof from '../components/Social-Proof'
 
+import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
 import { SERVICE_QUERY } from '@/sanity/queries'
-import { Service } from '@/sanity/types'
+import { type Service } from '@/sanity/types'
 
 const Angebote: NextPage = async () => {
   const { data } = (await sanityFetch({ query: SERVICE_QUERY })) as { data: Service[] }
-
-  const serviceImages = [
-    {
-      image: '/illus/paar.svg',
-      imageAlt: 'Schwangerschaft Illustration',
-    },
-    {
-      image: '/illus/geburt-auf-ball.svg',
-      imageAlt: 'Geburt Illustration',
-    },
-    {
-      image: '/illus/paar-mit-baby.svg',
-      imageAlt: 'Wochenbett Illustration',
-    },
-    {
-      image: '/illus/frauen-sprechen.svg',
-      imageAlt: 'Weitere Angebote Illustration',
-    },
-  ]
 
   return (
     <div className="bg-primary-dark w-full">
@@ -42,49 +23,49 @@ const Angebote: NextPage = async () => {
           </p>
         </div>
 
-        {/* Service sections */}
-        {data.map((service: Service, index: number) => (
-          <Card
-            key={service._id}
-            className={`flex w-full flex-col items-center justify-start md:justify-end md:gap-20 border-none shadow-none md:flex-row ${
-              index % 2 !== 0 ? 'md:flex-row-reverse' : ''
-            }`}
-          >
-            <div>
-              <Image
-                src={serviceImages[index]?.image || '/default-image.jpg'}
-                alt={serviceImages[index]?.imageAlt || 'Service Illustration'}
-                className="object-contain"
-                width={350}
-                height={250}
-              />
-            </div>
+        {data.map((service: Service, index: number) => {
+          const imageUrl = service.image ? urlFor(service.image).url() : '/default-image.jpg'
 
-            <CardContent className="flex  md:w-1/2 flex-col items-start gap-5">
-              <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
+          return (
+            <Card
+              key={service._id}
+              className={`flex w-full flex-col items-center justify-start md:justify-end md:gap-20 border-none shadow-none md:flex-row ${
+                index % 2 !== 0 ? 'md:flex-row-reverse' : ''
+              }`}
+            >
+              <div>
+                <Image
+                  src={imageUrl}
+                  alt={service.title || 'Service Illustration'}
+                  className="object-contain"
+                  width={350}
+                  height={250}
+                />
+              </div>
 
-              <p className="text-base text-content text-variable-collection-white">
-                {service.description?.toString()}
-              </p>
+              <CardContent className="flex md:w-1/2 flex-col items-start gap-5">
+                <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
 
-              <Link
-                href={{
-                  pathname: `/services/${service.title}`,
-                }}
-              >
-                <Button variant="white">mehr Infos</Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ))}
+                <p className="text-base text-content text-variable-collection-white">
+                  {service.description?.toString()}
+                </p>
+
+                <Link href={{ pathname: `/services/${service.title}` }}>
+                  <Button variant="white">mehr Infos</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          )
+        })}
       </section>
-      <div className="hidden">
-        <SocialProof
-          cardBackgroundColor="bg-white"
-          textColor="text-primary-dark"
-          backgroundColor="bg-primary-dark"
-        />
-      </div>
+
+      {/* <div className="hidden"> */}
+      {/*   <SocialProof */}
+      {/*     cardBackgroundColor="bg-white" */}
+      {/*     textColor="text-primary-dark" */}
+      {/*     backgroundColor="bg-primary-dark" */}
+      {/*   /> */}
+      {/* </div> */}
 
       <Contact
         imageUrl="/Bilder/paar-schwanger.png"
