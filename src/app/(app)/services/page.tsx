@@ -44,7 +44,9 @@ const Angebote: NextPage = async () => {
               </div>
 
               <CardContent className="flex md:w-1/2 flex-col items-start gap-5">
-                <h2 className="font-ink-blossoms text-header ">{service.title}</h2>
+                <h2 className="font-ink-blossoms text-header ">
+                  {service.title?.replace(/[\s\d\W]+/g, ' ')}
+                </h2>
 
                 <p className="text-base text-content text-variable-collection-white">
                   {service.description?.toString()}
@@ -56,7 +58,7 @@ const Angebote: NextPage = async () => {
                       ? '/courses'
                       : service.title === 'Info-Veranstaltungen'
                         ? '#schedule'
-                        : `/services/${service.title?.replace(/[\s\d\W]+/g, ' ')}`
+                        : `/services/${service.title}`
                   }
                 >
                   <Button variant="white">mehr Infos</Button>
