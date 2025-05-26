@@ -50,7 +50,15 @@ const Angebote: NextPage = async () => {
                   {service.description?.toString()}
                 </p>
 
-                <Link href={{ pathname: `/services/${service.title}` }}>
+                <Link
+                  href={
+                    service.title === 'Kurse'
+                      ? '/courses'
+                      : service.title === 'Info-Veranstaltungen'
+                        ? '#schedule'
+                        : `/services/${service.title?.replace(/[\s\d\W]+/g, ' ')}`
+                  }
+                >
                   <Button variant="white">mehr Infos</Button>
                 </Link>
               </CardContent>

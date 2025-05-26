@@ -66,7 +66,7 @@ function CarouselSize() {
                           ? '/courses'
                           : title === 'Info-Veranstaltungen'
                             ? '#schedule'
-                            : `/services/${title.replace(/\s+/g, ' ')}`
+                            : `/services/${title.replace(/[\s\d\W]+/g, ' ')}`
                       }
                       className="flex flex-col items-center"
                     >
