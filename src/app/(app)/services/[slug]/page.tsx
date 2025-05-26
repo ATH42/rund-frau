@@ -13,7 +13,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   const { data } = (await sanityFetch({
     query: SINGLE_SERVICE_QUERY,
-    params: { title: slug },
+    params: { slug },
   })) as { data: Service }
 
   if (!data) {
@@ -25,7 +25,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   return (
     <main>
       <Header
-        title={service.title?.replace(/[\s\d\W]+/g, ' ') || ''}
+        title={service.title || ''}
         image={service.image ? urlFor(service.image).url() : '/default-image.jpg'}
         subtitle={service.description || ''}
       />

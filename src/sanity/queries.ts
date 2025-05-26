@@ -36,11 +36,13 @@ export const SERVICE_QUERY = defineQuery(`*[_type == "service"] | order(sortOrde
   _id,
   title,
   description,
+  slug
 }`)
 
-export const SINGLE_SERVICE_QUERY = defineQuery(`*[_type == "service" && title == $title][0]{
+export const SINGLE_SERVICE_QUERY = defineQuery(`*[_type == "service" && slug.current == $slug][0]{
     _id,
   title,
+  slug,
   description,
   image{
     asset->{url}

@@ -69,7 +69,7 @@ const Angebote: NextPage = async () => {
 
               <Link
                 href={{
-                  pathname: `/services/${service.title}`,
+                  pathname: `/services/${service.slug?.current}`,
                 }}
               >
                 <Button variant="white">mehr Infos</Button>

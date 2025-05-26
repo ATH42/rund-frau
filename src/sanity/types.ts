@@ -68,12 +68,6 @@ export type Geopoint = {
   alt?: number
 }
 
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
-
 export type TeamMember = {
   _id: string
   _type: 'team-member'
@@ -129,6 +123,7 @@ export type Service = {
   _updatedAt: string
   _rev: string
   title?: string
+  slug?: Slug
   image?: {
     asset?: {
       _ref: string
@@ -149,6 +144,12 @@ export type Service = {
     _key: string
   }>
   sortOrder?: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
 }
 
 export type Schedule = {
@@ -293,10 +294,10 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
-  | Slug
   | TeamMember
   | TeamImage
   | Service
+  | Slug
   | Schedule
   | RoomImage
   | Course
@@ -308,3 +309,6 @@ export type AllSanitySchemaTypes =
   | ContactReasons
   | Intro
 export declare const internalGroqTypeReferenceTo: unique symbol
+// Source: ../rund-frau-next/src/sanity/queries.ts
+// Variable: INTRO_QUERY
+// Query: *[_type == "intro"][0]{  _id,  title,  description}
