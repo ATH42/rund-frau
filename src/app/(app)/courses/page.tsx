@@ -41,15 +41,15 @@ const CourseItem = ({
       </div>
     </div>
 
-    <div className="flex justify-center items-center relative w-full lg:w-1/2">
+    <div className="flex justify-center items-center relative w-full lg:w-1/2 h-[270px]">
       <Image
         width={486}
         height={270}
         src={image ? urlFor(image).url() : ''}
         alt={alt}
-        className="rounded-lg h-[270px] object-cover w-full"
+        className="rounded-lg h-full object-cover w-full"
       />
-      <div className="absolute inset-0 bg-primary/30 rounded-lg"></div>
+      <div className="absolute inset-0 bg-primary/30 rounded-lg pointer-events-none" />
     </div>
   </div>
 )
