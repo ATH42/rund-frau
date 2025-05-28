@@ -10,7 +10,7 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
   _id,
   title,
   description,
-  date,
+  dates,
   maxAttendees,
   location,
   price,

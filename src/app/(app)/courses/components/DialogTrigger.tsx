@@ -10,7 +10,7 @@ import {
 interface CourseDialogTriggerProps {
   title: string
   description: string
-  date: string
+  dates: string[]
   maxAttendees: number
   location: string
   price: number
@@ -19,7 +19,7 @@ interface CourseDialogTriggerProps {
 export const CourseDialogTrigger = ({
   title,
   description,
-  date,
+  dates,
   maxAttendees,
   location,
   price,
@@ -35,18 +35,25 @@ export const CourseDialogTrigger = ({
             <DialogTitle className="text-white text-header font-ink-blossoms">{title}</DialogTitle>
           </DialogHeader>
           <p className="p-4">{description}</p>
-          {date ? (
+          {dates ? (
             <p className="p-4">
-              {new Date(date).toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              {dates.map((dateStr, idx) => {
+                const date = new Date(dateStr)
+                return (
+                  <p key={idx}>
+                    {date.toLocaleDateString('de-DE', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}{' '}
+                    um{' '}
+                    {date.toLocaleTimeString('de-DE', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
+                )
               })}{' '}
-              um{' '}
-              {new Date(date).toLocaleTimeString('de-DE', {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
             </p>
           ) : null}
           {maxAttendees ? <p className="p-4">Max. Teilnehmer*innen: {maxAttendees}</p> : null}

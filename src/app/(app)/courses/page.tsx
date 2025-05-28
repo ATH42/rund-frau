@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import { CalendarDemo } from './components/Calendar'
+import { CoursesCalendar } from './components/Calendar'
 import { CourseDialogTrigger } from './components/DialogTrigger'
 
 const CourseItem = ({
   title,
   description,
-  date,
+  dates,
   maxAttendees,
   location,
   price,
@@ -15,7 +15,7 @@ const CourseItem = ({
 }: {
   title: string
   description: string
-  date: string
+  dates: string[]
   maxAttendees: number
   location: string
   price: number
@@ -33,7 +33,7 @@ const CourseItem = ({
         <CourseDialogTrigger
           title={title}
           description={description}
-          date={date}
+          dates={dates}
           maxAttendees={maxAttendees}
           location={location}
           price={price}
@@ -90,7 +90,7 @@ const Courses: NextPage = async () => {
             <CourseItem
               title={course.title || ''}
               description={course.description || ''}
-              date={course.date || ''}
+              dates={course.dates || []}
               maxAttendees={course.maxAttendees || 0}
               location={course.location || ''}
               price={course.price || 0}
@@ -101,7 +101,7 @@ const Courses: NextPage = async () => {
         ))}
       </section>
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24 w-full">
-        <CalendarDemo />
+        <CoursesCalendar courses={coursesData} />
       </section>
     </main>
   )
