@@ -67,11 +67,12 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
         setSuccessMessage('Wir haben deine E-Mail erhalten und melden uns bald bei dir!')
         setFormData({ name: '', phone: '', email: '', message: '' }) // Reset form
       } else {
-        alert('Failed to send email.')
+        setSuccessMessage(
+          'Es gab einen Fehler beim Versenden der E-Mail. Bitte versuche es später erneut.',
+        )
       }
     } catch (error) {
       console.error('Error sending email:', error)
-      alert('An error occurred while sending the email.')
     } finally {
       setIsSubmitting(false)
     }
