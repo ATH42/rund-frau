@@ -5,7 +5,6 @@ export async function POST(req: NextRequest) {
   const { name, phone, email, message } = await req.json()
 
   const transporter = nodemailer.createTransport({
-    // service: 'strato',
     host: 'smtp.strato.de',
     port: 465,
     secure: true,
@@ -19,8 +18,8 @@ export async function POST(req: NextRequest) {
 
   const mailOptions = {
     from: '<Geburtshaus-Leipzig>kurse@geburtshaus-leipzig.de',
-    to: [email],
-    subject: 'Neue Kontaktanfrage von deiner Webseite',
+    to: ['kontakt@geburtshaus-leipzig.de'],
+    subject: 'Neue Kontaktanfrage: ',
     text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nNachricht: ${message}`,
   }
 

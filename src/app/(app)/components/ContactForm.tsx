@@ -109,6 +109,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
               <Label htmlFor="name">Name</Label>
               <Input
                 type="text"
+                tabIndex={1}
                 id="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -119,6 +120,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
             <div>
               <Label htmlFor="phone">Telefon</Label>
               <Input
+                tabIndex={2}
                 id="phone"
                 type="text"
                 value={formData.phone}
@@ -130,6 +132,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
             <div>
               <Label htmlFor="email">E-Mail</Label>
               <Input
+                tabIndex={3}
                 id="email"
                 type="email"
                 value={formData.email}
@@ -141,6 +144,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
             <div>
               <Label htmlFor="message">Nachricht</Label>
               <Textarea
+                tabIndex={4}
                 id="message"
                 value={formData.message}
                 onChange={handleChange}
