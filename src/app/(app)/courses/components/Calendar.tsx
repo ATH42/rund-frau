@@ -11,40 +11,49 @@ type CoursesCalendarProps = {
 
 export function CoursesCalendar({ courses }: CoursesCalendarProps) {
   const [highlightedDates, setHighlightedDates] = React.useState<Date[]>([])
+  const [activeCourseIndex, setActiveCourseIndex] = React.useState<number | null>(null)
 
-  const handleCourseClick = (courseDates?: string[]) => {
+  const handleCourseClick = (courseDates?: string[], index?: number) => {
     if (!courseDates || courseDates.length === 0) return
 
     const validDates = courseDates
       .map((dateStr) => new Date(dateStr))
       .filter((date) => !isNaN(date.getTime()))
 
-    console.log('Original date strings:', courseDates)
-    console.log('Parsed valid dates:', validDates)
-
     setHighlightedDates(validDates)
+    setActiveCourseIndex(index ?? null)
   }
 
   return (
-    <div className="flex gap-10 w-full">
-      <Calendar
-        mode="multiple"
-        selected={highlightedDates}
-        onSelect={(dates) => {
-          if (dates) {
-            setHighlightedDates(dates)
-          }
-        }}
-        className="w-1/2"
-      />
+    <>
+      <h2 className="font-ink-blossoms self-center text-header text-white">Kurs buchen</h2>
+      <div className="flex w-full flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+        <div className="flex flex-col items-center justify-center gap-4 w-1/2 bg-white rounded-lg shadow-lg ">
+          <h2 className="font-ink-blossoms text-header"> Kursplan</h2>
+          <Calendar
+            mode="multiple"
+            selected={highlightedDates}
+            onSelect={(dates) => {
+              if (dates) {
+                setHighlightedDates(dates)
+              }
+            }}
+            className="text-primary-darker rounded-lg shadow-lg p-4 bg-white"
+          />
+        </div>
 
-      <div className="w-1/2 flex flex-col gap-4">
-        {courses.map((course, index) => (
-          <Button key={index} onClick={() => handleCourseClick(course.dates)} variant="whiteLight">
-            {course.title}
-          </Button>
-        ))}
+        <div className="w-1/2 flex flex-col gap-4">
+          {courses.map((course, index) => (
+            <Button
+              key={index}
+              onClick={() => handleCourseClick(course.dates, index)}
+              variant={index === activeCourseIndex ? 'default' : 'whiteLight'}
+            >
+              {course.title}
+            </Button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
