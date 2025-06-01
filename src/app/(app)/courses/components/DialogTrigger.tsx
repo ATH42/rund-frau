@@ -36,7 +36,7 @@ export const CourseDialogTrigger = ({
           </DialogHeader>
           <p className="p-4">{description}</p>
           {dates ? (
-            <p className="p-4">
+            <div className="p-4">
               {dates.map((dateStr, idx) => {
                 const date = new Date(dateStr)
                 return (
@@ -54,7 +54,7 @@ export const CourseDialogTrigger = ({
                   </p>
                 )
               })}{' '}
-            </p>
+            </div>
           ) : null}
           {maxAttendees ? <p className="p-4">Max. Teilnehmer*innen: {maxAttendees}</p> : null}
           {location ? <p className="p-4">Ort: {location}</p> : null}
