@@ -70,6 +70,7 @@ import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
 import { COURSE_QUERY } from '@/sanity/queries'
 import { Course } from '@/sanity/types'
+import BookingDialog from './components/BookingDialog'
 
 const Courses: NextPage = async () => {
   const { data: coursesData } = await sanityFetch({ query: COURSE_QUERY })
@@ -99,6 +100,7 @@ const Courses: NextPage = async () => {
       </section>
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24 w-full">
         <CoursesCalendar courses={coursesData} />
+        <BookingDialog />
       </section>
     </main>
   )
