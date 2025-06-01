@@ -11,6 +11,7 @@ type CoursesCalendarProps = {
 
 export function CoursesCalendar({ courses }: CoursesCalendarProps) {
   const [highlightedDates, setHighlightedDates] = React.useState<Date[]>([])
+  const [selectedDates, setSelectedDates] = React.useState<Date[]>([])
   const [activeCourseIndex, setActiveCourseIndex] = React.useState<number | null>(null)
 
   const handleCourseClick = (courseDates?: string[], index?: number) => {
@@ -31,11 +32,13 @@ export function CoursesCalendar({ courses }: CoursesCalendarProps) {
         <div className="flex flex-col items-center justify-center gap-4 lg:w-1/3 bg-white rounded-lg  py-6 min-w-[400px]">
           <h2 className="font-ink-blossoms text-header text-primary-darker"> Kursplan</h2>
           <Calendar
-            mode="multiple"
-            selected={highlightedDates}
-            onSelect={(dates) => {
-              if (dates) {
-                setHighlightedDates(dates)
+            mode="single"
+            modifiers={{ highlighted: highlightedDates }}
+            modifiersClassNames={{ highlighted: 'border-2 border-accent text-primary-darker' }}
+            selected={selectedDates[0]}
+            onSelect={(date) => {
+              if (date) {
+                setSelectedDates([date])
               }
             }}
             className="text-primary-darker rounded-lg bg-white overflow-x-auto"
