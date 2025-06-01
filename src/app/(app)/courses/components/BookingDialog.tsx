@@ -21,7 +21,7 @@ export default function BookingDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="whiteLight">mehr erfahren</Button>
+        <Button variant="whiteLight">Kurs Buchen</Button>
       </DialogTrigger>
       <DialogContent className="max-w-3xl">
         <DialogHeader>
