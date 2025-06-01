@@ -19,7 +19,7 @@ const CourseItem = ({
   maxAttendees: number
   location: string
   price: number
-  image: any | null
+  image: unknown | null
   alt: string
 }) => (
   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
@@ -42,7 +42,8 @@ const CourseItem = ({
       <Image
         width={486}
         height={270}
-        src={image ? urlFor(image).url() : ''}
+        // TODO: Use a default image if none is provided
+        src={image ? urlFor(image).url() : '/images/default-course-image.jpg'}
         alt={alt}
         className="rounded-lg h-full object-cover w-full"
       />
