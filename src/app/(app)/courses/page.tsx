@@ -20,9 +20,6 @@ const CourseItem = ({
   location: string
   price: number
   image: any | null
-
-  // i know that's bad practice, but the image type is quite complicated and it solves the problem and i would need to change everything how coursedata is passed here and in the dialogTrigger
-
   alt: string
 }) => (
   <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
@@ -82,7 +79,6 @@ const Courses: NextPage = async () => {
         title="Unsere Kurse"
         subtitle="Auf der Reise durch deine Schwangerschaft, Geburt und Wochenbett suchst du eine Hebamme, die dich sieht, im Blick behält und deinen Fähigkeiten vertraut. Begleitend tragen wir Hebammen unser Wissen, unsere Erfahrungen und das klassische Handwerk im Gepäck."
       />
-
       <section className="flex bg-primary-dark flex-col gap-16 px-6 py-12 lg:px-24 lg:py-24">
         <h1 className="text-header font-ink-blossoms text-white">Alle Kurse im Überblick</h1>
         {coursesData.map((course: Course, index: number) => (

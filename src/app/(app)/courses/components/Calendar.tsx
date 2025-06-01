@@ -28,8 +28,8 @@ export function CoursesCalendar({ courses }: CoursesCalendarProps) {
     <>
       <h2 className="font-ink-blossoms self-center text-header text-white">Kurs buchen</h2>
       <div className="flex w-full flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
-        <div className="flex flex-col items-center justify-center gap-4 w-1/2 bg-white rounded-lg shadow-lg ">
-          <h2 className="font-ink-blossoms text-header"> Kursplan</h2>
+        <div className="flex flex-col items-center justify-center gap-4 lg:w-1/3 bg-white rounded-lg shadow-lg py-6">
+          <h2 className="font-ink-blossoms text-header text-primary-darker"> Kursplan</h2>
           <Calendar
             mode="multiple"
             selected={highlightedDates}
@@ -38,7 +38,7 @@ export function CoursesCalendar({ courses }: CoursesCalendarProps) {
                 setHighlightedDates(dates)
               }
             }}
-            className="text-primary-darker rounded-lg shadow-lg p-4 bg-white"
+            className="text-primary-darker rounded-lg bg-white"
           />
         </div>
 
