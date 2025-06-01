@@ -9,19 +9,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary-dark text-white shadow-1 hover:bg-primary-darker',
+        default: 'bg-primary text-white shadow-1 hover:bg-primary-darker',
         white: 'bg-white text-primary-darker shadow-1 hover:bg-primary-darker hover:text-white',
-
         whiteLight: 'bg-white text-primary-darker shadow-1 hover:bg-primary hover:text-white',
         dark: 'bg-primary-dark text-white shadow-1 hover:bg-primary-darker hover:text-white',
-        calendar: 'bg-primary-light text-white shadow-1 hover:bg-primary-darker hover:text-white',
+        calendar: 'bg-white text-primary-darker hover:bg-primary-darker hover:text-white',
       },
       size: {
         default: 'px-[20px] py-[12px] rounded-full',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
-        calendar: 'h-9 w-9 rounded-full',
+        calendar: 'h-9 w-9 rounded-sm',
       },
     },
     defaultVariants: {
