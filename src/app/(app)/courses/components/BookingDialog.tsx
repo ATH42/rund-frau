@@ -16,14 +16,49 @@ import {
   SelectContent,
   SelectItem,
 } from '@/components/ui/select'
+import { useState } from 'react'
+import { Label } from '@/components/ui/label'
+
+interface FormData {
+  firstName: string
+  lastName: string
+  birthday: string
+  email: string
+  phone: string
+  address: string
+  houseNumber: string
+  zipCode: string
+  city: string
+  isAccompanyied: boolean
+  inCare: boolean
+  insuranceNumber: string
+  insurer: string
+  message: string
+}
 
 export default function BookingDialog() {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    email: '',
+    phone: '',
+    address: '',
+    houseNumber: '',
+    zipCode: '',
+    city: '',
+    isAccompanyied: false,
+    inCare: false,
+    insuranceNumber: '',
+    insurer: '',
+    message: '',
+  })
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="whiteLight">Kurs Buchen</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-xl bg-white text-primary-darker">
         <DialogHeader>
           <DialogTitle className="text-3xl font-script">Kurs buchen</DialogTitle>
         </DialogHeader>
@@ -41,49 +76,81 @@ export default function BookingDialog() {
 
         <form className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div className="flex gap-2">
-            <Input placeholder="Vorname" required />
-            <Input placeholder="Nachname" required />
+            <div className="flex flex-col w-full">
+              <Label>Name *</Label>
+              <div className="flex gap-2">
+                <Input placeholder="Vorname" required />
+                <Input placeholder="Nachname" required />
+              </div>
+            </div>
           </div>
 
-          <Select required>
-            <SelectTrigger>
-              <SelectValue placeholder="Begleitperson?" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ja">Ja</SelectItem>
-              <SelectItem value="nein">Nein</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Input type="date" placeholder="Dein Geburtsdatum" required className="col-span-1" />
-
-          <Select required>
-            <SelectTrigger>
-              <SelectValue placeholder="Schon in Betreuung?" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ja">Ja</SelectItem>
-              <SelectItem value="nein">Nein</SelectItem>
-            </SelectContent>
-          </Select>
-
-          <Input type="email" placeholder="Deine E-Mail" required />
-          <Input placeholder="Deine Versichertennummer" required />
-
-          <Input type="tel" placeholder="Deine Telefon-Nummer" required />
-          <Input placeholder="Institutionskennzeichen" />
-
-          <div className="flex gap-2">
-            <Input placeholder="Straße" required />
-            <Input placeholder="Hausnummer" required />
+          <div className="flex-col gap-2">
+            <Label>Bringst du eine Begleitperson mit? *</Label>
+            <Select required>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Ja / Nein" />
+              </SelectTrigger>
+              <SelectContent className="w-full bg-white">
+                <SelectItem value="ja">Ja</SelectItem>
+                <SelectItem value="nein">Nein</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
-          <div className="flex gap-2">
-            <Input placeholder="Postleitzahl" required />
-            <Input placeholder="Stadt" required />
+          <div className="flex-col gap-2">
+            <Label>Dein Geburtsdatum *</Label>
+            <Input type="date" placeholder="Dein Geburtsdatum" required className="col-span-1" />
           </div>
 
-          <Textarea placeholder="Schreib uns deine Nachricht." className="md:col-span-2" />
+          <div className="flex-col gap-2">
+            <Label>Bist du bereits in Betreuung? *</Label>
+            <Select required>
+              <SelectTrigger className="w-full bg-white">
+                <SelectValue placeholder="Ja / Nein" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ja">Ja</SelectItem>
+                <SelectItem value="nein">Nein</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex-col gap-2">
+            <Label> E-Mail Adresse *</Label>
+            <Input type="email" placeholder="Deine E-Mail" required />
+          </div>
+
+          <div>
+            <Label>Deine Versichertennummer *</Label>
+            <Input placeholder="Deine Versichertennummer" required />
+          </div>
+
+          <div className="flex-col gap-6">
+            <Label>Telefon *</Label>
+            <Input type="tel" placeholder="Deine Telefon-Nummer" required />
+          </div>
+          <div className="flex-col gap-2">
+            <Label>Institutionskennzeichen *</Label>
+            <Input placeholder="Eine Achtstellige Nummer unten links auf der Versichertenkarte." />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Adresse *</Label>
+            <div className="grid grid-cols-3 gap-2">
+              <Input placeholder="Straße" required className="col-span-2" />
+              <Input placeholder="Nr." required className="col-span-1" />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <Input placeholder="Plz" required className="col-span-1" />
+              <Input placeholder="Stadt" required className="col-span-2" />
+            </div>
+          </div>
+
+          <div className="flex-col gap-2">
+            <Label>Kommentar *</Label>
+            <Textarea placeholder="Schreib uns deine Nachricht." />
+          </div>
         </form>
 
         <div className="flex justify-end mt-4">
