@@ -3,7 +3,8 @@ import nodemailer from 'nodemailer'
 
 export async function POST(req: NextRequest) {
   const {
-    name,
+    firstName,
+    lastName,
     birthday,
     email,
     phone,
@@ -16,6 +17,7 @@ export async function POST(req: NextRequest) {
     insuranceNumber,
     insurer,
     message,
+    course: { title, date },
   } = await req.json()
 
   const transporter = nodemailer.createTransport({
@@ -32,21 +34,35 @@ export async function POST(req: NextRequest) {
 
   const mailOptions = {
     from: '<Geburtshaus-Leipzig>kurse@geburtshaus-leipzig.de',
-    to: ['kurse@geburtshaus-leipzig.de'],
-    subject: 'Neue Kursbuchung: ',
-    text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nNachricht: ${message}`,
+    to: ['alex.t.hoffmann@icloud.com'],
+    subject: 'Neue Kursbuchung',
+    text: `
+      Name: ${firstName} ${lastName}
+      Geburtsdatum: ${birthday}
+      E-Mail: ${email}
+      Telefon: ${phone}
+      Adresse: ${address} ${houseNumber}, ${zipCode} ${city}
+      Begleitperson: ${isAccompanyied ? 'Ja' : 'Nein'}
+      In Betreuung: ${inCare ? 'Ja' : 'Nein'}
+      Versichertennummer: ${insuranceNumber}
+      Versicherer: ${insurer}
+      Nachricht: ${message}
+
+      Kurs: ${title}
+      Kursdatum: ${date}
+    `,
   }
 
   try {
     await transporter.sendMail(mailOptions)
     return NextResponse.json(
-      { message: 'Wir haben deine Email erhalen und melden uns bald bei dir!' },
+      { message: 'Wir haben deine Email erhalten und melden uns bald bei dir!' },
       { status: 200 },
     )
   } catch (error) {
     console.error('Error sending email:', error)
     return NextResponse.json(
-      { message: 'Es gab einen Fehler beim versenden der Email' },
+      { message: 'Es gab einen Fehler beim Versenden der Email' },
       { status: 500 },
     )
   }
