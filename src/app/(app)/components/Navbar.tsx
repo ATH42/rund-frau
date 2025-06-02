@@ -1,31 +1,16 @@
 'use client'
 
-// Importing necessary modules and components from Next.js
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-/**
- * Navbar component that renders a sticky navigation bar with dynamic background color
- * based on the current route.
- *
- * @param {Object} props - Component props.
- * @param {string} [props.className] - Additional CSS classes for the navbar.
- * @returns {JSX.Element} The rendered Navbar component.
- */
 const Navbar = ({ className }: { className?: string }) => {
   const pathName = usePathname()
 
-  /**
-   * Determines the background color and text color of the navbar
-   * based on the current route.
-   *
-   * @returns {string} A string of CSS classes for background and text color.
-   */
-  const getBackgroundColor = () => {
+  const getBackgroundColor = (): string => {
     switch (pathName) {
       case '/services':
-        return 'bg-primary-dark text-white'
+        return 'bg-primary-darker text-white'
       case '/courses':
         return 'bg-white text-primary-darker'
       case '/team':

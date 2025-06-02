@@ -14,8 +14,8 @@ const Angebote: NextPage = async () => {
   const { data } = (await sanityFetch({ query: SERVICE_QUERY })) as { data: Service[] }
 
   return (
-    <div className="bg-primary-dark w-full">
-      <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-dark px-6 md:px-28 py-20">
+    <div className=" w-full">
+      <section className="flex w-full flex-col text-white items-center md:gap-20 bg-primary-darker px-6 md:px-28 py-20">
         <div className="flex w-full flex-col items-center gap-10">
           <h1 className="text-center font-ink-blossoms text-header">Unsere Angebote</h1>
           <p className="text-center text-lg text-variable-collection-white">
@@ -79,7 +79,7 @@ const Angebote: NextPage = async () => {
 
       <Contact
         imageUrl="/Bilder/paar-schwanger.png"
-        backgroundColor="bg-primary-darker"
+        backgroundColor="bg-primary-dark"
         buttonVariant="whiteLight"
         reverse
       />
