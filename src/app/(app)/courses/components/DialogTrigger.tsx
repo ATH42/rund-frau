@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -6,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import Link from 'next/link'
 
 interface CourseDialogTriggerProps {
   title: string
@@ -24,10 +26,18 @@ export const CourseDialogTrigger = ({
   location,
   price,
 }: CourseDialogTriggerProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleDialogClose = () => {
+    setIsOpen(false)
+  }
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="whiteLight">mehr erfahren</Button>
+        <Button variant="whiteLight" onClick={() => setIsOpen(true)}>
+          mehr erfahren
+        </Button>
       </DialogTrigger>
       <DialogContent className="text-white bg-primary-darker max-w-fit p-20 border-none">
         <div className="flex flex-col justify-center items-center mb-4">
@@ -60,6 +70,11 @@ export const CourseDialogTrigger = ({
           {location ? <p className="p-4">Ort: {location}</p> : null}
           {price ? <p className="p-4">Preis: {price}€</p> : null}
         </div>
+        <Link href="#calendar" className="w-full flex justify-center">
+          <Button variant="whiteLight" onClick={handleDialogClose}>
+            Kurs Buchen
+          </Button>
+        </Link>
       </DialogContent>
     </Dialog>
   )
