@@ -60,7 +60,6 @@ export const CourseDialogTrigger = ({
           {location ? <p className="p-4">Ort: {location}</p> : null}
           {price ? <p className="p-4">Preis: {price}€</p> : null}
         </div>
-        <Button variant="whiteLight">Kurs Buchen</Button>
       </DialogContent>
     </Dialog>
   )
