@@ -43,7 +43,7 @@ export default function AboutFooterSection({ teamImageData }: AboutFooterSection
     { label: 'Impressum', href: '/imprint' },
     { label: 'Datenschutzerklärung', href: '/privacy' },
     { label: 'Kontakt', href: '/team' },
-    { label: 'Downloads & Links', href: '' },
+    { label: 'Downloads & Links', href: '/downloads' },
   ]
 
   return (
