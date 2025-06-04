@@ -1,63 +1,29 @@
 import { Separator } from '@/components/ui/separator'
 import type { NextPage } from 'next'
 import { Contact } from '../components/Contact'
-// import BirthCalculator from '../components/BirthCalc'
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { sanityFetch } from '@/sanity/live'
+import { FAQ_QUERY } from '@/sanity/queries'
+import { Faq } from '@/sanity/types'
 
-type Question = {
-  topic: string
-  question: string
-  answer: string
-}
+const GroupedQuestions = async () => {
+  const { data: questions } = await sanityFetch({ query: FAQ_QUERY })
 
-const questions = [
-  {
-    topic: 'Kosten',
-    question: 'Wie wird abgerechnet?',
-    answer:
-      'Die Abrechnung erfolgt in der Regel über die Krankenkasse. Bitte erkundigen Sie sich bei Ihrer Kasse.',
-  },
-  {
-    topic: 'Kosten',
-    question: 'Was sind die Kosten für die Rufbereitschaft bei einer außerklinischen Geburt?',
-    answer:
-      'Wehen sind die Kontraktionen, die den Geburtsprozess einleiten, während Senkwehen dazu dienen, das Baby in die richtige Position zu bringen.',
-  },
-  {
-    topic: 'Qualität',
-    question: 'Was macht es sicher außerklinisch zu gebären?',
-    answer:
-      'Die Erholungszeit variiert, aber viele Frauen fühlen sich nach 6 bis 8 Wochen wieder fit.',
-  },
-  {
-    topic: 'Wer sind wir?',
-    question:
-      'Die Begleitung deiner Schwangerschaft durch und Hebammen ist ein wichtiger Baustein auf dem Weg zu deiner selbstbestimmten Geburt?',
-    answer:
-      'Die Erholungszeit variiert, aber viele Frauen fühlen sich nach 6 bis 8 Wochen wieder fit.',
-  },
-  {
-    topic: 'Kosten',
-    question: 'Was sind die Kosten für zusätzliche Leistungen?',
-    answer:
-      'Die Erholungszeit variiert, aber viele Frauen fühlen sich nach 6 bis 8 Wochen wieder fit.',
-  },
-]
-
-const GroupedQuestions = () => {
-  const groupQuestionsByTopic = (questions: Question[]) => {
-    return questions.reduce<Record<string, Question[]>>((acc, current) => {
-      const { topic } = current
-      if (!acc[topic]) {
-        acc[topic] = []
+  const groupQuestionsByTopic = (questions: Faq[]) => {
+    return questions.reduce<Record<string, Faq[]>>((acc, current) => {
+      if (!current.category) {
+        return acc
       }
-      acc[topic].push(current)
+      const { category } = current
+      if (!acc[category]) {
+        acc[category] = []
+      }
+      acc[category].push(current)
       return acc
     }, {})
   }

@@ -10,6 +10,8 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
   _id,
   title,
   description,
+  descriptionShort,
+  instructor,
   dates,
   maxAttendees,
   location,
@@ -77,7 +79,21 @@ export const SCHEDULE_QUERY = defineQuery(`*[_type == "schedule"]{
   location,
 }`)
 
-export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-form"][0]{  
+export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-form"]{  
   _id,
 reason  
+}`)
+
+export const FAQ_QUERY = defineQuery(`*[_type == "faq"]{ 
+  _id,
+  category,
+  question,
+  answer
+}`)
+
+export const DOWNLOADS_QUERY = defineQuery(`*[_type == "downloads"]{
+  title,
+  description,
+  file,
+  url
 }`)
