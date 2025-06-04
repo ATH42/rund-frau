@@ -37,11 +37,10 @@ interface FormData {
   message: string
   course: {
     title: string
-    date: string
   }
 }
 
-export default function BookingDialog({ course, date }: { course: Course; date: string }) {
+export default function BookingDialog({ course }: { course: Course }) {
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -57,7 +56,7 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
     insuranceNumber: '',
     insurer: '',
     message: '',
-    course: { title: course.title || '', date: date || '' },
+    course: { title: course.title || '' },
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -110,7 +109,7 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
           insuranceNumber: '',
           insurer: '',
           message: '',
-          course: { title: course.title || '', date: date || '' },
+          course: { title: course.title || '' },
         }) // Reset form
       } else {
         setErrorMessage('Es gab einen Fehler bei der Buchung. Bitte versuche es später erneut.')
@@ -136,7 +135,6 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
 
         <div className="space-y-1">
           <h2 className="font-bold">{course.title}</h2>
-          <p className="text-sm text-muted-foreground">{date}</p>
           <p className="text-sm">{course.location}</p>
           <p className="text-lg  mt-2">{course.price} Euro</p>
           <p className="text-sm text-muted-foreground">
@@ -147,7 +145,7 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
 
         {/* TODO: fix message */}
         {successMessage || errorMessage ? (
-          <div className={`text-center ${successMessage ? 'text-green-600' : 'text-red-600'}`}>
+          <div className={`text-center ${successMessage ? 'text-primary-darker' : 'text-red-300'}`}>
             {successMessage || errorMessage}
           </div>
         ) : (
@@ -206,10 +204,10 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
             <div className="flex-col gap-2">
               <Label>Bist du bereits in Betreuung? *</Label>
               <Select required onValueChange={(value) => handleSelectChange('inCare', value)}>
-                <SelectTrigger className="w-full bg-white">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Ja / Nein" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full bg-white">
                   <SelectItem value="true">Ja</SelectItem>
                   <SelectItem value="false">Nein</SelectItem>
                 </SelectContent>
@@ -251,7 +249,7 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
               />
             </div>
             <div className="flex-col gap-2">
-              <Label>Institutionskennzeichen *</Label>
+              <Label>IK der Krankenkasse *</Label>
               <Input
                 name="insurer"
                 placeholder="Eine Achtstellige Nummer unten links auf der Versichertenkarte."
@@ -301,7 +299,7 @@ export default function BookingDialog({ course, date }: { course: Course; date: 
             </div>
 
             <div className="flex-col gap-2">
-              <Label>Kommentar *</Label>
+              <Label>Kommentar</Label>
               <Textarea
                 name="message"
                 placeholder="Schreib uns deine Nachricht."
