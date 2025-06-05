@@ -14,6 +14,7 @@ const buttonVariants = cva(
         whiteLight: 'bg-white text-primary-darker shadow-1 hover:bg-primary hover:text-white',
         dark: 'bg-primary-dark text-white shadow-1 hover:bg-primary-darker hover:text-white',
         calendar: 'bg-white text-primary-darker hover:bg-primary-darker hover:text-white',
+        none: 'bg-transparent text-primary-darker hover:bg-white hover:text-primary-darker',
       },
       size: {
         default: 'px-[20px] py-[12px] rounded-full',

@@ -151,7 +151,7 @@ export default function BookingDialog({ course }: { course: Course }) {
         ) : (
           <form className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4" onSubmit={handleSubmit}>
             <div className="flex gap-2">
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col w-full gap-2">
                 <Label>Name *</Label>
                 <div className="flex gap-2">
                   <Input
@@ -172,7 +172,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               </div>
             </div>
 
-            <div className="flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <Label>Bringst du eine Begleitperson mit? *</Label>
               <Select
                 required
@@ -188,7 +188,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               </Select>
             </div>
 
-            <div className="flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <Label>Dein Geburtsdatum *</Label>
               <Input
                 name="birthday"
@@ -201,7 +201,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               />
             </div>
 
-            <div className="flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <Label>Bist du bereits in Betreuung? *</Label>
               <Select required onValueChange={(value) => handleSelectChange('inCare', value)}>
                 <SelectTrigger className="w-full">
@@ -214,7 +214,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               </Select>
             </div>
 
-            <div className="flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <Label>E-Mail Adresse *</Label>
               <Input
                 name="email"
@@ -226,7 +226,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               />
             </div>
 
-            <div>
+            <div className="flex flex-col gap-2">
               <Label>Deine Versichertennummer *</Label>
               <Input
                 name="insuranceNumber"
@@ -237,7 +237,7 @@ export default function BookingDialog({ course }: { course: Course }) {
               />
             </div>
 
-            <div className="flex-col gap-6">
+            <div className="flex flex-col gap-2">
               <Label>Telefon *</Label>
               <Input
                 name="phone"
@@ -298,8 +298,8 @@ export default function BookingDialog({ course }: { course: Course }) {
               </div>
             </div>
 
-            <div className="flex-col gap-2">
-              <Label>Kommentar</Label>
+            <div className="flex flex-col gap-2">
+              <Label>Kommentar *</Label>
               <Textarea
                 name="message"
                 placeholder="Schreib uns deine Nachricht."

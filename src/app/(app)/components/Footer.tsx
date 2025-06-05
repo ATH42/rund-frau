@@ -43,7 +43,7 @@ export default function AboutFooterSection({ teamImageData }: AboutFooterSection
     { label: 'Impressum', href: '/imprint' },
     { label: 'Datenschutzerklärung', href: '/privacy' },
     { label: 'Kontakt', href: '/team' },
-    { label: 'Downloads & Links', href: '' },
+    { label: 'Downloads & Links', href: '/downloads' },
   ]
 
   return (
@@ -103,21 +103,21 @@ export default function AboutFooterSection({ teamImageData }: AboutFooterSection
           <div className="flex flex-1 flex-col gap-4 text-center text-white lg:text-left">
             <a
               className="flex items-center justify-center gap-3 cursor-pointer lg:justify-start"
-              href="mailto:mail@mail.de"
+              href="mailto:kontakt@geburtshaus-leipzig.de"
             >
               <Mail className="h-5 w-5" />
-              <span>E-Mail</span>
+              <span>kontakt@geburtshaus-leipzig.de</span>
             </a>
             <a
               className="flex items-center justify-center gap-3 lg:justify-start cursor-pointer"
-              href="tel:+49123456789"
+              href="tel:+4934149265791"
             >
               <Phone className="h-5 w-5" />
-              <span>Telefonnummer</span>
+              <span>0341 – 49 26 57 91</span>
             </a>
             <div className="flex items-center justify-center gap-3 lg:justify-start cursor-pointer">
               <Printer className="h-5 w-5" />
-              <span>Faxnummer</span>
+              <span>0341 – 49 26 57 92</span>
             </div>
           </div>
         </div>

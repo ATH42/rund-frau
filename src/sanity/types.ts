@@ -31,18 +31,31 @@ export type Downloads = {
   _updatedAt: string
   _rev: string
   title?: string
-  description?: string
-  file?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+  contacts?: Array<{
+    contactName?: string
+    phoneNumber?: string
+    _key: string
+  }>
+  files?: Array<{
+    fileName?: string
+    fileItem?: {
+      asset?: {
+        url?: string
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+      }
+      media?: unknown
+      _type: 'file'
     }
-    media?: unknown
-    _type: 'file'
-  }
-  url?: string
+    _key: string
+  }>
+  url?: Array<{
+    linkName?: string
+    urlItem?: string
+    _key: string
+  }>
 }
 
 export type TeamMember = {
@@ -52,6 +65,7 @@ export type TeamMember = {
   _updatedAt: string
   _rev: string
   name?: string
+  category?: string
   title?: string
   phone?: string
   mail?: string
@@ -129,7 +143,6 @@ export type Schedule = {
   _updatedAt: string
   _rev: string
   title?: string
-  date?: string
   content?: string
   location?: string
 }

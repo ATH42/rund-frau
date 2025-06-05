@@ -11,13 +11,26 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import type { ContactReasons } from '@/sanity/types'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { ArrowRight } from 'lucide-react'
 
 interface ContactFormProps {
   buttonVariant?: 'white' | 'default' | 'whiteLight' | 'dark'
+  reasons?: ContactReasons[]
+  label?: string
+  className?: string
 }
 
 interface FormData {
   name: string
+  reason: string
   phone: string
   email: string
   message: string
@@ -31,9 +44,15 @@ const Loader = () => {
   )
 }
 
-export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) {
+export function ContactForm({
+  className,
+  label,
+  buttonVariant = 'whiteLight',
+  reasons,
+}: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
+    reason: '',
     phone: '',
     email: '',
     message: '',
@@ -50,6 +69,15 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
     }))
   }
 
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  console.log('ContactForm rendered with reasons:', reasons)
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -65,7 +93,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
 
       if (response.ok) {
         setSuccessMessage('Wir haben deine E-Mail erhalten und melden uns bald bei dir!')
-        setFormData({ name: '', phone: '', email: '', message: '' }) // Reset form
+        setFormData({ name: '', reason: '', phone: '', email: '', message: '' })
       } else {
         setSuccessMessage(
           'Es gab einen Fehler beim Versenden der E-Mail. Bitte versuche es später erneut.',
@@ -89,8 +117,19 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
       }}
     >
       <DialogTrigger asChild>
-        <Button variant={buttonVariant} onClick={() => setIsDialogOpen(true)}>
-          Termin vereinbaren
+        <Button
+          variant={label ? 'none' : buttonVariant}
+          onClick={() => setIsDialogOpen(true)}
+          className={`${className} hover:underline`}
+        >
+          {label ? (
+            <div className="flex items-center">
+              <ArrowRight className="text-primary-darker mr-2 h-20" />
+              {label}
+            </div>
+          ) : (
+            'Termin vereinbaren'
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-primary-darker max-w-fit p-20">
@@ -105,7 +144,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
           <div className="text-primary-darker font-ink-blossoms text-center">{successMessage}</div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="name">Name</Label>
               <Input
                 type="text"
@@ -117,7 +156,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
                 disabled={isSubmitting}
               />
             </div>
-            <div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="phone">Telefon</Label>
               <Input
                 tabIndex={2}
@@ -129,7 +168,7 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
                 disabled={isSubmitting}
               />
             </div>
-            <div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="email">E-Mail</Label>
               <Input
                 tabIndex={3}
@@ -141,7 +180,23 @@ export function ContactForm({ buttonVariant = 'whiteLight' }: ContactFormProps) 
                 disabled={isSubmitting}
               />
             </div>
-            <div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="reason">Anliegen</Label>
+              <Select required onValueChange={(value) => handleSelectChange('reason', value)}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Dein Anliegen" />
+                </SelectTrigger>
+                <SelectContent className="w-full bg-white">
+                  {reasons &&
+                    reasons.map((reason) => (
+                      <SelectItem key={reason._id} value={reason.reason || ''}>
+                        {reason.reason}
+                      </SelectItem>
+                    ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2">
               <Label htmlFor="message">Nachricht</Label>
               <Textarea
                 tabIndex={4}

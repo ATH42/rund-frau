@@ -6,13 +6,17 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { Schedule } from '@/sanity/types'
-
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { ContactReasons, Schedule } from '@/sanity/types'
 import { useState } from 'react'
+import { ContactForm } from './ContactForm'
 
-export function AccordionList({ items }: { items: Schedule[] }) {
+export function AccordionList({
+  items,
+  reasons,
+}: {
+  items: Schedule[]
+  reasons: ContactReasons[]
+}) {
   const [visibleCount, setVisibleCount] = useState(3)
 
   const loadMore = () => {
@@ -29,14 +33,15 @@ export function AccordionList({ items }: { items: Schedule[] }) {
                 <h3 className="flex-1 text-subheader">{item.title}</h3>
               </AccordionTrigger>
               <AccordionContent className="px-4 py-2 text-primary-darker">
-                {item.content}
-
-                <Link className="flex items-center gap-2" href="/anmeldung">
-                  <ArrowRight className="text-primary-darker mr-2 size-6" />
-                  <span className="text-content text-primary-darker hover:underline py-4">
-                    zur Anmeldung
-                  </span>
-                </Link>
+                <div className="flex flex-col gap-4">
+                  {item.content}
+                  <ContactForm
+                    className="shadow-none text-xl m-0 p-0 size-xl self-start"
+                    label="hier anmelden"
+                    buttonVariant="whiteLight"
+                    reasons={reasons}
+                  />
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

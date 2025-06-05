@@ -26,6 +26,7 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
 export const TEAM_MEMBERS_QUERY = defineQuery(`*[_type == "team-member"] | order(sortOrder asc){  
   _id,
   name,
+  category,
   title,
   phone,
   mail,
@@ -75,12 +76,11 @@ export const TEAM_IMAGE_QUERY = defineQuery(`*[_type == "team-image"][0]{
 export const SCHEDULE_QUERY = defineQuery(`*[_type == "schedule"]{  
   _id,
   title,
-  date,
   content,
   location,
 }`)
 
-export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-form"]{  
+export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-reasons"]{  
   _id,
 reason  
 }`)
@@ -94,7 +94,20 @@ export const FAQ_QUERY = defineQuery(`*[_type == "faq"]{
 
 export const DOWNLOADS_QUERY = defineQuery(`*[_type == "downloads"]{
   title,
-  description,
-  file,
-  url
+  contacts[]{
+    contactName,
+    phoneNumber
+  },
+  files[]{
+    fileName,
+    fileItem {
+      asset->{
+        url
+      }
+    }
+  },
+  url[]{
+    linkName,
+    urlItem
+  }
 }`)

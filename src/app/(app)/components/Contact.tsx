@@ -2,18 +2,21 @@ import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from 'next/image'
 import { ContactForm } from './ContactForm'
+import { ContactReasons } from '@/sanity/types'
 
 interface ContactProps {
   imageUrl: string
   backgroundColor?: string
   buttonVariant: 'white' | 'default' | 'whiteLight'
   reverse?: boolean
+  reasons: ContactReasons[]
 }
 
-export function Contact({
+export async function Contact({
   imageUrl,
   backgroundColor = 'bg-primary',
   reverse = false,
+  reasons,
 }: ContactProps) {
   return (
     <section
@@ -35,9 +38,8 @@ export function Contact({
             Lernt uns in einem persönlichen Gespräch
             <br /> kennen und besprecht mit uns eure Wünsche <br /> zur Geburtsbegleitung.
           </p>
-          <div className="pt-2 sm:pt-4">
-            <ContactForm buttonVariant="white" />
-          </div>
+          <div className="pt-2 sm:pt-4"></div>
+          <ContactForm buttonVariant="white" reasons={JSON.parse(JSON.stringify(reasons))} />
         </CardContent>
       </Card>
 

@@ -7,11 +7,12 @@ import { Contact } from '../components/Contact'
 
 import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
-import { SERVICE_QUERY } from '@/sanity/queries'
+import { CONTACT_FORM_QUERY, SERVICE_QUERY } from '@/sanity/queries'
 import { type Service } from '@/sanity/types'
 
 const Angebote: NextPage = async () => {
   const { data } = (await sanityFetch({ query: SERVICE_QUERY })) as { data: Service[] }
+  const { data: reasons } = await sanityFetch({ query: CONTACT_FORM_QUERY })
 
   return (
     <div className=" w-full">
@@ -78,6 +79,7 @@ const Angebote: NextPage = async () => {
       {/* </div> */}
 
       <Contact
+        reasons={reasons}
         imageUrl="/Bilder/paar-schwanger.png"
         backgroundColor="bg-primary-dark"
         buttonVariant="whiteLight"
