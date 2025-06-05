@@ -93,7 +93,20 @@ export const FAQ_QUERY = defineQuery(`*[_type == "faq"]{
 
 export const DOWNLOADS_QUERY = defineQuery(`*[_type == "downloads"]{
   title,
-  description,
-  file,
-  url
+  contacts[]{
+    contactName,
+    phoneNumber
+  },
+  files[]{
+    fileName,
+    fileItem {
+      asset->{
+        url
+      }
+    }
+  },
+  url[]{
+    linkName,
+    urlItem
+  }
 }`)

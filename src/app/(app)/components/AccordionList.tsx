@@ -33,8 +33,9 @@ export function AccordionList({ items }: { items: Schedule[] }) {
 
                 <Link className="flex items-center gap-2" href="/anmeldung">
                   <ArrowRight className="text-primary-darker mr-2 size-6" />
+
                   <span className="text-content text-primary-darker hover:underline py-4">
-                    zur Anmeldung
+                    {/* TODO: dialog trigger hier anmelden */}
                   </span>
                 </Link>
               </AccordionContent>
