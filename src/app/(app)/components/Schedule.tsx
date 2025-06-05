@@ -2,19 +2,15 @@ import * as motion from 'motion/react-client'
 import { AccordionList } from './AccordionList' // Import the new component
 import { sanityFetch } from '@/sanity/live'
 import { SCHEDULE_QUERY } from '@/sanity/queries'
-import type { Schedule } from '@/sanity/types'
+import type { ContactReasons, Schedule } from '@/sanity/types'
 
 const fadeIn = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.5 } },
 }
 
-export async function Schedule() {
+export async function Schedule({ reasons }: { reasons: ContactReasons[] }) {
   const { data } = await sanityFetch({ query: SCHEDULE_QUERY })
-
-  const sortedData = data.sort((a: Schedule, b: Schedule) => {
-    return new Date(a?.date || '').getTime() - new Date(b?.date || '').getTime()
-  })
 
   return (
     <motion.section
@@ -26,7 +22,7 @@ export async function Schedule() {
     >
       <h2 className="text-center font-ink-blossoms text-header text-white">Aktuelles</h2>
 
-      <AccordionList items={sortedData} />
+      <AccordionList items={data} reasons={reasons} />
     </motion.section>
   )
 }

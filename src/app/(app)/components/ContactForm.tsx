@@ -19,10 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { ArrowRight } from 'lucide-react'
 
 interface ContactFormProps {
   buttonVariant?: 'white' | 'default' | 'whiteLight' | 'dark'
   reasons?: ContactReasons[]
+  label?: string
+  className?: string
 }
 
 interface FormData {
@@ -41,7 +44,12 @@ const Loader = () => {
   )
 }
 
-export function ContactForm({ buttonVariant = 'whiteLight', reasons }: ContactFormProps) {
+export function ContactForm({
+  className,
+  label,
+  buttonVariant = 'whiteLight',
+  reasons,
+}: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     reason: '',
@@ -109,8 +117,19 @@ export function ContactForm({ buttonVariant = 'whiteLight', reasons }: ContactFo
       }}
     >
       <DialogTrigger asChild>
-        <Button variant={buttonVariant} onClick={() => setIsDialogOpen(true)}>
-          Termin vereinbaren
+        <Button
+          variant={label ? 'none' : buttonVariant}
+          onClick={() => setIsDialogOpen(true)}
+          className={`${className} hover:underline`}
+        >
+          {label ? (
+            <div className="flex items-center">
+              <ArrowRight className="text-primary-darker mr-2 h-20" />
+              {label}
+            </div>
+          ) : (
+            'Termin vereinbaren'
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-primary-darker max-w-fit p-20">

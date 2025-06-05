@@ -3,8 +3,9 @@ import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import * as motion from 'motion/react-client'
 import Image from 'next/image'
 import { ContactForm } from './ContactForm'
+import { ContactReasons } from '@/sanity/types'
 
-const Hero: React.FC = () => {
+const Hero = ({ reasons }: { reasons: ContactReasons[] }) => {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -22,7 +23,7 @@ const Hero: React.FC = () => {
             <br /> Rundfrau Leipzig.
           </h1>
           <div className="pt-2 sm:pt-4">
-            <ContactForm buttonVariant="dark" />
+            <ContactForm buttonVariant="dark" reasons={reasons} />
           </div>
         </CardContent>
       </Card>

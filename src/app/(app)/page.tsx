@@ -5,20 +5,26 @@ import { Intro } from './components/Intro'
 import Offers from './components/Offers'
 import SocialProof from './components/Social-Proof'
 import { Schedule } from './components/Schedule'
+import { CONTACT_FORM_QUERY } from '@/sanity/queries'
+import { sanityFetch } from '@/sanity/live'
 
 export default async function Home() {
+  const { data: reasons } = await sanityFetch({
+    query: CONTACT_FORM_QUERY,
+  })
+
   return (
     <main className="relative flex min-h-screen flex-col items-center bg-white">
-      <Hero />
+      <Hero reasons={reasons} />
 
       <Intro />
 
       <Offers />
 
-      <Contact imageUrl="/woman-preg.jpeg" buttonVariant="default" />
+      <Contact imageUrl="/woman-preg.jpeg" buttonVariant="default" reasons={reasons} />
 
       <div id="schedule" className="w-full">
-        <Schedule />
+        <Schedule reasons={reasons} />
       </div>
 
       <div className="relative flex w-full bg-primary-darker items-center justify-center self-stretch pb-0 pt-[125px]">

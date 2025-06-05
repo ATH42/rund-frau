@@ -2,27 +2,22 @@ import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from 'next/image'
 import { ContactForm } from './ContactForm'
-import { sanityFetch } from '@/sanity/live'
-import { CONTACT_FORM_QUERY } from '@/sanity/queries'
+import { ContactReasons } from '@/sanity/types'
 
 interface ContactProps {
   imageUrl: string
   backgroundColor?: string
   buttonVariant: 'white' | 'default' | 'whiteLight'
   reverse?: boolean
+  reasons: ContactReasons[]
 }
 
 export async function Contact({
   imageUrl,
   backgroundColor = 'bg-primary',
   reverse = false,
+  reasons,
 }: ContactProps) {
-  const { data: reasons } = await sanityFetch({
-    query: CONTACT_FORM_QUERY,
-  })
-
-  console.log('Contact component rendered with reasons:', reasons)
-
   return (
     <section
       className={`flex w-full flex-col bg-white ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
