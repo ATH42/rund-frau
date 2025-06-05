@@ -2,6 +2,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import Image from 'next/image'
 import { ContactForm } from './ContactForm'
+import { sanityFetch } from '@/sanity/live'
+import { CONTACT_FORM_QUERY } from '@/sanity/queries'
 
 interface ContactProps {
   imageUrl: string
@@ -10,11 +12,17 @@ interface ContactProps {
   reverse?: boolean
 }
 
-export function Contact({
+export async function Contact({
   imageUrl,
   backgroundColor = 'bg-primary',
   reverse = false,
 }: ContactProps) {
+  const { data: reasons } = await sanityFetch({
+    query: CONTACT_FORM_QUERY,
+  })
+
+  console.log('Contact component rendered with reasons:', reasons)
+
   return (
     <section
       className={`flex w-full flex-col bg-white ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
@@ -35,9 +43,8 @@ export function Contact({
             Lernt uns in einem persönlichen Gespräch
             <br /> kennen und besprecht mit uns eure Wünsche <br /> zur Geburtsbegleitung.
           </p>
-          <div className="pt-2 sm:pt-4">
-            <ContactForm buttonVariant="white" />
-          </div>
+          <div className="pt-2 sm:pt-4"></div>
+          <ContactForm buttonVariant="white" reasons={JSON.parse(JSON.stringify(reasons))} />
         </CardContent>
       </Card>
 

@@ -79,7 +79,7 @@ export const SCHEDULE_QUERY = defineQuery(`*[_type == "schedule"]{
   location,
 }`)
 
-export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-form"]{  
+export const CONTACT_FORM_QUERY = defineQuery(`*[_type == "contact-reasons"]{  
   _id,
 reason  
 }`)
