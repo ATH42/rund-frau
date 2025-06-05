@@ -25,6 +25,7 @@ export const COURSE_QUERY = defineQuery(`*[_type == "course"]{
 export const TEAM_MEMBERS_QUERY = defineQuery(`*[_type == "team-member"] | order(sortOrder asc){  
   _id,
   name,
+  category,
   title,
   phone,
   mail,

@@ -40,7 +40,6 @@ export type Downloads = {
     fileName?: string
     fileItem?: {
       asset?: {
-        url: string
         _ref: string
         _type: 'reference'
         _weak?: boolean
@@ -65,6 +64,7 @@ export type TeamMember = {
   _updatedAt: string
   _rev: string
   name?: string
+  category?: string
   title?: string
   phone?: string
   mail?: string

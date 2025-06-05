@@ -104,19 +104,21 @@ const Team: NextPage = async () => {
     data: TeamMember[]
   }
 
+  console.log('Team component rendered with team members:', teamMembers)
   const groupedMembers = teamMembers.reduce(
     (acc: Record<string, TeamMember[]>, member: TeamMember) => {
-      if (!member.title) {
+      if (!member.category) {
         return acc
       } // for now, bc of the sanity bug that it makes everything optional in types.
-      if (!acc[member.title]) {
-        acc[member.title] = []
+      if (!acc[member.category]) {
+        acc[member.category] = []
       }
-      acc[member.title].push(member)
+      acc[member.category].push(member)
       return acc
     },
     {} as Record<string, TeamMember[]>,
   )
+  console.log('Grouped team members:', groupedMembers)
 
   return (
     <main className="w-full bg-primary-dark flex-col overflow-hidden">
