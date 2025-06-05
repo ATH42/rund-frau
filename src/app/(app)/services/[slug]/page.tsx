@@ -5,7 +5,7 @@ import { Paragraph } from '../components/Paragraph'
 
 import { urlFor } from '@/sanity/imageUrlBuilder'
 import { sanityFetch } from '@/sanity/live'
-import { SINGLE_SERVICE_QUERY } from '@/sanity/queries'
+import { CONTACT_FORM_QUERY, SINGLE_SERVICE_QUERY } from '@/sanity/queries'
 import { Service } from '@/sanity/types'
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -15,6 +15,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     query: SINGLE_SERVICE_QUERY,
     params: { title: slug },
   })) as { data: Service }
+
+  const { data: reasons } = await sanityFetch({
+    query: CONTACT_FORM_QUERY,
+  })
 
   if (!data) {
     return <p>Service not found</p>
@@ -39,6 +43,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </GridComponent>
       </div>
       <Contact
+        reasons={reasons}
         imageUrl="/Bilder/hand-auf-bauch.png"
         buttonVariant={'whiteLight'}
         backgroundColor="bg-primary-darker"
