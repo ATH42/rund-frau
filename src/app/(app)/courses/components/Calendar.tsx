@@ -1,10 +1,8 @@
 'use client'
-
 import * as React from 'react'
 import { Calendar } from '@/components/ui/calendar'
 import type { Course } from '@/sanity/types'
 import { Button } from '@/components/ui/button'
-import BookingDialog from './BookingDialog'
 
 type CoursesCalendarProps = {
   courses: Course[]
@@ -19,27 +17,76 @@ function formatDateToYYYYMMDD(date: Date): string {
 export function CoursesCalendar({ courses }: CoursesCalendarProps) {
   const [highlightedDates, setHighlightedDates] = React.useState<Date[]>([])
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(undefined)
-  const [activeCourseIndex, setActiveCourseIndex] = React.useState<number | null>(null)
+  const [activeCategory, setActiveCategory] = React.useState<string | null>(null)
   const [selectedCourse, setSelectedCourse] = React.useState<Course | null>(null)
 
-  const handleCourseClick = (course: Course, index: number) => {
-    if (!course.dates || course.dates.length === 0) return
+  const coursesByCategory = React.useMemo(() => {
+    return courses.reduce(
+      (acc, course) => {
+        if (!course.category) {
+          console.warn(`Course "${course.title}" is missing a category.`)
+          return acc
+        }
+        if (!acc[course.category]) {
+          acc[course.category] = []
+        }
+        acc[course.category].push(course)
+        return acc
+      },
+      {} as Record<string, Course[]>,
+    )
+  }, [courses])
 
-    const validDates = course.dates
-      .map((dateStr) => new Date(dateStr))
-      .filter((date) => !isNaN(date.getTime()))
+  const handleCategoryClick = (category: string) => {
+    const validDates = coursesByCategory[category]
+      .flatMap((course) => course.dates || [])
+      .map((dateStr) => {
+        if (dateStr) {
+          const date = new Date(dateStr)
+          return !isNaN(date.getTime()) ? date : null
+        }
+        return null
+      })
+      .filter((date): date is Date => date !== null)
 
     setHighlightedDates(validDates)
-    setActiveCourseIndex(index)
-    setSelectedCourse(course)
+    setActiveCategory(category)
   }
 
   const handleDateSelect = (date: Date | undefined) => {
     if (date) {
       const normalizedDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()))
       setSelectedDate(normalizedDate)
+
+      // Find the course that matches the selected date
+      const matchedCourse = courses.find((course) =>
+        course.dates?.some(
+          (dateStr) =>
+            formatDateToYYYYMMDD(new Date(dateStr)) === formatDateToYYYYMMDD(normalizedDate),
+        ),
+      )
+
+      setSelectedCourse(matchedCourse || null)
     } else {
       setSelectedDate(undefined)
+      setSelectedCourse(null)
+    }
+  }
+
+  const handleZumKursClick = () => {
+    if (selectedCourse) {
+      const courseElement = document.getElementById(selectedCourse.title || '')
+      if (courseElement) {
+        courseElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+        // Add a slight delay to ensure scrollIntoView completes before adjusting further
+        setTimeout(() => {
+          window.scrollBy({
+            top: -100, // Adjust this value to control the overscroll distance
+            behavior: 'smooth',
+          })
+        }, 300) // Adjust delay as needed to ensure smooth scrolling
+      }
     }
   }
 
@@ -62,13 +109,13 @@ export function CoursesCalendar({ courses }: CoursesCalendarProps) {
         </div>
 
         <div className="w-1/2 flex flex-col gap-4">
-          {courses.map((course, index) => (
+          {Object.keys(coursesByCategory).map((category) => (
             <Button
-              key={index}
-              onClick={() => handleCourseClick(course, index)}
-              variant={index === activeCourseIndex ? 'default' : 'whiteLight'}
+              key={category}
+              onClick={() => handleCategoryClick(category)}
+              variant={category === activeCategory ? 'default' : 'whiteLight'}
             >
-              {course.title}
+              {category}
             </Button>
           ))}
         </div>
@@ -81,7 +128,11 @@ export function CoursesCalendar({ courses }: CoursesCalendarProps) {
           const formattedDate = formatDateToYYYYMMDD(new Date(dateStr))
           const isMatch = formattedDate === formatDateToYYYYMMDD(selectedDate)
           return isMatch
-        }) && <BookingDialog course={selectedCourse} date={formatDateToYYYYMMDD(selectedDate)} />}
+        }) && (
+          <>
+            <Button onClick={handleZumKursClick}>Zum Kurs</Button>
+          </>
+        )}
     </>
   )
 }

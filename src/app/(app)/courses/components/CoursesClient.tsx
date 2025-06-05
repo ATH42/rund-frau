@@ -14,16 +14,7 @@ const CoursesClient: React.FC<CoursesClientProps> = ({ coursesData }) => {
         <h1 className="text-header font-ink-blossoms text-white">Alle Kurse im Überblick</h1>
         {coursesData.map((course, index) => (
           <div key={index} className="flex flex-col lg:flex-row flex-wrap gap-16 py-5">
-            <CourseItem
-              title={course.title || ''}
-              description={course.description || ''}
-              dates={course.dates || []}
-              maxAttendees={course.maxAttendees || 0}
-              location={course.location || ''}
-              price={course.price || 0}
-              image={course.image || ''}
-              alt={course.alt || ''}
-            />
+            <CourseItem course={course} />
           </div>
         ))}
       </section>
