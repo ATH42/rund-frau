@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { sanityFetch } from '@/sanity/live'
-import { FAQ_QUERY } from '@/sanity/queries'
+import { CONTACT_FORM_QUERY, FAQ_QUERY } from '@/sanity/queries'
 import { Faq } from '@/sanity/types'
 
 const GroupedQuestions = async () => {
@@ -68,12 +68,14 @@ function Header() {
   )
 }
 
-const FAQ: NextPage = () => {
+const FAQ: NextPage = async () => {
+  const { data: reasons } = await sanityFetch({ query: CONTACT_FORM_QUERY })
   return (
     <main className="min-h-screen bg-primary-darker">
       <Header />
       <GroupedQuestions />
       <Contact
+        reasons={reasons}
         imageUrl="/Bilder/pexels-mikhail-nilov-8342877.png"
         backgroundColor="bg-primary-dark"
         buttonVariant="whiteLight"
