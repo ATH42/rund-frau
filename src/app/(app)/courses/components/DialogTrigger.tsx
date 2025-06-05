@@ -63,11 +63,9 @@ export const CourseDialogTrigger = ({ course }: { course: Course }) => {
               {location ? <p className="p-4">Ort: {location}</p> : null}
               {price ? <p className="p-4">Preis: {price}€</p> : null}
             </div>
-            <Link href="#calendar" className="w-full flex justify-center">
-              <Button variant="whiteLight" onClick={handleShowBookingDialog}>
-                Kurs Buchen
-              </Button>
-            </Link>
+            <Button variant="whiteLight" onClick={handleShowBookingDialog}>
+              Kurs Buchen
+            </Button>
           </DialogContent>
         </Dialog>
       ) : (

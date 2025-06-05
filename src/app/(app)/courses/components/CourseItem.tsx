@@ -9,7 +9,7 @@ export const CourseItem = ({ course }: { course: Course }) => {
     return null
   }
   return (
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
+    <div id={title} className="flex flex-col lg:flex-row gap-8 lg:gap-16 w-full">
       <div className="flex flex-col w-full lg:w-1/2 gap-4">
         <h2 className="text-subheader font-bold text-white">{title}</h2>
         <p className="text-content text-white">{description}</p>
