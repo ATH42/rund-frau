@@ -21,7 +21,6 @@ export async function Schedule({ reasons }: { reasons: ContactReasons[] }) {
       className="relative flex w-full flex-col items-center gap-10 bg-primary-darker self-stretch pb-2.5 pt-[130px]"
     >
       <h2 className="text-center font-ink-blossoms text-header text-white">Aktuelles</h2>
-
       <AccordionList items={data} reasons={reasons} />
     </motion.section>
   )

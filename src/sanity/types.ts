@@ -40,6 +40,7 @@ export type Downloads = {
     fileName?: string
     fileItem?: {
       asset?: {
+        url?: string
         _ref: string
         _type: 'reference'
         _weak?: boolean
